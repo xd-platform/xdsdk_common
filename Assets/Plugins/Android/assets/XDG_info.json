@@ -1,0 +1,58 @@
+{
+    "client_id": "hn5RcJei2JxCYlS0",
+    "game_name": "TDSGlobalDemo",
+    "channel": "Google Play",
+    "region": true,
+    "adjust": {
+        "app_token": "5sqgsqxswe0w",
+        "events": [
+            {
+                "event_name": "Server Check",
+                "token": "ail8v6"
+            },
+            {
+                "event_name": "charater create",
+                "token": "rt19op"
+            },
+            {
+                "event_name": "Change Job quest end",
+                "token": "k5g4pt"
+            },
+            {
+                "event_name": "First Purchase User",
+                "token": "ymeavj"
+            },
+            {
+                "event_name": "In App Purchase Revenue",
+                "token": "x0sykq"
+            },
+            {
+                "event_name": "TDSG_ADJ_REVENUE",
+                "token": "demotesttoken"
+            }
+        ]
+    },
+    "appsflyer": {
+        "dev_key": "FLZT4V2Z3tSqCPtHbRwXNo",
+        "app_id": "337997064271037"
+    },
+    "game_logos": [
+        "https://res.xdcdn.net/TDS/Global/res/xd_logo.png",
+        "https://res.xdcdn.net/TDS/Global/res/xd_logo.png",
+        "https://res.xdcdn.net/TDS/Global/res/xd_logo.png"
+    ],
+    "twitter": {
+        "consumer_key": "feOTAapnuXNFngQ2LktBnCpeF",
+        "consumer_secret": "zqkP0Mn9pmxypZ9dwFVbCZbQsxVT9REHNWWtTPEp8zIgOsB84l"
+    },
+    "line": {
+        "channel_id": "1655275943"
+    },
+    "tapsdk": {
+        "client_id": "jfqhF3x9mat70ez52i",
+        "client_token": "C91pZh9OJNt7oDPx3lku4H01HelnYjSBS1jaZJed",
+        "tapdb_enabled": true,
+        "tapdb_channel": "tapdb_channel_1",
+        "server_url": "https://jfqhf3x9.cloud.ap-sg.tapapis.com"
+    }
+}
