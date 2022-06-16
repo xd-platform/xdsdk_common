@@ -10,8 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XDGAgreementConfig : NSObject
-@property (nonatomic, strong) NSString *firstUrl;
-@property (nonatomic, strong) NSString *updateUrl;
+@property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *version;
 @property (nonatomic, strong) NSString *region;
 @property (nonatomic, assign) BOOL isKRPushServiceSwitchEnable;
