@@ -16,6 +16,13 @@
       "dependencies": {},
       "hash": "7897313a90163d26a33648ebb47a36af28af8098"
     },
+    "com.tapsdk.antiaddiction": {
+      "version": "https://github.com/taptap/TapAntiAddiction-Unity.git#3.9.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b21bf1db6fd5d567df0ce7e36bffc2f37f5fb079"
+    },
     "com.taptap.tds.bootstrap": {
       "version": "https://github.com/TapTap/TapBootstrap-Unity.git#3.9.0",
       "depth": 0,

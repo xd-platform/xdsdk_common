@@ -71,7 +71,7 @@
       "tds_purchase_processing": "该订单正在处理中，请稍后",
       "tds_terms_agreement": "条款协议",
       "tds_service_terms_agreement": "我已阅读并同意条款",
-      "tds_push_agreement": "我同意接收应用的推送通知",
+      "tds_push_agreement": "我同意接收应用的推送通知我同意接收应用的推送通知我同意接收应用的推送通知",
       "tds_confirm_agreement": "同意",
       "tds_decline_agreement": "不同意",
       "tds_is_adult_agreement": "我已满16周岁",
@@ -80,7 +80,11 @@
       "tds_custom_service": "客服中心",
       "tds_product_not_exists":"该商品不存在",
       "tds_ios_restricted_payment_title": "支付受限",
-      "tds_ios_restricted_payment_description": "请在“设置->内容与隐私访问限制”中，取消对“App内购买项目”的限制"
+      "tds_ios_restricted_payment_description": "请在“设置->内容与隐私访问限制”中，取消对“App内购买项目”的限制",
+      "tds_service_deny_dialog_content": "您未同意前述心动相关协议，会造成您无法继续体验或游玩游戏。您可以点击退出游戏来关闭游戏客户端，或点击返回、再次阅读并确认心动相关协议。",
+      "tds_service_deny_dialog_deny": "退出游戏",
+      "tds_service_deny_dialog_agree": "返回",
+      "tds_service_na_toast": "请先确认你的年龄信息"
    
     },
     "ru_RU": {
@@ -157,14 +161,18 @@
       "tds_service_terms_agreement": "Я прочитал(а) и согласен(на) с условиями",
       "tds_push_agreement": "Частые попытки пополнения счета. Замените продукт и попробуйте снова",
       "tds_confirm_agreement": "Принять",
-      "tds_decline_agreement": "不同意",
+      "tds_decline_agreement": "Не согласен",
       "tds_is_adult_agreement": "Я старше 16 лет",
       "tds_california_agreement": "《Privacy Notice for California Residents》",
       "tds_cancel_claim": "Отменить",
       "tds_custom_service": "Центр обслуживания клиентов",
       "tds_product_not_exists":"Предмета не существует",
       "tds_ios_restricted_payment_title": "Платеж ограничен",
-      "tds_ios_restricted_payment_description": "Снимите ограничение \"Товары для покупок в прилож.\" в \"Настр.->Огран. конфиденциальности и контента\""
+      "tds_ios_restricted_payment_description": "Снимите ограничение \"Товары для покупок в прилож.\" в \"Настр.->Огран. конфиденциальности и контента\"",
+      "tds_service_deny_dialog_content": "Если вы не согласны с вышеупомянутыми условиями соглашения, вы не сможете продолжаить играть в XD. Вы можете нажать «Выйти из игры», чтобы закрыть игру, или нажать «Назад», чтобы еще раз прочитать и подписать соответствующее соглашение компании XD.",
+      "tds_service_deny_dialog_deny": "Выйти из игры",
+      "tds_service_deny_dialog_agree": "Вернуться",
+      "tds_service_na_toast": "Пожалуйста, подтвердите информацию о своем возрасте"
     },
     "tr_TR": {
       "tds_account_safe_info": "Hesap Güvenlik Merkezi",
@@ -240,14 +248,18 @@
       "tds_service_terms_agreement": "Tüm koşulları okudum ve onayladım",
       "tds_push_agreement": "Uygulamadan bildirim almayı onaylıyorum",
       "tds_confirm_agreement": "Onayla",
-      "tds_decline_agreement": "不同意",
+      "tds_decline_agreement": "kabul ediyorum",
       "tds_is_adult_agreement": "16 yaşın üzerindeyim",
       "tds_california_agreement": "《Privacy Notice for California Residents》",
       "tds_cancel_claim": "İptal",
       "tds_custom_service": "Müşteri Hizmetleri Merkezi",
       "tds_product_not_exists":"Ürün mevcut değil",
       "tds_ios_restricted_payment_title": "Ödeme kısıtlandı",
-      "tds_ios_restricted_payment_description": "Lütfen “Ayarlar -> İçerik ve Gizlilik ulaşım kısıtlamaları”'na giderek “Uygulama içi ödeme malzemeleri”kısıtlamasını kaldırınız"
+      "tds_ios_restricted_payment_description": "Lütfen “Ayarlar -> İçerik ve Gizlilik ulaşım kısıtlamaları”'na giderek “Uygulama içi ödeme malzemeleri”kısıtlamasını kaldırınız",
+      "tds_service_deny_dialog_content": "Coşkun ilgili anlaşmaları kabul etmediğinizden dolayı, oyunu deneyimlemeye veya oynamaya devam edememenize neden olur.oyundan çık'ı tıklayarak oyunu kapatabilir, Veya geri'yi tıklayarak Coşkun oyunun ilgili anlaşmayı tekrar okuyabilir ve onaylayabilirsiniz.",
+      "tds_service_deny_dialog_deny": "Oyundan çık",
+      "tds_service_deny_dialog_agree": "Geri",
+      "tds_service_na_toast": "Lütfen önce yaş bilgilerinizi onaylayın"
     },
     "es_ES": {
       "tds_account_safe_info": "Centro de seguridad de cuenta",
@@ -323,14 +335,18 @@
       "tds_service_terms_agreement": "He leído y acepto los términos",
       "tds_push_agreement": "Intentos de recarga demasiado frecuentes. Cambie a un producto distinto y vuelva a intentarlo",
       "tds_confirm_agreement": "Aceptar",
-      "tds_decline_agreement": "不同意",
+      "tds_decline_agreement": "No está de acuerdo",
       "tds_is_adult_agreement": "Tengo 16 años",
       "tds_california_agreement": "《Privacy Notice for California Residents》",
       "tds_cancel_claim": "Cancelar",
       "tds_custom_service": "Centro de atención al cliente",
       "tds_product_not_exists":"El artículo no existe",
       "tds_ios_restricted_payment_title": "Pago restringido",
-      "tds_ios_restricted_payment_description": "Vaya a \"Configuración -> Restricciones de acceso a contenido y privacidad\" para eliminar las restricciones de \"Compras en la aplicación\""
+      "tds_ios_restricted_payment_description": "Vaya a \"Configuración -> Restricciones de acceso a contenido y privacidad\" para eliminar las restricciones de \"Compras en la aplicación\"",
+      "tds_service_deny_dialog_content": "El hecho de que usted no acepte el Acuerdo mencionado de XD puede impedirle seguir experimentando o jugando al juego. Puede cerrar el Cliente del juego haciendo clic en Salir del juego, o haciendo clic en Atrás para leer y confirmar de nuevo el Acuerdo de XD.",
+      "tds_service_deny_dialog_deny": "Salir del juego",
+      "tds_service_deny_dialog_agree": "Volver",
+      "tds_service_na_toast": "Por favor, compruebe primero su información de edad"
     },
     "pt_PT": {
       "tds_account_safe_info": "Centro de segurança da conta",
@@ -406,14 +422,18 @@
       "tds_service_terms_agreement": "Eu li e concordo com os termos",
       "tds_push_agreement": "Eu concordo em receber notificações do aplicativo",
       "tds_confirm_agreement": "Confirmar consentimento",
-      "tds_decline_agreement": "不同意",
+      "tds_decline_agreement": "Discordar",
       "tds_is_adult_agreement": "Eu tenho 16 anos.",
       "tds_california_agreement": "《Privacy Notice for California Residents》",
       "tds_cancel_claim": "Cancelar",
       "tds_custom_service": "Atendimento ao Cliente",
       "tds_product_not_exists":"O produto em questão não existe",
       "tds_ios_restricted_payment_title": "O pagamento está limitado",
-      "tds_ios_restricted_payment_description": "Cancele a restrição à \"Compra no aplicativo\" em \"Configurações - Restrições de acesso a conteúdo e privacidade\""
+      "tds_ios_restricted_payment_description": "Cancele a restrição à \"Compra no aplicativo\" em \"Configurações - Restrições de acesso a conteúdo e privacidade\"",
+      "tds_service_deny_dialog_content": "Se você discordar dos acordos relacionados acima mencionados de XD, não poderá continuar a experimentar ou divertir-se com o jogo. Você pode clicar em sair do jogo para fechar o terminal do cliente do jogo ou clicar em voltar para ler e confirmar novamente os acordos relevantes de XD.",
+      "tds_service_deny_dialog_deny": "Sair do jogo",
+      "tds_service_deny_dialog_agree": "Voltar",
+      "tds_service_na_toast": "Por favor, confirme as suas informações da idade primeiro"
     },
     "fr_FR": {
       "tds_account_safe_info": "Centre de sécurité des comptes",
@@ -489,14 +509,18 @@
       "tds_service_terms_agreement": "J'ai lu et j'accepte les conditions",
       "tds_push_agreement": "J'accepte de recevoir des notifications de l'APP",
       "tds_confirm_agreement": "Accepter",
-      "tds_decline_agreement": "不同意",
+      "tds_decline_agreement": "Refuser",
       "tds_is_adult_agreement": "J'ai plus de 16 ans",
       "tds_california_agreement": "《Privacy Notice for California Residents》",
       "tds_cancel_claim": "Annuler",
       "tds_custom_service": "Centre Service à la Clientèle",
       "tds_product_not_exists":"Le produit n'existe pas",
       "tds_ios_restricted_payment_title": "Paiement restreint",
-      "tds_ios_restricted_payment_description": "Rendez dans \"Paramètres -> Restrictions d’accès au contenu et à la confidentialité\" pour supprimer les restrictions concernant les \"Achats intégrés d’articles\""
+      "tds_ios_restricted_payment_description": "Rendez dans \"Paramètres -> Restrictions d’accès au contenu et à la confidentialité\" pour supprimer les restrictions concernant les \"Achats intégrés d’articles\"",
+      "tds_service_deny_dialog_content": "Vous n'avez pas accepté les conditions de cœur raté ci-dessus, ce qui vous empêchera de continuer à expérimenter ou à jouer.  Vous pouvez retirer les jeux pour éteindre le client, ou cliquer Retourner pour lire à nouveau les conditions de cœur raté.",
+      "tds_service_deny_dialog_deny": "Retirer les jeux",
+      "tds_service_deny_dialog_agree": "Retourner",
+      "tds_service_na_toast": "Veuillez confirmer votre âge"
     },
     "de_DE": {
       "tds_account_safe_info": "Sicherheitszentrum des Accounts",
@@ -572,14 +596,18 @@
       "tds_service_terms_agreement": "Ich habe die Bedingungen gelesen und stimme denen zu",
       "tds_push_agreement": "Ich bin damit einverstanden, Benachrichtigungen von der APP zu erhalten",
       "tds_confirm_agreement": "Akzeptieren",
-      "tds_decline_agreement": "不同意",
+      "tds_decline_agreement": "Ablehnen",
       "tds_is_adult_agreement": "Ich bin über 16 Jahre alt",
       "tds_california_agreement": "《Privacy Notice for California Residents》",
       "tds_cancel_claim": "Abbrechen",
       "tds_custom_service": "Kundenservice",
       "tds_product_not_exists":"Dieser Artikel ist nicht vorhanden",
       "tds_ios_restricted_payment_title": "Beschränkte Zahlung",
-      "tds_ios_restricted_payment_description": "Gehe bitte zu den \"Einstellungen -> Zugriffsbeschränkungen für Inhalte und Datenschutz\", um die Einschränkungen für \"In-App-Kaufgegenstände\" zu beseitigen"
+      "tds_ios_restricted_payment_description": "Gehe bitte zu den \"Einstellungen -> Zugriffsbeschränkungen für Inhalte und Datenschutz\", um die Einschränkungen für \"In-App-Kaufgegenstände\" zu beseitigen",
+      "tds_service_deny_dialog_content": "Wenn Sie den vorgenannten XD-Vereinbarungen nicht zustimmen, kann dies dazu führen, dass Sie das Spiel nicht weiter nutzen oder spielen können. Sie können auf Spiel beenden klicken, um den Spiele-Kundendienst zu schließen, oder klicken Sie auf Zurück, um die XD-Vereinbarungen erneut anzuzeigen und zu bestätigen.",
+      "tds_service_deny_dialog_deny": "Spiel beenden",
+      "tds_service_deny_dialog_agree": "Zurück",
+      "tds_service_na_toast": "Bitte bestätigen Sie zunächst Ihre Altersangaben"
     },
     "ko_KR": {
       "tds_account_safe_info": "계정 보안센터",
@@ -655,14 +683,18 @@
       "tds_service_terms_agreement": "약관 내용을 확인했으며, 이에 동의합니다",
       "tds_push_agreement": "이벤트 푸시 알림과 수신에 동의합니다",
       "tds_confirm_agreement": "동의하기",
-      "tds_decline_agreement": "不同意",
+      "tds_decline_agreement": "비동의",
       "tds_is_adult_agreement": "만 16세 이상입니다.",
       "tds_california_agreement": "《Privacy Notice for California Residents》",
       "tds_cancel_claim": "취소",
       "tds_custom_service": "고객센터",
       "tds_product_not_exists":"이 상품은 존재하지 않습니다",
       "tds_ios_restricted_payment_title": "구매 실패",
-      "tds_ios_restricted_payment_description": "기기 설정 중 '콘텐츠 및 개인 정보 보호 제한' 항목에서 인앱 구매 제한 횟수를 변경해주세요"
+      "tds_ios_restricted_payment_description": "기기 설정 중 '콘텐츠 및 개인 정보 보호 제한' 항목에서 인앱 구매 제한 횟수를 변경해주세요",
+      "tds_service_deny_dialog_content": "만약 동의하지 않으실 경우 게임을 계속 이용하실 수 없습니다. 게임 나가기를 눌러 클라이언트를 종료하시거나, 돌아가기를 눌러 XD 서비스 약관에 동의하실 수 있습니다.",
+      "tds_service_deny_dialog_deny": "게임 나가기",
+      "tds_service_deny_dialog_agree": "돌아가기",
+      "tds_service_na_toast": "나이 정보를 확인해주세요."
     },
   "ja_JP": {
     "tds_account_safe_info": "アカウントセキュリティセンター",
@@ -738,14 +770,18 @@
     "tds_service_terms_agreement": "同意する",
     "tds_push_agreement": "このアプリのプッシュ通知を受け取ります",
     "tds_confirm_agreement": "同意する",
-    "tds_decline_agreement": "不同意",
+    "tds_decline_agreement": "同意しない",
     "tds_is_adult_agreement": "16歳以上",
     "tds_california_agreement": "《Privacy Notice for California Residents》",
     "tds_cancel_claim": "キャンセル",
     "tds_custom_service": "カスタマーサービスセンター",
     "tds_product_not_exists":"該当の商品（アイテム）が見つかりません",
     "tds_ios_restricted_payment_title": "現在ご利用を制限しております",
-    "tds_ios_restricted_payment_description": "「設置->コンテンツとプライバシーの制限」の順に選択し、「App 内課金」の制限を解除してください"
+    "tds_ios_restricted_payment_description": "「設置->コンテンツとプライバシーの制限」の順に選択し、「App 内課金」の制限を解除してください",
+    "tds_service_deny_dialog_content": "前述のXD関連規約に同意しない限り、ゲームの体験およびプレイを続けることはできません。ゲーム終了をタップしてクライアントを終了するか、戻るをタップしてXD関連規約をご確認ください。",
+    "tds_service_deny_dialog_deny": "ゲーム終了",
+    "tds_service_deny_dialog_agree": "戻る",
+    "tds_service_na_toast": "年齢情報をご確認ください"
  
   },
   "zh_TW": {
@@ -829,7 +865,11 @@
     "tds_custom_service": "客服中心",
     "tds_product_not_exists":"該商品不存在",
     "tds_ios_restricted_payment_title": "支付受限",
-    "tds_ios_restricted_payment_description": "請在“設置->內容與隱私訪問限制”中，取消對“App內購買專案”的限制"
+    "tds_ios_restricted_payment_description": "請在“設置->內容與隱私訪問限制”中，取消對“App內購買專案”的限制",
+    "tds_service_deny_dialog_content": "您未同意上述心動相關協議，會造成您無法繼續體驗或遊玩遊戲。您可以點擊退出遊戲來關閉遊戲用戶端，或點擊返回以再次閱讀並確認心動相關協議。",
+    "tds_service_deny_dialog_deny": "退出遊戲",
+    "tds_service_deny_dialog_agree": "返回",
+    "tds_service_na_toast": "請先確認你的年齡資訊"
   },
   "en_US": {
     "tds_account_safe_info": "Account security center",
@@ -904,14 +944,18 @@
     "tds_service_terms_agreement": "I have read and agree to the terms",
     "tds_push_agreement": "I agree to receive push notifications.",
     "tds_confirm_agreement": "Accept",
-    "tds_decline_agreement": "不同意",
+    "tds_decline_agreement": "Decline",
     "tds_is_adult_agreement": "I am over 16 years old",
     "tds_california_agreement": "《Privacy Notice for California Residents》",
     "tds_cancel_claim": "Cancel",
     "tds_custom_service": "Customer Service Center",
     "tds_product_not_exists":"This item doesn't exist",
     "tds_ios_restricted_payment_title": "Payment restricted",
-    "tds_ios_restricted_payment_description": "Please go to \"Settings -> Content and Privacy Access Restrictions\" to remove the restrictions on \"In-App Purchase Items\""
+    "tds_ios_restricted_payment_description": "Please go to \"Settings -> Content and Privacy Access Restrictions\" to remove the restrictions on \"In-App Purchase Items\"",
+    "tds_service_deny_dialog_content": "You didn't accept the XD agreements listed above, so you won't be able to continue playing this game. You can click EXIT to close the game client, or click BACK to read and accept our agreements.",
+    "tds_service_deny_dialog_deny": "EXIT",
+    "tds_service_deny_dialog_agree": "Back",
+    "tds_service_na_toast": "Confirm your age first."
   },
   "th_TH": {
     "tds_account_safe_info": "ศูนย์ความปลอดภัยบัญชี",
@@ -986,14 +1030,18 @@
     "tds_service_terms_agreement": "ฉันได้อ่านและเห็นด้วยกับเงื่อนไขแล้ว",
     "tds_push_agreement": "ฉันยอมรับการแจ้งเตือนจาก App",
     "tds_confirm_agreement": "ยืนยันการเห็นด้วย",
-    "tds_decline_agreement": "不同意",
+    "tds_decline_agreement": "ไม่เห็นด้วย",
     "tds_is_adult_agreement": "ฉันอายุ 16 ปีขึ้นไป",
     "tds_california_agreement": "《Privacy Notice for California Residents》",
     "tds_cancel_claim": "ยกเลิก",
     "tds_custom_service": "ฝ่ายบริการลูกค้า",
     "tds_product_not_exists":"ไม่มีไอเทมนี้",
     "tds_ios_restricted_payment_title": "การชำระถูกจำกัด",
-    "tds_ios_restricted_payment_description": "โปรดยกเลิกการจำกัด \"รายการซื้อขายใน App\" ที่ \"การตั้งค่→การจำกัดการเข้าถึงเนื้อหาและความเป็นส่วนตัว\""
+    "tds_ios_restricted_payment_description": "โปรดยกเลิกการจำกัด \"รายการซื้อขายใน App\" ที่ \"การตั้งค่→การจำกัดการเข้าถึงเนื้อหาและความเป็นส่วนตัว\"",
+    "tds_service_deny_dialog_content": "การที่คุณไม่เห็นด้วยกับข้อตกลงดังกล่าวอาจทําให้คุณไม่สามารถสัมผัสหรือเล่นเกมต่อไปได้ คุณสามารถคลิก ออกจากเกม เพื่อปิดไคลเอ็นต์เกม หรือคลิกย้อนกลับอ่านอีกครั้งและยืนยันข้อตกลงXinDong",
+    "tds_service_deny_dialog_deny": "ออกจากเกม",
+    "tds_service_deny_dialog_agree": "กลับ",
+    "tds_service_na_toast": "โปรดตรวจสอบข้อมูลอายุของคุณก่อน"
   },
   "in_ID": {
     "tds_account_safe_info": "Pusat Keamanan Akun",
@@ -1068,13 +1116,17 @@
     "tds_service_terms_agreement": "Saya telah membaca dan menyetujui persyaratan",
     "tds_push_agreement": "Saya setuju untuk menerima pemberitahuan dari aplikasi",
     "tds_confirm_agreement": "Konfirmasi Setuju",
-    "tds_decline_agreement": "不同意",
+    "tds_decline_agreement": "Tidak setuju",
     "tds_is_adult_agreement": "Saya sudah 16 tahun",
     "tds_california_agreement": "《Privacy Notice for California Residents》",
     "tds_cancel_claim": "Batal",
     "tds_custom_service": "Customer Service",
     "tds_product_not_exists":"Tidak ada item ini",
     "tds_ios_restricted_payment_title": "Pembatasan pembayaran",
-    "tds_ios_restricted_payment_description": "Mohon matikan pembatasan \"Pembelian konten dalam App\" di \"Pengaturan -> Batasan akses konten dan privasi\""
+    "tds_ios_restricted_payment_description": "Mohon matikan pembatasan \"Pembelian konten dalam App\" di \"Pengaturan -> Batasan akses konten dan privasi\"",
+    "tds_service_deny_dialog_content": "Jika Anda tidak menyetujui perjanjian terkait yang disebutkan di atas, Anda tidak akan dapat terus mencoba atau memainkan game. Anda dapat tap Keluar dari Game untuk menutup klien game, atau tap Kembali untuk membaca dan mengonfirmasi kembali persetujuan terkait XinDong.",
+    "tds_service_deny_dialog_deny": "Keluar game",
+    "tds_service_deny_dialog_agree": "Kembali",
+    "tds_service_na_toast": "Silakan konfirmasi info umur kamu"
   }
 }

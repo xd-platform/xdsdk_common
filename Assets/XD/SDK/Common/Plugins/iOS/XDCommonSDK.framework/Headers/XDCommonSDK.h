@@ -59,7 +59,7 @@ FOUNDATION_EXPORT const unsigned char XDCommonSDKVersionString[];
 //#import <XDCommonSDK/TDSGlobalLabel.h>
 #import <XDCommonSDK/TDSGlobalTitleView.h>
 #import <XDCommonSDK/TDSGlobalWebController.h>
-#import <XDCommonSDK/TDSGlobalProgressHUD.h>
+#import <XDCommonSDK/TDSGProgressHUD.h>
 #import <XDCommonSDK/TDSGlobalViewControllerBase.h>
 #import <XDCommonSDK/TDSGlobalPopWindowManager.h>
 #import <XDCommonSDK/TDSGlobalCustomLoadingView.h>

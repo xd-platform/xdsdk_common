@@ -10,10 +10,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 extern CGFloat const LANDSCAPE_LOGIN_WINDOW_WIDTH;
 extern CGFloat const LANDSCAPE_LOGIN_WINDOW_HEIGHT;
-extern CGFloat const BUTTON_BORDER_WIDTH;
-extern CGFloat const CONTAINER_CORNER_RADIUS;
-extern CGFloat const TOAST_TOP_BOTTOM_SPACE;
-extern CGFloat const TOAST_TEXT_FONT_SIZE;
+extern CGFloat const TDSG_BUTTON_BORDER_WIDTH;
+extern CGFloat const TDSG_CONTAINER_CORNER_RADIUS;
+extern CGFloat const TDSG_TOAST_TOP_BOTTOM_SPACE;
+extern CGFloat const TDSG_TOAST_TEXT_FONT_SIZE;
 
 /**
  颜色，字体 等
