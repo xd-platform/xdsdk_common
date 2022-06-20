@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 带图案加载中
 - (void)removeLoadingInfo;
+- (void)loadInfoFail:(UIView *)targetView customMsg:(NSString *)msg tapAction:(void (^)(void))action;
 - (void)loadInfoFail:(UIView *)targetView tapAction:(void (^)(void))action;
 - (void)loadInfoFail:(UIView *)targetView networkFail:(BOOL)networkFail tapAction:(void (^)(void))action;
 #pragma mark - 界面Push pop

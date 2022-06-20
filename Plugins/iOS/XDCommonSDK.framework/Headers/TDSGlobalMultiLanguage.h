@@ -61,6 +61,7 @@ extern NSString *const TDSG_COPY_SUCCESS_TOAST_KEY;
 
 extern NSString *const TDSG_LOAD_FAIL_TEXT_KEY;
 extern NSString *const TDSG_LOAD_NET_FAIL_TEXT_KEY;
+extern NSString *const TDSG_LOAD_PROTOCOL_FAIL_TEXT_KEY;
 extern NSString *const TDSG_CONFIRM_BUTTON_TEXT_KEY;
 
 extern NSString *const TDSG_GUEST_TEXT_KEY;

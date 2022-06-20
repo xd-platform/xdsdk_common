@@ -7,6 +7,7 @@ using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using XD.SDK.Common.Editor;
+using LC.Newtonsoft.Json;
 
 public static class XDGIOSCommonProcessor{
     [PostProcessBuild(199)]
@@ -62,7 +63,7 @@ public static class XDGIOSCommonProcessor{
 
         Debug.Log("资源路径" + tdsResourcePath);
         if (!Directory.Exists(tdsResourcePath) || tdsResourcePath == ""){
-            Debug.LogError("需要拷贝的资源路径不存在");
+            Debug.LogError("打包失败 ---- 需要拷贝的资源路径不存在1");
             return;
         }
 
@@ -124,9 +125,9 @@ public static class XDGIOSCommonProcessor{
         File.WriteAllText(_plistPath, _plist.WriteToString());
     }
 
-    public static void SetThirdLibraryId(string pathToBuildProject, XDGConfigModel configModel){
+    private static void SetThirdLibraryId_IO(string pathToBuildProject, XDGConfigModel configModel){
         if (configModel == null){
-            Debug.LogError("配置文件Model是空");
+            Debug.LogError("打包失败  ----  XDConfig 配置文件Model是空");
             return;
         }
 
@@ -203,16 +204,88 @@ public static class XDGIOSCommonProcessor{
 
         File.WriteAllText(_plistPath, _plist.WriteToString());
     }
+    
+     private static void SetThirdLibraryId_CN(string pathToBuildProject, XDGConfigModel configModel){
+        if (configModel == null){
+            Debug.LogError("打包失败  ----  XDConfig-CN 配置文件Model是空");
+            return;
+        }
 
-    public static void CopyThirdResource(string target, string projPath, PBXProject proj, string parentFolder,
+        var _plistPath = pathToBuildProject + "/Info.plist"; //Xcode工程的plist
+        var _plist = new PlistDocument();
+        _plist.ReadFromString(File.ReadAllText(_plistPath));
+        var _rootDic = _plist.root;
+        
+        var taptapId = configModel.tapsdk.client_id;
+
+        //添加url 用添加，不要覆盖
+        PlistElementDict dict = _plist.root.AsDict();
+        PlistElementArray array = null;
+        foreach (var item in _rootDic.values){
+            if (item.Key.Equals("CFBundleURLTypes")){
+                array = (PlistElementArray) item.Value;
+                break;
+            }
+        }
+
+        if (array == null){
+            array = dict.CreateArray("CFBundleURLTypes");
+        }
+        
+        PlistElementDict dict2 = array.AddDict();
+        if (taptapId != null){
+            dict2.SetString("CFBundleURLName", "TapTap");
+            PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+            array2.AddString($"tt{taptapId}");
+        }
+        
+        File.WriteAllText(_plistPath, _plist.WriteToString());
+    }
+
+     public static void SetThirdLibraryId(string projectPath, string configJsonPath, bool isCN){
+         if (File.Exists(configJsonPath)){
+             var json = File.ReadAllText(configJsonPath);
+             var md = JsonConvert.DeserializeObject<XDGConfigModel>(json);
+             if (md == null){
+                 Debug.LogError("json 配置文件解析失败: " + configJsonPath);
+                 return;
+             }
+             
+             if (isCN){
+                 SetThirdLibraryId_CN(projectPath, md);
+             } else{
+                 SetThirdLibraryId_IO(projectPath, md);
+             }
+             
+         } else{
+             Debug.LogError("json 配置文件不存在: " + configJsonPath);
+         }
+     }
+
+     public static void CopyThirdResource(string target, string projPath, PBXProject proj, string parentFolder,
         string xcodeResourceFolder, string[] bundleNames){
         var tdsResourcePath = parentFolder + "/Assets/Plugins/iOS/Resource";
 
         if (!Directory.Exists(tdsResourcePath)){
-            Debug.LogError("拷贝的资源路径不存在");
+            Debug.LogError("打包失败 --- 拷贝的资源路径不存在2");
+            return;
+        }
+        
+        //拷贝 XDConfig.json 配置文件
+        var ioJson = parentFolder + "/Assets/Plugins/XDConfig.json";
+        var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
+        if (File.Exists(ioJson)){
+            File.Copy(ioJson, Path.Combine(xcodeResourceFolder, "XDConfig.json"));   
+        }
+        if (File.Exists(cnJson)){
+            File.Copy(cnJson, Path.Combine(xcodeResourceFolder, "XDConfig-cn.json"));   
+        }
+        if (!File.Exists(ioJson) && !File.Exists(cnJson)){
+            Debug.LogError("打包失败 ---  拷贝的json配置文件不存在");
             return;
         }
 
+        //拷贝文件夹
         XDGFileHelper.CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder);
         foreach (var name in bundleNames){
             proj.AddFileToBuild(target,
