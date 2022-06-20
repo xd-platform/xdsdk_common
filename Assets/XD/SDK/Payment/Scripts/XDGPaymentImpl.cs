@@ -5,7 +5,7 @@ using UnityEngine;
 using XD.SDK.Common;
 
 namespace XD.SDK.Payment{
-    public class XDGPaymentImpl : IPaymentAPI{
+    public class XDGPaymentImpl{
         private readonly string XDG_PAYMENT_SERVICE = "XDGPaymentService"; //注意要和iOS本地桥接类名一样
 
         private XDGPaymentImpl(){
@@ -69,26 +69,57 @@ namespace XD.SDK.Payment{
                 });
         }
 
-        public void PayWithWeb(string serverId, string roleId, string productId, string extras,
-            Action<XDGError> callback){
+        public void PayWithWeb(
+            string orderId,
+            string productId,
+            string productName,
+            double payAmount,
+            string roleId,
+            string serverId,
+            string extras,
+            Action<WebPayResultType, string> callback){
             var dic = new Dictionary<string, object>{
-                {"serverId", serverId},
-                {"roleId", roleId},
+                {"orderId", orderId},
                 {"productId", productId},
+                {"productName", productName},
+                {"payAmount", payAmount},
+                {"roleId", roleId},
+                {"serverId", serverId},
                 {"extras", extras},
             };
+            XDGTool.Log("PayWithWeb 参数: " + JsonUtility.ToJson(dic));
+            
             var command = new Command.Builder()
                 .Service(XDG_PAYMENT_SERVICE)
                 .Method("payWithWeb")
                 .Args(dic)
                 .Callback(true)
                 .CommandBuilder();
+
             EngineBridge.GetInstance()
                 .CallHandler(command, result => {
                     XDGTool.Log("PayWithWeb 方法结果: " + result.ToJSON());
-                    callback(!XDGTool.checkResultSuccess(result)
-                        ? new XDGError(result.code, result.message)
-                        : new XDGError(result.content));
+
+                    if (XDGTool.checkResultSuccess(result)){
+                        Dictionary<string, object> resultDic =
+                            Json.Deserialize(result.content) as Dictionary<string, object>;
+                        var code = SafeDictionary.GetValue<int>(resultDic, "code");
+                        var message = SafeDictionary.GetValue<string>(resultDic, "message");
+
+                        if (code == 0){
+                            callback(WebPayResultType.OK, "支付完成");
+                        } else if (code == 1){
+                            callback(WebPayResultType.Cancel, "支付取消");
+                        } else if (code == 2){
+                            callback(WebPayResultType.Processing, "支付处理中");
+                        } else{
+                            callback(WebPayResultType.Error, message);
+                            XDGTool.LogError($"安卓网页支付失败, 参数：{JsonUtility.ToJson(dic)} 结果：{result.ToJSON()}");
+                        }
+                    } else{
+                        callback(WebPayResultType.Error, "支付结果解析失败");
+                        XDGTool.LogError($"支付结果解析失败, 参数：{JsonUtility.ToJson(dic)} 结果：{result.ToJSON()}");
+                    }
                 });
         }
 

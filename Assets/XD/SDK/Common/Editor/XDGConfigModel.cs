@@ -10,7 +10,7 @@ namespace XD.SDK.Common.Editor{
     public string game_name{ get; set; }
     public string report_url{ get; set; }
     public string logout_url{ get; set; }
-    public string webpay_url{ get; set; }
+    public string web_pay_url{ get; set; }
     public Tapsdk tapsdk{ get; set; }
     public List<string> logos{ get; set; }
     public Facebook facebook{ get; set; }

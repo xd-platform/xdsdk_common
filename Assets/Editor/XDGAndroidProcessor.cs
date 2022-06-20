@@ -1,8 +1,6 @@
 #if UNITY_EDITOR && UNITY_ANDROID
 using System.IO;
-#if UNITY_ANDROID
 using UnityEditor.Android;
-#endif
 using UnityEngine;
 using XD.SDK.Common.Editor;
 
@@ -12,13 +10,31 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         if (path.Contains("unityLibrary")){
             projectPath = path.Substring(0, path.Length - 12);
         }
+        var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
         
-        var googleServiceOriginPath = projectPath + "/unityLibrary/src/main/assets/google-services.json";
-        if (File.Exists(googleServiceOriginPath)){
+        //拷贝 google-services
+        var googleJsonPath = parentFolder + "/Assets/Plugins/google-services.json";
+        if (File.Exists(googleJsonPath)){
             Debug.Log("拷贝谷歌 google-services");
-            File.Copy(googleServiceOriginPath, projectPath + "/launcher/google-services.json", true);
+            File.Copy(googleJsonPath, projectPath + "/launcher/google-services.json");
+            File.Copy(googleJsonPath, projectPath + "/unityLibrary/src/main/assets/google-services.json");
         }
-
+        
+        //拷贝 SDK json 文件
+        var ioJson = parentFolder + "/Assets/Plugins/XDConfig.json";
+        var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
+        if (File.Exists(ioJson)){
+            File.Copy(ioJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json");   
+        }
+        if (File.Exists(cnJson)){
+            File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json");   
+        }
+        if (!File.Exists(ioJson) && !File.Exists(cnJson)){
+            Debug.LogError("打包失败 ---  拷贝的json配置文件不存在");
+            return;
+        }
+        
+        //配置路径
         var gradlePropertiesFile = projectPath + "/gradle.properties";
         var baseProjectGradle = projectPath + "/build.gradle";
         var launcherGradle = projectPath + "/launcher/build.gradle";

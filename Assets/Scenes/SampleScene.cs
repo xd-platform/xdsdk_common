@@ -83,7 +83,7 @@ public class SampleScene : MonoBehaviour{
 
     public void InitRelease(){
         XDGCommonImpl.GetInstance().SetDebugMode();
-        XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig");
+        XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig.json");
         XDGCommon.InitSDK(((success, msg) => {
             if (success){
                 ResultText.text = $"初始化成功 {success} {msg}";
@@ -103,7 +103,7 @@ public class SampleScene : MonoBehaviour{
     public void InitRelease_CN(){
         isCN = true;
         XDGCommonImpl.GetInstance().SetDebugMode();
-        XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig-cn");
+        XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig-cn.json");
         XDGCommon.InitSDK(((success, msg) => {
             if (success){
                 ResultText.text = $"初始化成功 {success} {msg}";
@@ -317,24 +317,38 @@ public class SampleScene : MonoBehaviour{
 
     public void OpenWebPay(){
         var tmp = WebPayProductField.text;
-        var productId = "com.tds.sdkdemopro.fxqusd199";
+        
+        var price = 0.1;
+        var productId = "com.xd.sdkdemo1.stone30";
         if (tmp == "1"){
-            productId = "com.tds.sdkdemopro.fxqusd099";
+            price = 6.00;
+            productId = "com.xd.sdkdemo1.package";
         } else if (tmp == "2"){
-            productId = "com.tds.sdkdemopro.fxqusd299";
+            price = 60.00;
+            productId = "com.xd.sdkdemo1.stone60";
         } else if (tmp == "3"){
-            productId = "com.tds.sdkdemopro.fxqusd399";
+            price = 300.00;
+            productId = "com.xd.sdkdemo1.stone300";
         }
 
         ResultText.text = $"支付 {productId}";
 
         var serverId = WebPayServiceField.text;
         if (string.IsNullOrEmpty(serverId)){
-            serverId = "serverId";
+            serverId = "90001";
         }
 
-        XDGPayment.PayWithWeb(serverId, UserId, productId, "ext",
-            error => { ResultText.text = $"网页支付 " + error.ToJSON(); });
+        XDGPayment.PayWithWeb(
+            "",
+            productId,
+            productId,
+            price,
+            UserId,
+            serverId, 
+            "ext",
+            (type, msg) => {
+                ResultText.text = $"网页支付结果： {type}  msg:{msg}";
+            });
     }
 
 

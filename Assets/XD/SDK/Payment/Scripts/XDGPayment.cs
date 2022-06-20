@@ -9,9 +9,16 @@ namespace XD.SDK.Payment{
             XDGPaymentImpl.GetInstance().PayWithProduct(orderId, productId, roleId, serverId, ext, callback);
         }
 
-        public static void PayWithWeb(string serverId, string roleId, string productId, string extras,
-            Action<XDGError> callback){
-            XDGPaymentImpl.GetInstance().PayWithWeb(serverId, roleId, productId, extras, callback);
+        public static void PayWithWeb(
+            string orderId,
+            string productId,
+            string productName,
+            double payAmount,
+            string roleId, 
+            string serverId,
+            string extras,
+            Action<WebPayResultType, string> callback){
+            XDGPaymentImpl.GetInstance().PayWithWeb(orderId, productId, productName, payAmount, roleId, serverId, extras, callback);
         }
 
         public static void QueryWithProductIds(string[] productIds, Action<XDGSkuDetailInfo> callback){

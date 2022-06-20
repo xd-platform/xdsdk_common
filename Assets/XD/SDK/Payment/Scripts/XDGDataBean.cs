@@ -289,6 +289,7 @@ namespace XD.SDK.Payment
             if (errorDic != null)
             {
                 xdgError = new XDGError(errorDic);
+                XDGTool.LogError($"产品支付失败： {jsonStr}");
             }
 
             var orderInfoDic = SafeDictionary.GetValue<Dictionary<string, object>>(dic, "orderInfo");

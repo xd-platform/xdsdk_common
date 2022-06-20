@@ -71,6 +71,7 @@ namespace XD.SDK.Common.Editor
         {
             if (Directory.Exists(dstPath))
                 Directory.Delete(dstPath,true);
+            
             if (File.Exists(dstPath))
                 File.Delete(dstPath);
 
