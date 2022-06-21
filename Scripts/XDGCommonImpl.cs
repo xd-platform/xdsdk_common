@@ -27,13 +27,7 @@ namespace XD.SDK.Common{
             return _instance;
         }
 
-        public void InitSDK(bool isCN, Action<bool, string> callback){
-            if (isCN){
-                updateConfigFileName("XDConfig-cn.json");
-            } else{
-                updateConfigFileName("XDConfig.json");
-            }
-            
+        public void InitSDK(Action<bool, string> callback){
             var command = new Command.Builder()
                 .Service(COMMON_MODULE_UNITY_BRIDGE_NAME)
                 .Method("initSDK")
@@ -404,7 +398,7 @@ namespace XD.SDK.Common{
             EngineBridge.GetInstance().CallHandler(command);
         }
 
-        private void updateConfigFileName(string fileName){
+        public void updateConfigFileName(string fileName){
             var command = new Command.Builder()
                 .Service(COMMON_MODULE_UNITY_BRIDGE_NAME)
                 .Method("updateConfigFileName")
