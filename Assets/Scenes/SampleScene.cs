@@ -83,7 +83,8 @@ public class SampleScene : MonoBehaviour{
 
     public void InitRelease(){
         XDGCommonImpl.GetInstance().SetDebugMode();
-        XDGCommon.InitSDK(false,((success, msg) => {
+        XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig.json");
+        XDGCommon.InitSDK(((success, msg) => {
             if (success){
                 ResultText.text = $"初始化成功 {success} {msg}";
             } else{
@@ -102,7 +103,8 @@ public class SampleScene : MonoBehaviour{
     public void InitRelease_CN(){
         isCN = true;
         XDGCommonImpl.GetInstance().SetDebugMode();
-        XDGCommon.InitSDK(true,((success, msg) => {
+        XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig-cn.json");
+        XDGCommon.InitSDK(((success, msg) => {
             if (success){
                 ResultText.text = $"初始化成功 {success} {msg}";
                 // InitAntiSDK();

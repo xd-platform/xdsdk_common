@@ -44,6 +44,24 @@ public static class XDGIOSCommonProcessor{
 
             //拷贝外面配置的文件夹
             CopyThirdResource(target, projPath, proj, parentFolder, resourcePath);
+            
+            //拷贝 XDConfig.json
+            var jsonPath = parentFolder + "/Assets/Plugins/XDConfig.json";
+            if (!File.Exists(jsonPath)){
+                Debug.LogError("XDConfig.json 配置文件不存在，这个是必须的");
+                return;
+            }
+            var json = File.ReadAllText(jsonPath);
+            var md = JsonConvert.DeserializeObject<XDGConfigModel>(json);
+            if (md == null){
+                Debug.LogError("json 配置文件解析失败: " + jsonPath);
+                return;
+            }
+            var filePath = Path.Combine(resourcePath, "XDConfig.json");
+            File.Copy(jsonPath, filePath);
+            AddXcodeConfig(target, proj, filePath); //先拷贝，后配置
+            SetThirdLibraryId(path, md);
+            File.WriteAllText(projPath, proj.WriteToString()); //保存
 
             //修改plist
             SetPlist(path);
@@ -89,9 +107,9 @@ public static class XDGIOSCommonProcessor{
         File.WriteAllText(projPath, proj.WriteToString()); //保存
     }
 
-    private static void AddXcodeConfig(string target, PBXProject proj, string xcodeFilePath){
+    public static void AddXcodeConfig(string target, PBXProject proj, string xcodeFilePath){
         if (!xcodeFilePath.EndsWith("/Info.plist")){ //有些bundle里有这个，和项目的冲突
-            proj.AddFileToBuild(target, proj.AddFile(xcodeFilePath, xcodeFilePath, PBXSourceTree.Source));   
+            proj.AddFileToBuild(target, proj.AddFile(xcodeFilePath, xcodeFilePath, PBXSourceTree.Source));
         }
     }
 
@@ -177,7 +195,7 @@ public static class XDGIOSCommonProcessor{
         File.WriteAllText(_plistPath, _plist.WriteToString());
     }
 
-    private static void SetThirdLibraryId_IO(string pathToBuildProject, XDGConfigModel configModel){
+    private static void SetThirdLibraryId(string pathToBuildProject, XDGConfigModel configModel){
         if (configModel == null){
             Debug.LogError("打包失败  ----  XDConfig 配置文件Model是空");
             return;
@@ -216,13 +234,13 @@ public static class XDGIOSCommonProcessor{
         }
 
         PlistElementDict dict2 = array.AddDict();
-        if (taptapId != null){
-            dict2.SetString("CFBundleURLName", "TapIO");
+        if (!string.IsNullOrEmpty(taptapId)){
+            dict2.SetString("CFBundleURLName", "Tap");
             PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
             array2.AddString($"tt{taptapId}");
         }
 
-        if (googleId != null){
+        if (!string.IsNullOrEmpty(googleId)){
             dict2 = array.AddDict();
             dict2.SetString("CFBundleURLName", "Google");
             PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
@@ -230,7 +248,7 @@ public static class XDGIOSCommonProcessor{
             array2.AddString(googleId);
         }
 
-        if (facebookId != null){
+        if (!string.IsNullOrEmpty(facebookId)){
             dict2 = array.AddDict();
             dict2.SetString("CFBundleURLName", "Facebook");
             PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
@@ -238,7 +256,7 @@ public static class XDGIOSCommonProcessor{
             array2.AddString("fb" + facebookId);
         }
 
-        if (bundleId != null){
+        if (!string.IsNullOrEmpty(bundleId)){
             dict2 = array.AddDict();
             dict2.SetString("CFBundleURLName", "Line");
             PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
@@ -246,7 +264,7 @@ public static class XDGIOSCommonProcessor{
             array2.AddString("line3rdp." + bundleId);
         }
 
-        if (twitterId != null){
+        if (!string.IsNullOrEmpty(twitterId)){
             dict2 = array.AddDict();
             dict2.SetString("CFBundleURLName", "Twitter");
             PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
@@ -255,93 +273,6 @@ public static class XDGIOSCommonProcessor{
         }
 
         File.WriteAllText(_plistPath, _plist.WriteToString());
-    }
-
-    private static void SetThirdLibraryId_CN(string pathToBuildProject, XDGConfigModel configModel){
-        if (configModel == null){
-            Debug.LogError("打包失败  ----  XDConfig-cn 配置文件Model是空");
-            return;
-        }
-
-        var _plistPath = pathToBuildProject + "/Info.plist"; //Xcode工程的plist
-        var _plist = new PlistDocument();
-        _plist.ReadFromString(File.ReadAllText(_plistPath));
-        var _rootDic = _plist.root;
-
-        var taptapId = configModel.tapsdk.client_id;
-
-        //添加url 用添加，不要覆盖
-        PlistElementDict dict = _plist.root.AsDict();
-        PlistElementArray array = null;
-        foreach (var item in _rootDic.values){
-            if (item.Key.Equals("CFBundleURLTypes")){
-                array = (PlistElementArray) item.Value;
-                break;
-            }
-        }
-
-        if (array == null){
-            array = dict.CreateArray("CFBundleURLTypes");
-        }
-
-        PlistElementDict dict2 = array.AddDict();
-        if (taptapId != null){
-            dict2.SetString("CFBundleURLName", "TapCN");
-            PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
-            array2.AddString($"tt{taptapId}");
-        }
-
-        File.WriteAllText(_plistPath, _plist.WriteToString());
-    }
-
-    public static void SetThirdLibraryId(string path, string configJsonPath,
-        bool isCN){
-        
-        var projPath = PBXProject.GetPBXProjectPath(path);
-        var proj = new PBXProject();
-        proj.ReadFromString(File.ReadAllText(projPath));
-
-        // 2019.3 以上有多个target
-#if UNITY_2019_3_OR_NEWER
-        string unityFrameworkTarget = proj.TargetGuidByName("UnityFramework");
-        string target = proj.GetUnityMainTargetGuid();
-#else
-                string unityFrameworkTarget = proj.TargetGuidByName("Unity-iPhone");
-                string target = proj.TargetGuidByName("Unity-iPhone");
-#endif
-
-
-        if (File.Exists(configJsonPath)){
-            var folderPath = Path.Combine(path, "SDKResource");
-            if (!File.Exists(folderPath)){
-                Directory.CreateDirectory(folderPath);
-            }
-
-            var json = File.ReadAllText(configJsonPath);
-            var md = JsonConvert.DeserializeObject<XDGConfigModel>(json);
-            if (md == null){
-                Debug.LogError("json 配置文件解析失败: " + configJsonPath);
-                return;
-            }
-
-            if (isCN){
-                var filePath = Path.Combine(folderPath, "XDConfig-cn.json");
-                File.Copy(configJsonPath, filePath);
-
-                AddXcodeConfig(target, proj, filePath); //先拷贝，后配置
-                SetThirdLibraryId_CN(path, md);
-            } else{
-                var filePath = Path.Combine(folderPath, "XDConfig.json");
-                File.Copy(configJsonPath, filePath);
-
-                AddXcodeConfig(target, proj, filePath); //先拷贝，后配置
-                SetThirdLibraryId_IO(path, md);
-            }
-
-            File.WriteAllText(projPath, proj.WriteToString()); //保存
-        } else{
-            Debug.LogError("json 配置文件不存在: " + configJsonPath);
-        }
     }
 
     private static void CopyThirdResource(string target, string projPath, PBXProject proj, string parentFolder,

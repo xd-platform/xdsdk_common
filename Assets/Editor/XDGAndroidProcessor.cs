@@ -12,7 +12,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         }
         var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
         
-        //拷贝 google-services
+        //拷贝 google-services 可选
         var googleJsonPath = parentFolder + "/Assets/Plugins/google-services.json";
         if (File.Exists(googleJsonPath)){
             Debug.Log("拷贝谷歌 google-services");
@@ -20,19 +20,21 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
             File.Copy(googleJsonPath, projectPath + "/unityLibrary/src/main/assets/google-services.json");
         }
         
-        //拷贝 SDK json 文件
-        var ioJson = parentFolder + "/Assets/Plugins/XDConfig.json";
-        var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
-        if (File.Exists(ioJson)){
-            File.Copy(ioJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json");   
-        }
-        if (File.Exists(cnJson)){
-            File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json");   
-        }
-        if (!File.Exists(ioJson) && !File.Exists(cnJson)){
+        //拷贝 SDK json 文件，必须的
+        var configJson = parentFolder + "/Assets/Plugins/XDConfig.json";
+        if (File.Exists(configJson)){
+            File.Copy(configJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json");   
+        } else{
             Debug.LogError("打包失败 ---  拷贝的json配置文件不存在");
             return;
         }
+
+        //Demo用的，游戏不用配置这个 XDConfig-cn.json
+        var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
+        if (File.Exists(cnJson)){
+            File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json");   
+        }
+       
         
         //配置路径
         var gradlePropertiesFile = projectPath + "/gradle.properties";
@@ -74,25 +76,27 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
 
                 implementation 'com.google.firebase:firebase-core:18.0.0'
                 implementation 'com.google.firebase:firebase-messaging:21.1.0'
-    
                 implementation 'com.google.code.gson:gson:2.8.6'
-
                 implementation 'com.google.android.gms:play-services-auth:16.0.1'
+                implementation 'com.google.android.gms:play-services-ads-identifier:15.0.1'
 
                 implementation 'com.facebook.android:facebook-login:12.0.0'
                 implementation 'com.facebook.android:facebook-share:12.0.0'
+
                 implementation 'com.appsflyer:af-android-sdk:6.5.2'
                 implementation 'com.appsflyer:unity-wrapper:6.5.2'
 
                 implementation 'com.adjust.sdk:adjust-android:4.24.1'
+
+                implementation 'com.twitter.sdk.android:twitter:3.3.0'
+                implementation 'com.twitter.sdk.android:tweet-composer:3.3.0'
+
+                implementation 'com.linecorp:linesdk:5.0.1'
+
+                implementation 'androidx.appcompat:appcompat:1.3.1'
                 implementation 'com.android.installreferrer:installreferrer:2.2'
                 implementation 'com.android.billingclient:billing:3.0.0'
                 implementation 'androidx.recyclerview:recyclerview:1.2.1'
-                implementation 'com.google.android.gms:play-services-ads-identifier:15.0.1'
-                implementation 'com.twitter.sdk.android:twitter:3.3.0'
-                implementation 'com.twitter.sdk.android:tweet-composer:3.3.0'
-                implementation 'com.linecorp:linesdk:5.0.1'
-                implementation 'androidx.appcompat:appcompat:1.3.1'
             ");
         }
         
