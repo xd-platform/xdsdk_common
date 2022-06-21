@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace XD.SDK.Common{
     public class XDGCommon{
-        public static void InitSDK(Action<bool, string> callback){
-            XDGCommonImpl.GetInstance().InitSDK(callback);
+        public static void InitSDK(bool isCN, Action<bool, string> callback){
+            XDGCommonImpl.GetInstance().InitSDK(isCN, callback);
         }
 
         public static void IsInitialized(Action<bool> callback){

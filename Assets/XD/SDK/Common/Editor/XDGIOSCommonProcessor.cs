@@ -32,16 +32,18 @@ public static class XDGIOSCommonProcessor{
             proj.AddFrameworkToProject(unityFrameworkTarget, "Accelerate.framework", true);
 
             //创建文件夹
-            var resourcePath = Path.Combine(path, "SDKCommonResource");
+            var resourcePath = Path.Combine(path, "SDKResource");
             var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
             if (!File.Exists(resourcePath)){
                 Directory.CreateDirectory(resourcePath);
             }
 
-            //拷贝资源文件, 根据需要修改
+            //拷贝SDK内部资源文件
             CopyResource(target, projPath, proj, parentFolder,
-                "com.xd.sdk.common", "Common", resourcePath,
-                new[]{"XDResources.bundle"});
+                "com.xd.sdk.common", "Common", resourcePath);
+
+            //拷贝外面配置的文件夹
+            CopyThirdResource(target, projPath, proj, parentFolder, resourcePath);
 
             //修改plist
             SetPlist(path);
@@ -51,10 +53,26 @@ public static class XDGIOSCommonProcessor{
         }
     }
 
+    private static string FilterFile(string srcPath, string filterName){
+        if (!Directory.Exists(srcPath)){
+            return null;
+        }
+
+        foreach (var dir in Directory.GetDirectories(srcPath)){
+            string fileName = Path.GetFileName(dir);
+            if (fileName.StartsWith(filterName)){
+                Debug.Log("筛选到指定文件夹:" + Path.Combine(srcPath, Path.GetFileName(dir)));
+                return Path.Combine(srcPath, Path.GetFileName(dir));
+            }
+        }
+
+        return null;
+    }
+
     private static void CopyResource(string target, string projPath, PBXProject proj, string parentFolder,
-        string npmModuleName, string localModuleName, string xcodeResourceFolder, string[] bundleNames){
+        string npmModuleName, string localModuleName, string xcodeResourceFolder){
         //拷贝文件夹里的资源
-        var tdsResourcePath = XDGFileHelper.FilterFile(parentFolder + "/Library/PackageCache/", $"{npmModuleName}@");
+        var tdsResourcePath = FilterFile(parentFolder + "/Library/PackageCache/", $"{npmModuleName}@");
         if (string.IsNullOrEmpty(tdsResourcePath)){ //优先使用npm的，否则用本地的
             tdsResourcePath = parentFolder + "/Assets/XD/SDK/" + localModuleName;
         }
@@ -67,15 +85,49 @@ public static class XDGIOSCommonProcessor{
             return;
         }
 
-        XDGFileHelper.CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder);
-        foreach (var name in bundleNames){
-            proj.AddFileToBuild(target,
-                proj.AddFile(Path.Combine(xcodeResourceFolder, name), Path.Combine(xcodeResourceFolder, name),
-                    PBXSourceTree.Source));
-        }
-
+        CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder, target, proj);
         File.WriteAllText(projPath, proj.WriteToString()); //保存
     }
+
+    private static void AddXcodeConfig(string target, PBXProject proj, string xcodeFilePath){
+        if (!xcodeFilePath.EndsWith("/Info.plist")){ //有些bundle里有这个，和项目的冲突
+            proj.AddFileToBuild(target, proj.AddFile(xcodeFilePath, xcodeFilePath, PBXSourceTree.Source));   
+        }
+    }
+
+    private static void CopyAndReplaceDirectory(string srcPath, string dstPath, string target, PBXProject proj){
+        if (!File.Exists(dstPath)){
+            Directory.CreateDirectory(dstPath);
+        }
+
+        //.framework文件 和 meta文件不拷贝
+        foreach (var file in Directory.GetFiles(srcPath)){
+            var name = Path.GetFileName(file);
+            var filePath = Path.Combine(dstPath, name);
+
+            if (!name.EndsWith(".meta") && !File.Exists(filePath)){
+                File.Copy(file, filePath);
+            }
+
+            //添加到 xcode 配置
+            if (filePath.EndsWith(".bundle") || filePath.EndsWith(".plist") || filePath.EndsWith(".json")){
+                AddXcodeConfig(target, proj, filePath);
+            }
+        }
+
+        foreach (var dir in Directory.GetDirectories(srcPath)){
+            var name = Path.GetFileName(dir);
+            var dirPath = Path.Combine(dstPath, name);
+            if (!name.EndsWith(".framework") && !name.EndsWith(".xcframework")){
+                CopyAndReplaceDirectory(dir, dirPath, target, proj);
+            }
+
+            if (dirPath.EndsWith(".bundle")){
+                AddXcodeConfig(target, proj, dirPath);
+            }
+        }
+    }
+
 
     private static void SetPlist(string pathToBuildProject){
         var _plistPath = pathToBuildProject + "/Info.plist"; //Xcode工程的plist
@@ -165,7 +217,7 @@ public static class XDGIOSCommonProcessor{
 
         PlistElementDict dict2 = array.AddDict();
         if (taptapId != null){
-            dict2.SetString("CFBundleURLName", "TapTap");
+            dict2.SetString("CFBundleURLName", "TapIO");
             PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
             array2.AddString($"tt{taptapId}");
         }
@@ -204,10 +256,10 @@ public static class XDGIOSCommonProcessor{
 
         File.WriteAllText(_plistPath, _plist.WriteToString());
     }
-    
-     private static void SetThirdLibraryId_CN(string pathToBuildProject, XDGConfigModel configModel){
+
+    private static void SetThirdLibraryId_CN(string pathToBuildProject, XDGConfigModel configModel){
         if (configModel == null){
-            Debug.LogError("打包失败  ----  XDConfig-CN 配置文件Model是空");
+            Debug.LogError("打包失败  ----  XDConfig-cn 配置文件Model是空");
             return;
         }
 
@@ -215,7 +267,7 @@ public static class XDGIOSCommonProcessor{
         var _plist = new PlistDocument();
         _plist.ReadFromString(File.ReadAllText(_plistPath));
         var _rootDic = _plist.root;
-        
+
         var taptapId = configModel.tapsdk.client_id;
 
         //添加url 用添加，不要覆盖
@@ -231,68 +283,78 @@ public static class XDGIOSCommonProcessor{
         if (array == null){
             array = dict.CreateArray("CFBundleURLTypes");
         }
-        
+
         PlistElementDict dict2 = array.AddDict();
         if (taptapId != null){
-            dict2.SetString("CFBundleURLName", "TapTap");
+            dict2.SetString("CFBundleURLName", "TapCN");
             PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
             array2.AddString($"tt{taptapId}");
         }
-        
+
         File.WriteAllText(_plistPath, _plist.WriteToString());
     }
 
-     public static void SetThirdLibraryId(string projectPath, string configJsonPath, bool isCN){
-         if (File.Exists(configJsonPath)){
-             var json = File.ReadAllText(configJsonPath);
-             var md = JsonConvert.DeserializeObject<XDGConfigModel>(json);
-             if (md == null){
-                 Debug.LogError("json 配置文件解析失败: " + configJsonPath);
-                 return;
-             }
-             
-             if (isCN){
-                 SetThirdLibraryId_CN(projectPath, md);
-             } else{
-                 SetThirdLibraryId_IO(projectPath, md);
-             }
-             
-         } else{
-             Debug.LogError("json 配置文件不存在: " + configJsonPath);
-         }
-     }
+    public static void SetThirdLibraryId(string path, string configJsonPath,
+        bool isCN){
+        
+        var projPath = PBXProject.GetPBXProjectPath(path);
+        var proj = new PBXProject();
+        proj.ReadFromString(File.ReadAllText(projPath));
 
-     public static void CopyThirdResource(string target, string projPath, PBXProject proj, string parentFolder,
-        string xcodeResourceFolder, string[] bundleNames){
+        // 2019.3 以上有多个target
+#if UNITY_2019_3_OR_NEWER
+        string unityFrameworkTarget = proj.TargetGuidByName("UnityFramework");
+        string target = proj.GetUnityMainTargetGuid();
+#else
+                string unityFrameworkTarget = proj.TargetGuidByName("Unity-iPhone");
+                string target = proj.TargetGuidByName("Unity-iPhone");
+#endif
+
+
+        if (File.Exists(configJsonPath)){
+            var folderPath = Path.Combine(path, "SDKResource");
+            if (!File.Exists(folderPath)){
+                Directory.CreateDirectory(folderPath);
+            }
+
+            var json = File.ReadAllText(configJsonPath);
+            var md = JsonConvert.DeserializeObject<XDGConfigModel>(json);
+            if (md == null){
+                Debug.LogError("json 配置文件解析失败: " + configJsonPath);
+                return;
+            }
+
+            if (isCN){
+                var filePath = Path.Combine(folderPath, "XDConfig-cn.json");
+                File.Copy(configJsonPath, filePath);
+
+                AddXcodeConfig(target, proj, filePath); //先拷贝，后配置
+                SetThirdLibraryId_CN(path, md);
+            } else{
+                var filePath = Path.Combine(folderPath, "XDConfig.json");
+                File.Copy(configJsonPath, filePath);
+
+                AddXcodeConfig(target, proj, filePath); //先拷贝，后配置
+                SetThirdLibraryId_IO(path, md);
+            }
+
+            File.WriteAllText(projPath, proj.WriteToString()); //保存
+        } else{
+            Debug.LogError("json 配置文件不存在: " + configJsonPath);
+        }
+    }
+
+    private static void CopyThirdResource(string target, string projPath, PBXProject proj, string parentFolder,
+        string xcodeResourceFolder){
         var tdsResourcePath = parentFolder + "/Assets/Plugins/iOS/Resource";
 
         if (!Directory.Exists(tdsResourcePath)){
             Debug.LogError("打包失败 --- 拷贝的资源路径不存在2");
             return;
         }
-        
-        //拷贝 XDConfig.json 配置文件
-        var ioJson = parentFolder + "/Assets/Plugins/XDConfig.json";
-        var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
-        if (File.Exists(ioJson)){
-            File.Copy(ioJson, Path.Combine(xcodeResourceFolder, "XDConfig.json"));   
-        }
-        if (File.Exists(cnJson)){
-            File.Copy(cnJson, Path.Combine(xcodeResourceFolder, "XDConfig-cn.json"));   
-        }
-        if (!File.Exists(ioJson) && !File.Exists(cnJson)){
-            Debug.LogError("打包失败 ---  拷贝的json配置文件不存在");
-            return;
-        }
 
         //拷贝文件夹
-        XDGFileHelper.CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder);
-        foreach (var name in bundleNames){
-            proj.AddFileToBuild(target,
-                proj.AddFile(Path.Combine(xcodeResourceFolder, name), Path.Combine(xcodeResourceFolder, name),
-                    PBXSourceTree.Source));
-        }
-
+        CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder, target, proj);
         File.WriteAllText(projPath, proj.WriteToString()); //保存
     }
 
