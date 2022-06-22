@@ -27,7 +27,6 @@ public class SampleScene : MonoBehaviour{
     public InputField WebPayProductField;
 
     private string UserId;
-    private List<LoginType> loginTypes = new List<LoginType>();
     private bool isCN = false;
 
     private void Start(){
@@ -132,6 +131,7 @@ public class SampleScene : MonoBehaviour{
     }
 
     public void AlertLogin(){
+        var loginTypes = new List<LoginType>();
         loginTypes.Add(LoginType.TapTap);
         loginTypes.Add(LoginType.Guest);
         if (!isCN){
