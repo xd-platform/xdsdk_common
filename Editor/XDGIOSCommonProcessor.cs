@@ -206,11 +206,11 @@ public static class XDGIOSCommonProcessor{
         _plist.ReadFromString(File.ReadAllText(_plistPath));
         var _rootDic = _plist.root;
 
-        var facebookId = configModel.facebook.app_id;
-        var facebookToken = configModel.facebook.client_token;
-        var taptapId = configModel.tapsdk.client_id;
-        var googleId = configModel.google.REVERSED_CLIENT_ID;
-        var twitterId = configModel.twitter.consumer_key;
+        var facebookId = (configModel.facebook != null ? configModel.facebook.app_id : null);
+        var facebookToken = (configModel.facebook != null ? configModel.facebook.client_token : null);
+        var taptapId = (configModel.tapsdk != null ? configModel.tapsdk.client_id : null);
+        var googleId = (configModel.google != null ? configModel.google.REVERSED_CLIENT_ID : null);
+        var twitterId = (configModel.twitter != null ? configModel.twitter.consumer_key : null);
         var bundleId = configModel.bundle_id;
 
         //添加url 用添加，不要覆盖
@@ -279,14 +279,11 @@ public static class XDGIOSCommonProcessor{
         string xcodeResourceFolder){
         var tdsResourcePath = parentFolder + "/Assets/Plugins/iOS/Resource";
 
-        if (!Directory.Exists(tdsResourcePath)){
-            Debug.LogError("打包失败 --- 拷贝的资源路径不存在2");
-            return;
-        }
-
         //拷贝文件夹
-        CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder, target, proj);
-        File.WriteAllText(projPath, proj.WriteToString()); //保存
+        if (Directory.Exists(tdsResourcePath)){
+            CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder, target, proj);
+            File.WriteAllText(projPath, proj.WriteToString()); //保存  
+        }
     }
 
     private static void SetScriptClass(string pathToBuildProject){
