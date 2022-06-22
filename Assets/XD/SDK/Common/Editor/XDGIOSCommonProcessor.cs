@@ -38,15 +38,19 @@ public static class XDGIOSCommonProcessor{
                 Directory.CreateDirectory(resourcePath);
             }
 
-            //拷贝SDK内部资源文件
+            //拷贝SDK内部资源文件 common 
             CopyResource(target, projPath, proj, parentFolder,
                 "com.xd.sdk.common", "Common", resourcePath);
+            
+            //拷贝SDK内部资源文件 third
+            CopyResource(target, projPath, proj, parentFolder,
+                "com.xd.sdk.thirdoversea", "ThirdOversea", resourcePath);
 
             //拷贝外面配置的文件夹
             CopyThirdResource(target, projPath, proj, parentFolder, resourcePath);
             
             //拷贝 XDConfig.json
-            var jsonPath = parentFolder + "/Assets/Plugins/XDConfig.json";
+            var jsonPath = parentFolder + "/Assets/Plugins/XDSDKConfig/XDConfig.json";
             if (!File.Exists(jsonPath)){
                 Debug.LogError("XDConfig.json 配置文件不存在，这个是必须的");
                 return;
@@ -94,17 +98,13 @@ public static class XDGIOSCommonProcessor{
         if (string.IsNullOrEmpty(tdsResourcePath)){ //优先使用npm的，否则用本地的
             tdsResourcePath = parentFolder + "/Assets/XD/SDK/" + localModuleName;
         }
-
         tdsResourcePath = tdsResourcePath + "/Plugins/iOS/Resource";
 
-        Debug.Log("资源路径" + tdsResourcePath);
-        if (!Directory.Exists(tdsResourcePath) || tdsResourcePath == ""){
-            Debug.LogError("打包失败 ---- 需要拷贝的资源路径不存在1");
-            return;
+        if (Directory.Exists(tdsResourcePath) && tdsResourcePath != ""){
+            Debug.Log("拷贝资源路径: " + tdsResourcePath);
+            CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder, target, proj);
+            File.WriteAllText(projPath, proj.WriteToString()); //保存  
         }
-
-        CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder, target, proj);
-        File.WriteAllText(projPath, proj.WriteToString()); //保存
     }
 
     public static void AddXcodeConfig(string target, PBXProject proj, string xcodeFilePath){
@@ -277,10 +277,11 @@ public static class XDGIOSCommonProcessor{
 
     private static void CopyThirdResource(string target, string projPath, PBXProject proj, string parentFolder,
         string xcodeResourceFolder){
-        var tdsResourcePath = parentFolder + "/Assets/Plugins/iOS/Resource";
+        var tdsResourcePath = parentFolder + "/Assets/Plugins/XDSDKConfig/iOS";
 
         //拷贝文件夹
         if (Directory.Exists(tdsResourcePath)){
+            Debug.Log("拷贝资源路径: " + tdsResourcePath);
             CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder, target, proj);
             File.WriteAllText(projPath, proj.WriteToString()); //保存  
         }

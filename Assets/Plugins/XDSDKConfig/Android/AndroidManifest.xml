@@ -10,7 +10,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
-
+    <!--  //测试代码，demo抓包用，游戏不用配置  -->
     <application
             android:networkSecurityConfig="@xml/network_security_config">
 

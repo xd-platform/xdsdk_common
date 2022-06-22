@@ -1,7 +1,7 @@
 {
-  "name": "com.xd.sdk.common",
+  "name": "com.xd.sdk.thirdoversea",
   "version": "6.4.0",
-  "description": "XD Common",
+  "description": "XD-SDK ThirdOversea",
   "unity": "2018.3",
   "license": "MIT",
   "dependencies": {

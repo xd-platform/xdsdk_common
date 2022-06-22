@@ -13,29 +13,13 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
         
         //拷贝 google-services 可选
-        var googleJsonPath = parentFolder + "/Assets/Plugins/google-services.json";
+        var googleJsonPath = parentFolder + "/Assets/Plugins/XDSDKConfig/Android/google-services.json";
         if (File.Exists(googleJsonPath)){
             Debug.Log("拷贝谷歌 google-services");
             File.Copy(googleJsonPath, projectPath + "/launcher/google-services.json");
             File.Copy(googleJsonPath, projectPath + "/unityLibrary/src/main/assets/google-services.json");
         }
-        
-        //拷贝 SDK json 文件，必须的
-        var configJson = parentFolder + "/Assets/Plugins/XDConfig.json";
-        if (File.Exists(configJson)){
-            File.Copy(configJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json");   
-        } else{
-            Debug.LogError("打包失败 ---  拷贝的json配置文件不存在");
-            return;
-        }
 
-        //Demo用的，游戏不用配置这个 XDConfig-cn.json
-        var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
-        if (File.Exists(cnJson)){
-            File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json");   
-        }
-       
-        
         //配置路径
         var gradlePropertiesFile = projectPath + "/gradle.properties";
         var baseProjectGradle = projectPath + "/build.gradle";
@@ -92,23 +76,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
                 implementation 'com.twitter.sdk.android:tweet-composer:3.3.0'
 
                 implementation 'com.linecorp:linesdk:5.0.1'
-
-                implementation 'androidx.appcompat:appcompat:1.3.1'
-                implementation 'com.android.installreferrer:installreferrer:2.2'
-                implementation 'com.android.billingclient:billing:3.0.0'
-                implementation 'androidx.recyclerview:recyclerview:1.2.1'
             ");
-        }
-        
-        //需要
-        if (File.Exists(gradlePropertiesFile)){
-            Debug.Log("编辑 gradlePropertiesFile");
-            if (File.Exists(gradlePropertiesFile)){
-                var writeHelper = new XDGScriptHandlerProcessor(gradlePropertiesFile);
-                writeHelper.WriteBelow(@"org.gradle.jvmargs=-Xmx4096M", @"
-android.useAndroidX=true
-android.enableJetifier=true");
-            }
         }
     }
 

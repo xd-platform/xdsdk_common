@@ -16,7 +16,7 @@ public static class XDGIOSProcessor{
             var parentPath = Directory.GetParent(Application.dataPath)?.FullName;
 
             //国内配置文件 Demo用
-            var jsonPath_CN = parentPath + "/Assets/Plugins/XDConfig-cn.json";
+            var jsonPath_CN = parentPath + "/Assets/Plugins/XDSDKConfig/XDConfig-cn.json";
             SetCNConfig(path, jsonPath_CN); 
         }
     }
@@ -56,9 +56,7 @@ public static class XDGIOSProcessor{
             SetThirdLibraryId_CN(path, md);
 
             File.WriteAllText(projPath, proj.WriteToString()); //保存
-        } else{
-            Debug.LogError("json 配置文件不存在: " + configJsonPath);
-        }
+        } 
     }
 
     private static void SetThirdLibraryId_CN(string pathToBuildProject, XDGConfigModel configModel){
