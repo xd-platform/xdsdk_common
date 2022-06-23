@@ -13,7 +13,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
 
         //拷贝 SDK json 文件，必须的
-        var configJson = parentFolder + "/Assets/Plugins/XDSDKConfig/XDConfig.json";
+        var configJson = parentFolder + "/Assets/Plugins/XDConfig.json";
         if (File.Exists(configJson)){
             File.Copy(configJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json");   
         } else{
@@ -22,7 +22,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         }
 
         //Demo用的，游戏不用配置这个 XDConfig-cn.json
-        var cnJson = parentFolder + "/Assets/Plugins/XDSDKConfig/XDConfig-cn.json";
+        var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
         if (File.Exists(cnJson)){
             File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json");   
         }

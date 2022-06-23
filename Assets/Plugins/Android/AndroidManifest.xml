@@ -5,15 +5,12 @@
     package="com.unity3d.player"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-    <!--  //测试代码，demo抓包用，游戏不用配置  -->
-    <application
-            android:networkSecurityConfig="@xml/network_security_config">
-
+    
+   <!-- 代理抓包配置   -->
+    <application android:networkSecurityConfig="@xml/network_security_config">
+        
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="\333676195299012" />
@@ -40,21 +37,6 @@
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider333676195299012"
             android:exported="true" />
-
-        <activity android:name="com.unity3d.player.UnityPlayerActivity"
-                  android:theme="@style/UnityThemeSelector">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
-        </activity>
-
-        <activity
-            android:name="com.taptap.sdk.TapTapActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
         <service
             android:name="com.xd.intl.common.firebase.TDSGlobalFirebaseMessagingService"

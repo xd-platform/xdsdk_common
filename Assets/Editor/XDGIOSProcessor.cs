@@ -16,7 +16,7 @@ public static class XDGIOSProcessor{
             var parentPath = Directory.GetParent(Application.dataPath)?.FullName;
 
             //国内配置文件 Demo用
-            var jsonPath_CN = parentPath + "/Assets/Plugins/XDSDKConfig/XDConfig-cn.json";
+            var jsonPath_CN = parentPath + "/Assets/Plugins/XDConfig-cn.json";
             SetCNConfig(path, jsonPath_CN); 
         }
     }

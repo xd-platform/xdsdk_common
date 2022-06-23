@@ -4,13 +4,14 @@ rootPath=$(pwd)
 npm_source_dic_root="$rootPath"/Assets/XD/SDK
 
 # 多个模块一起发布
-npm_module_name=("Account" "Common" "Payment")
+npm_module_name=("Account" "Common" "Payment" "ThirdOversea")
 
 # 单个模块发布
 #npm_module_name=("Account")
 
 publishNPM() {
-  echo @xd-sdk:registry=http://npm.xindong.com >> .npmrc
+  echo registry=http://npm.xindong.com >> .npmrc
+  echo //npm.xindong.com/:_authToken=\"3/duEhSnRRQf3EHc/ZEaIPW6DCDyLrcf0AKsDECM088=\" >> .npmrc
   
   npm publish
   

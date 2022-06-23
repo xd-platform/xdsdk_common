@@ -81,11 +81,12 @@ namespace XD.SDK.Account{
                     str += "TWITTER,";
                 } else if (type == LoginType.Guest){
                     str += "GUEST,";
-                } else if (type == LoginType.WeChat){
-                    str += "WECHAT,";
-                } else if (type == LoginType.QQ){
-                    str += "QQ,";
-                }
+                } 
+                // else if (type == LoginType.WeChat){
+                //     str += "WECHAT,";
+                // } else if (type == LoginType.QQ){
+                //     str += "QQ,";
+                // }
             }
 
             return str;
@@ -180,21 +181,31 @@ namespace XD.SDK.Account{
             EngineBridge.GetInstance().CallHandler(command);
         }
 
-        public void AddUserStatusChangeCallback(Action<int, string> callback){
+        public void AddUserStatusChangeCallback(Action<XDGUserStatusCodeType, string> callback){
             var command = new Command(XDG_ACCOUNT_SERVICE, "addUserStatusChangeCallback", true,
                 null);
             EngineBridge.GetInstance().CallHandler(command, (result) => {
                 XDGTool.Log("AddUserStatusChangeCallback 方法结果: " + result.ToJSON());
+                
                 if (!XDGTool.checkResultSuccess(result)){
+                    callback(XDGUserStatusCodeType.ERROR, "Unknow error");
                     return;
                 }
 
                 XDGUserStatusChangeWrapper wrapper = new XDGUserStatusChangeWrapper(result.content);
-                if (wrapper.code == XDGUserStatusCode.LOGOUT){
+                if (wrapper.code == (int)XDGUserStatusCodeType.LOGOUT){
                     TDSUser.Logout();
+                    callback(XDGUserStatusCodeType.LOGOUT, wrapper.message);
+                    
+                }else if (wrapper.code == (int)XDGUserStatusCodeType.BIND){
+                    callback(XDGUserStatusCodeType.BIND, wrapper.message);
+                    
+                }else if (wrapper.code == (int)XDGUserStatusCodeType.UNBIND){
+                    callback(XDGUserStatusCodeType.UNBIND, wrapper.message);
+                    
+                }else {
+                    callback(XDGUserStatusCodeType.ERROR, wrapper.message);
                 }
-
-                callback(wrapper.code, wrapper.message);
             });
         }
 
@@ -250,11 +261,9 @@ namespace XD.SDK.Account{
             });
         }
 
-        public void AccountCancellation(){ //iOS有，安卓没有
-#if UNITY_IOS
+        public void OpenUnregister(){ 
             var command = new Command(XDG_ACCOUNT_SERVICE, "accountCancellation", false, null);
             EngineBridge.GetInstance().CallHandler(command);
-#endif
         }
     }
 }

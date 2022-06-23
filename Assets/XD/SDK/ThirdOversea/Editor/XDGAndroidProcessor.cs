@@ -13,7 +13,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
         
         //拷贝 google-services 可选
-        var googleJsonPath = parentFolder + "/Assets/Plugins/XDSDKConfig/Android/google-services.json";
+        var googleJsonPath = parentFolder + "/Assets/Plugins/Android/google-services.json";
         if (File.Exists(googleJsonPath)){
             Debug.Log("拷贝谷歌 google-services");
             File.Copy(googleJsonPath, projectPath + "/launcher/google-services.json");

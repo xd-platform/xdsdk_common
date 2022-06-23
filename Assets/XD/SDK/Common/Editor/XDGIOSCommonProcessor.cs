@@ -50,7 +50,7 @@ public static class XDGIOSCommonProcessor{
             CopyThirdResource(target, projPath, proj, parentFolder, resourcePath);
             
             //拷贝 XDConfig.json
-            var jsonPath = parentFolder + "/Assets/Plugins/XDSDKConfig/XDConfig.json";
+            var jsonPath = parentFolder + "/Assets/Plugins/XDConfig.json";
             if (!File.Exists(jsonPath)){
                 Debug.LogError("XDConfig.json 配置文件不存在，这个是必须的");
                 return;
@@ -277,7 +277,7 @@ public static class XDGIOSCommonProcessor{
 
     private static void CopyThirdResource(string target, string projPath, PBXProject proj, string parentFolder,
         string xcodeResourceFolder){
-        var tdsResourcePath = parentFolder + "/Assets/Plugins/XDSDKConfig/iOS";
+        var tdsResourcePath = parentFolder + "/Assets/Plugins/iOS";
 
         //拷贝文件夹
         if (Directory.Exists(tdsResourcePath)){

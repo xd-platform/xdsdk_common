@@ -153,9 +153,7 @@ namespace XD.SDK.Common
             Apple,
             LINE,
             Twitter,
-            Guest,
-            WeChat,
-            QQ
+            Guest
         }
     
 }

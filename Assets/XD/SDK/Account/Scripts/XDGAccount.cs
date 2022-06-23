@@ -29,7 +29,7 @@ namespace XD.SDK.Account{
             XDGAccountImpl.GetInstance().Logout();
         }
 
-        public static void AddUserStatusChangeCallback(Action<int, string> callback){
+        public static void AddUserStatusChangeCallback(Action<XDGUserStatusCodeType, string> callback){
             XDGAccountImpl.GetInstance().AddUserStatusChangeCallback(callback);
         }
 
@@ -41,8 +41,8 @@ namespace XD.SDK.Account{
             XDGAccountImpl.GetInstance().OpenUserCenter();
         }
 
-        public static void AccountCancellation(){
-            XDGAccountImpl.GetInstance().AccountCancellation();
+        public static void OpenUnregister(){
+            XDGAccountImpl.GetInstance().OpenUnregister();
         }
     }
 }

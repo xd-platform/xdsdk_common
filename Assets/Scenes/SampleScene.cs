@@ -91,7 +91,9 @@ public class SampleScene : MonoBehaviour{
             }
         }));
 
-        XDGAccount.AddUserStatusChangeCallback((code, msg) => { ResultText.text = $"用户状态回调 code: {code}  msg:{msg}"; });
+        XDGAccount.AddUserStatusChangeCallback((type, msg) => {
+            ResultText.text = $"用户状态回调 code: {type}  msg:{msg}";
+        });
     }
 
     public void InitDevelop(){
@@ -112,7 +114,9 @@ public class SampleScene : MonoBehaviour{
             }
         }));
 
-        XDGAccount.AddUserStatusChangeCallback((code, msg) => { ResultText.text = $"用户状态回调 code: {code}  msg:{msg}"; });
+        XDGAccount.AddUserStatusChangeCallback((type, msg) => {
+            ResultText.text = $"用户状态回调 code: {type}  msg:{msg}";
+        });
     }
 
     public void InitDevelop_CN(){
@@ -145,7 +149,9 @@ public class SampleScene : MonoBehaviour{
         XDGAccount.Login(loginTypes, user => {
             UserId = user.userId;
             ResultText.text = JsonUtility.ToJson(user);
-        }, error => { ResultText.text = error.error_msg; });
+        }, error => {
+            ResultText.text = error.error_msg;
+        });
     }
 
     public void AutoLogin(){
@@ -153,7 +159,9 @@ public class SampleScene : MonoBehaviour{
                 UserId = user.userId;
                 ResultText.text = JsonUtility.ToJson(user);
             },
-            error => { ResultText.text = "登录失败: " + error.ToJSON(); });
+            error => {
+                ResultText.text = "登录失败: " + error.ToJSON();
+            });
     }
 
     public void TypeLogin(){
@@ -181,7 +189,9 @@ public class SampleScene : MonoBehaviour{
                 UserId = user.userId;
                 ResultText.text = JsonUtility.ToJson(user);
             },
-            (error) => { ResultText.text = "失败: " + error.ToJSON(); });
+            (error) => {
+                ResultText.text = "失败: " + error.ToJSON();
+            });
     }
 
     public void OpenUserCenter(){
@@ -208,7 +218,7 @@ public class SampleScene : MonoBehaviour{
     }
 
     public void OpenUnregister(){
-        XDGAccount.AccountCancellation();
+        XDGAccount.OpenUnregister();
     }
 
     public void ApplePay(){
