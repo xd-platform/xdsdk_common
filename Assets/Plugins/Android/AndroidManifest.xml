@@ -10,6 +10,15 @@
     
    <!-- 代理抓包配置   -->
     <application android:networkSecurityConfig="@xml/network_security_config">
+
+        <activity android:name="com.unity3d.player.UnityPlayerActivity"
+                  android:theme="@style/UnityThemeSelector">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+        </activity>
         
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -38,6 +47,7 @@
             android:authorities="com.facebook.app.FacebookContentProvider333676195299012"
             android:exported="true" />
 
+     <!--   启动项      -->
         <service
             android:name="com.xd.intl.common.firebase.TDSGlobalFirebaseMessagingService"
             android:exported="false">
