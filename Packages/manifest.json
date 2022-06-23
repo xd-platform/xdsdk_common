@@ -61,7 +61,8 @@
       "url": "https://nexus.tapsvc.com/repository/npm-registry/",
       "scopes": [
         "com.taptap",
-        "com.tapsdk"
+        "com.tapsdk",
+        "leancloud"
       ]
     }
   ]

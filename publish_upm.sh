@@ -2,7 +2,7 @@
 # 获取当前分支
 currentBranch=$(git symbolic-ref --short -q HEAD)
 
-upmModule=("xd-sdk-account-upm" "xd-sdk-common-upm" "xd-sdk-payment-upm" "xd-sdk-thirdoversea-upm")
+upmModule=("xdsdk-account-upm" "xdsdk-common-upm" "xdsdk-payment-upm" "xdsdk-thirdoversea-upm")
 module=("Account" "Common" "Payment" "ThirdOversea")
 githubRepoName=("xdsdk_account" "xdsdk_common" "xdsdk_payment" "xdsdk_oversea")
 
