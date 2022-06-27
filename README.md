@@ -51,8 +51,8 @@
 #### 
 * 将 [TDS-Info.plist](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/TDS-Info.plist) 放在 `/Assets/Plugins` 中,
 * 将 `XDConfig.json` 放在 `/Assets/Plugins` 中 ([海外配置下载这个文件](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/oversea/XDConfig.json),  [国内配置下载这个文件](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/mainland/XDConfig.json))
-* 可选配置：如果有用谷歌，需要将`GoogleService-Info.plist`放在`/Assets/iOS`中(iOS用)，将`google-services.json`放在`/Assets/Android`中(Android用)，这个两个文件是游戏从[Firebase后台](https://console.firebase.google.com)下载的。
-* 可选配置：如果有用谷歌或firebase，需要将[AndroidManifest.xml](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/oversea/AndroidManifest.xml) 放在`/Assets/Android`中
+* 可选配置：如果有用谷歌，需要将`GoogleService-Info.plist`放在`/Assets/Plugins/iOS`中(iOS用)，将`google-services.json`放在`/Assets/Plugins/Android`中(Android用)，这个两个文件是游戏从[Firebase后台](https://console.firebase.google.com)下载的。
+* 可选配置：如果有用谷歌或firebase，需要将[AndroidManifest.xml](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/oversea/AndroidManifest.xml) 放在`/Assets/Plugins/Android`中
 
 ## 3.接口使用
 #### 切换语言

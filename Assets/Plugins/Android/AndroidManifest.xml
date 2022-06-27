@@ -11,6 +11,7 @@
    <!-- 代理抓包配置   -->
     <application android:networkSecurityConfig="@xml/network_security_config">
 
+        <!--   启动项      -->
         <activity android:name="com.unity3d.player.UnityPlayerActivity"
                   android:theme="@style/UnityThemeSelector">
             <intent-filter>
@@ -46,8 +47,8 @@
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider333676195299012"
             android:exported="true" />
-
-     <!--   启动项      -->
+        
+        <!--   Firebase 推送相关的配置，请注意全路径匹配     -->
         <service
             android:name="com.xd.intl.common.firebase.TDSGlobalFirebaseMessagingService"
             android:exported="false">
