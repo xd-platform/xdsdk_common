@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param handler 结果回调
 + (void)initSDKWithConfig:(XDGConfig*)config handler:(XDGInitCallback)handler;
 
+/// 是否已经初始化
++ (BOOL)isInitialized;
+
 /// 当前登录用户，打开客服中心
 /// @param serverId 服务器 ID，可为空
 /// @param roleId 角色 ID，可为空
