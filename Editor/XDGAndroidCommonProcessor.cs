@@ -42,6 +42,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
                 implementation 'com.android.installreferrer:installreferrer:2.2'
                 implementation 'com.android.billingclient:billing:3.0.0'
                 implementation 'androidx.recyclerview:recyclerview:1.2.1'
+                implementation 'com.google.code.gson:gson:2.8.6'
             ");
         }
         
