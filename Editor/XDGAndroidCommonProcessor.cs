@@ -21,7 +21,6 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
             return;
         }
 
-        //Demo用的，游戏不用配置这个 XDConfig-cn.json
         var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
         if (File.Exists(cnJson)){
             File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json");   
