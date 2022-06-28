@@ -44,7 +44,7 @@ public static class XDGIOSCommonProcessor{
             
             //拷贝SDK内部资源文件 third
             CopyResource(target, projPath, proj, parentFolder,
-                "com.xd.sdk.thirdoversea", "ThirdOversea", resourcePath);
+                "com.xd.sdk.oversea", "Oversea", resourcePath);
 
             //拷贝外面配置的文件夹
             CopyThirdResource(target, projPath, proj, parentFolder, resourcePath);

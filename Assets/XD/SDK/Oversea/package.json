@@ -1,7 +1,7 @@
 {
-  "name": "com.xd.sdk.thirdoversea",
+  "name": "com.xd.sdk.oversea",
   "version": "6.4.0",
-  "description": "XD-SDK ThirdOversea",
+  "description": "XD-SDK Oversea",
   "unity": "2018.3",
   "license": "MIT",
   "dependencies": {
