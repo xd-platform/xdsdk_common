@@ -24,7 +24,7 @@
     "com.xd.sdk.common": "6.4.0",
     "com.xd.sdk.account": "6.4.0",
     "com.xd.sdk.payment": "6.4.0",           //可选，没有支付可以不加
-    "com.xd.sdk.thirdoversea": "6.4.0",      //可选，海外用的，国内不加
+    "com.xd.sdk.oversea": "6.4.0",      //可选，海外用的，国内不加
     "com.tapsdk.antiaddiction":"3.9.0",      //可选,不是国内没有防沉迷可以不加，防沉迷需要游戏自行接入,XDSDK里不包含 
     
     "scopedRegistries": [
