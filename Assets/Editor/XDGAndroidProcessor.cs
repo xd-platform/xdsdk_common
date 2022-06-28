@@ -10,8 +10,9 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         if (path.Contains("unityLibrary")){
             projectPath = path.Substring(0, path.Length - 12);
         }
+
         var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
-        
+
         //拷贝 google-services 可选
         var googleJsonPath = parentFolder + "/Assets/Plugins/Android/google-services.json";
         if (File.Exists(googleJsonPath)){
@@ -25,7 +26,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         var baseProjectGradle = projectPath + "/build.gradle";
         var launcherGradle = projectPath + "/launcher/build.gradle";
         var unityLibraryGradle = projectPath + "/unityLibrary/build.gradle";
-        
+
         //apply plugin 可根据需要添加或删除
         if (File.Exists(launcherGradle)){
             Debug.Log("编辑 launcherGradle");
