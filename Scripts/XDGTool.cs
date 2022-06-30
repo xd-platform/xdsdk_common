@@ -13,7 +13,6 @@ namespace XD.SDK.Common{
         }
         
         public static void LogError(string msg){
-            Log(msg);
             Print("userId:【" + userId + "】"  + msg);
         }
         
