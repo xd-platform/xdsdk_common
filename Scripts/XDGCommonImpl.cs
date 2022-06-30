@@ -10,6 +10,9 @@ namespace XD.SDK.Common{
         private static volatile XDGCommonImpl _instance;
         private static readonly object locker = new object();
 
+        private static string Channel = "";
+        private static string GameVersion = "";
+
         private XDGCommonImpl(){
             XDGTool.Log("===> Init XDG Bridge Service");
             EngineBridge.GetInstance()
@@ -48,6 +51,14 @@ namespace XD.SDK.Common{
                     var region = RegionType.CN;
                     if (info.region != 0){ //0国内，否则海外
                         region = RegionType.IO;
+                    }
+                    
+                    //替换channel, gameVersion
+                    if (!string.IsNullOrEmpty(Channel)){
+                        info.channel = Channel;
+                    }
+                    if (!string.IsNullOrEmpty(GameVersion)){
+                        info.gameVersion = GameVersion;
                     }
 
                     var config = new TapConfig.Builder()
@@ -406,6 +417,11 @@ namespace XD.SDK.Common{
                 .Callback(false)
                 .CommandBuilder();
             EngineBridge.GetInstance().CallHandler(command);
+        }
+        
+        public void ReplaceChannelAndVersion(string channel, string gameVersion){
+            Channel = channel;
+            GameVersion = gameVersion;
         }
 
         public void clearAllUserDefaultsData(){

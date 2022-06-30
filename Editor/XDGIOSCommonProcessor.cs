@@ -128,7 +128,7 @@ public static class XDGIOSCommonProcessor{
             }
 
             //添加到 xcode 配置
-            if (filePath.EndsWith(".bundle") || filePath.EndsWith(".plist") || filePath.EndsWith(".json")){
+            if (filePath.EndsWith(".bundle") || filePath.EndsWith(".plist") || filePath.EndsWith(".json") || filePath.EndsWith("InfoPlist.strings")){
                 AddXcodeConfig(target, proj, filePath);
             }
         }
