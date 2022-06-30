@@ -11,7 +11,7 @@
     "com.xd.sdk.common": "https://github.com/xd-platform/xdsdk_common.git#6.4.0",
     "com.xd.sdk.account": "https://github.com/xd-platform/xdsdk_account.git#6.4.0",
     "com.xd.sdk.payment": "https://github.com/xd-platform/xdsdk_payment.git#6.4.0",          //可选，没有支付可以不加
-    "com.xd.sdk.payment": "https://github.com/xd-platform/xdsdk_oversea.git#6.4.0",          //可选，海外用的，国内不加
+    "com.xd.sdk.oversea": "https://github.com/xd-platform/xdsdk_oversea.git#6.4.0",          //可选，海外用的，国内不加
     "com.tapsdk.antiaddiction":"https://github.com/taptap/TapAntiAddiction-Unity.git#3.9.0", //可选,不是国内没有防沉迷可以不加，防沉迷需要游戏自行接入,XDSDK里不包含 
     
     //2. 通过NPM方式添加引用 (内网可用)
@@ -51,8 +51,9 @@
 #### 
 * 将 [TDS-Info.plist](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/TDS-Info.plist) 放在 `/Assets/Plugins` 中,
 * 将 `XDConfig.json` 放在 `/Assets/Plugins` 中 ([海外配置下载这个文件](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/oversea/XDConfig.json),  [国内配置下载这个文件](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/mainland/XDConfig.json))
-* 可选配置：如果有用谷歌，需要将`GoogleService-Info.plist`放在`/Assets/Plugins/iOS`中(iOS用)，将`google-services.json`放在`/Assets/Plugins/Android`中(Android用)，这个两个文件是游戏从[Firebase后台](https://console.firebase.google.com)下载的。
-* 可选配置：如果有用谷歌或firebase，需要将[AndroidManifest.xml](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/oversea/AndroidManifest.xml) 放在`/Assets/Plugins/Android`中
+* 可选配置：如果有用Firebase，需要将`GoogleService-Info.plist`放在`/Assets/Plugins/iOS`中(iOS用)，将`google-services.json`放在`/Assets/Plugins/Android`中(Android用)，这个两个文件是游戏从[Firebase后台](https://console.firebase.google.com)下载的。
+* 可选配置：如果有用Twitter或Firebase，需要将[AndroidManifest.xml](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/oversea/AndroidManifest.xml) 放在`/Assets/Plugins/Android`中，按需修改。
+* 可选配置：按需添加Google, Twitter, LINE等第三方库，将[XDGAndroidProcessor.cs](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/XDGAndroidProcessor.cs) 放在`/Assets/Editor`中，可按需删除 implementation 库引用。如果没有使用Firebase，则可以搜索删除firebase和google对应的配置。
 
 ## 3.接口使用
 #### 切换语言
@@ -305,4 +306,29 @@ XDGPayment.QueryWithProductIds(productIds, info => {
                 }
             }
         });
+```
+
+#### Android 11 相关配置
+
+如果您的应用以 Android 11（API 级别 30）或更高版本为目标平台，在默认情况下，系统会自动让部分应用对您的应用可见，但会隐藏其他应用。
+通过让部分应用在默认情况下不可见，系统可以了解应向您的应用显示哪些其他应用，这样有助于鼓励最小权限原则，还可帮助 Google Play 等应用商店评估应用为用户提供的隐私权和安全性。
+针对 XDSDK 支持的登录类型的平台，在手机安装有对应 App 的情况下，无法正常跳转外部 App 进行授权登录时请参考以下配置项进行软件包可见性的适配配置，将配置添加到 `AndroidManifest.xml` 文件中：
+
+```
+<!--添加如下 queries 标签的内容，直接在 manifest 标签下-->
+<queries>
+    <!-- TapTap -->
+    <package android:name="com.taptap"/>
+    <package android:name="com.taptap.pad"/>
+    <package android:name="com.taptap.global"/>
+
+    <!-- Facebook -->
+    <package android:name="com.facebook.katana"/>
+    <!-- Facebook 有端分享 -->
+    <provider android:authorities="com.facebook.katana.provider.PlatformProvider"/>
+    <!-- Twitter -->
+    <package android:name="com.twitter.android"/>
+    <!-- LINE -->
+    <package android:name="jp.naver.line.android"/>
+</queries>
 ```
