@@ -40,22 +40,24 @@ namespace XD.SDK.Account{
                 try{
                     XDGTool.Log("Login 方法结果: " + result.ToJSON());
                     if (!XDGTool.checkResultSuccess(result)){
-                        XDGTool.LogError($"Login 登录失败1：code:{result.code}  msg:{result.message}");
+                        XDGTool.LogError($"Login 登录失败1 :{result.ToJSON()}");
                         errorCallback(new XDGError(result.code, result.message));
                         return;
                     }
 
                     var userWrapper = new XDGUserWrapper(result.content);
                     if (userWrapper.error != null){
-                        XDGTool.LogError(
-                            $"Login 登录失败2 code:{userWrapper.error.code}  msg:{userWrapper.error.error_msg}");
+                        XDGTool.LogError($"Login 登录失败2 :{result.ToJSON()}");
                         errorCallback(userWrapper.error);
                         return;
                     }
 
+                    if (userWrapper.user == null){
+                        XDGTool.LogError($"Login 登录失败3 :{result.ToJSON()}");
+                    }
+
                     ActiveLearnCloudToken(userWrapper.user, callback, errorCallback);
 
-                    XDGTool.Log("login block end");
                 } catch (Exception e){
                     errorCallback(new XDGError(result.code, result.message));
                     XDGTool.LogError("Login 报错" + e.Message);
@@ -106,7 +108,7 @@ namespace XD.SDK.Account{
             }
 
             XDGTool.Log("LoginSync 开始执行   GetCurrent");
-            TDSUser preUser = await TDSUser.GetCurrent();
+            var preUser = await TDSUser.GetCurrent();
             if (preUser != null){
                 if (preUser.ObjectId == user.userId){
                     XDGTool.Log("LoginSync 使用local pre user");
@@ -204,6 +206,7 @@ namespace XD.SDK.Account{
                     callback(XDGUserStatusCodeType.UNBIND, wrapper.message);
                     
                 }else {
+                    XDGTool.LogError($"AddUserStatusChangeCallback 未知回调 :{result.ToJSON()}");
                     callback(XDGUserStatusCodeType.ERROR, wrapper.message);
                 }
             });
@@ -214,14 +217,20 @@ namespace XD.SDK.Account{
             EngineBridge.GetInstance().CallHandler(command, result => {
                 XDGTool.Log("GetUser 方法结果: " + result.ToJSON());
                 if (!XDGTool.checkResultSuccess(result)){
+                    XDGTool.LogError($"GetUser 失败1 :{result.ToJSON()}");
                     errorCallback(new XDGError(result.code, result.message));
                     return;
                 }
 
                 XDGUserWrapper userWrapper = new XDGUserWrapper(result.content);
                 if (userWrapper.error != null){
+                    XDGTool.LogError($"GetUser 失败2 :{result.ToJSON()}");
                     errorCallback(userWrapper.error);
                     return;
+                }
+
+                if (userWrapper.user == null){
+                    XDGTool.LogError($"GetUser 失败3 :{result.ToJSON()}");
                 }
 
                 callback(userWrapper.user);
@@ -245,16 +254,20 @@ namespace XD.SDK.Account{
             EngineBridge.GetInstance().CallHandler(command, result => {
                 XDGTool.Log("LoginByType 方法结果: " + result.ToJSON());
                 if (!XDGTool.checkResultSuccess(result)){
-                    XDGTool.LogError($"LoginByType 登录失败1：code:{result.code}  msg:{result.message}");
+                    XDGTool.LogError($"LoginByType 登录失败1：{result.ToJSON()} ");
                     errorCallback(new XDGError(result.code, result.message));
                     return;
                 }
 
                 XDGUserWrapper wrapper = new XDGUserWrapper(result.content);
                 if (wrapper.error != null){
-                    XDGTool.LogError($"LoginByType 登录失败2：code:{wrapper.error.code}  msg:{wrapper.error.error_msg}");
+                    XDGTool.LogError($"LoginByType 登录失败2：{result.ToJSON()}");
                     errorCallback(wrapper.error);
                     return;
+                }
+
+                if ( wrapper.user == null){
+                    XDGTool.LogError($"LoginByType wrapper user 是空 ：{result.ToJSON()}");
                 }
 
                 ActiveLearnCloudToken(wrapper.user, callback, errorCallback);

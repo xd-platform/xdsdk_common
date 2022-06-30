@@ -104,7 +104,7 @@ RU //俄语
 
 #### 根据登录类型登录
 ```
-1.要时候Tap登录前，需要现在Tap开发者后台里配置安卓包名、签名文件MD5、iOS Bundle ID，然后在测试用户列表里加入Tap账号id, 之后才可以用Tap APP登录。
+1.要使用Tap登录前，需要现在Tap开发者后台里配置安卓包名、签名文件MD5、iOS Bundle ID，然后在测试用户列表里加入Tap账号id, 之后才可以用Tap APP登录。
 2.登录流程：先LoginByType(Default)自动登录(自动登录: 以上次登录成功过的账户继续登录)，如果自动登录失败，再显示Tap 或 游客登录按钮给用户点击授权登录。
 3.登录成功后需要调用 【XDGCommon.TrackUser(string userId);】, TapDB 统计用户。
 4.登录成功后如果要使用 TDSUser 信息，需要执行 【var tdsUser = await TDSUser.GetCurrent().Result.Fetch();】 后才可以使用。

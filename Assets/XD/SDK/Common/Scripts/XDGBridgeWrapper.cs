@@ -16,7 +16,7 @@ namespace XD.SDK.Common{
             localConfigInfo = new LocalConfigInfo(configInfoDic);
 
             if (!isSuccess){
-                XDGTool.LogError("初始化失败1：" + resultJson);
+                XDGTool.LogError("初始化失败2 result json ：" + resultJson);
             }
         }
     }

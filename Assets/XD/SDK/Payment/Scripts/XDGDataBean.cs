@@ -334,6 +334,7 @@ namespace XD.SDK.Payment
             var msg = SafeDictionary.GetValue<string>(dic, "msg");
             if (code != Result.RESULT_SUCCESS)
             {
+                XDGTool.LogError($"CheckRefundResult 失败 :{jsonStr}");
                 xdgError = new XDGError(code, msg);
             }
             else
