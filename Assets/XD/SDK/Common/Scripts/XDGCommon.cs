@@ -83,5 +83,9 @@ namespace XD.SDK.Common{
             XDGCommonImpl.GetInstance().disableAgreementUI();
         }
 
+        public static void ReplaceChannelAndVersion(string channel, string gameVersion){
+            XDGCommonImpl.GetInstance().ReplaceChannelAndVersion(channel, gameVersion);
+        }
+
     }
 }

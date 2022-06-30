@@ -5,10 +5,38 @@
     package="com.unity3d.player"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
-   <!-- 代理抓包配置   -->
+    <!-- 可选 Android 11 相关配置，在手机安装有对应 App 的情况下，无法正常跳转外部 App 进行授权登录时请参考以下配置 -->
+    <queries>
+        <!-- TapTap -->
+        <package android:name="com.taptap"/>
+        <package android:name="com.taptap.pad"/>
+        <package android:name="com.taptap.global"/>
+
+        <!-- Toss -->
+        <package android:name="viva.republica.toss" />
+        <!-- gojek -->
+        <package android:name="com.gojek.app" />
+        <!-- line -->
+        <package android:name="jp.naver.line.android" />
+
+    </queries>
+
+    <uses-sdk tools:overrideLibrary="com.tds,com.tds.common
+        , com.tds.xdg.core,com.tds.xdg.account,com.tds.xdg.authorization
+        , com.tds.xdg.pay, com.tds.xdg.share
+        , com.tds.xdg.architecture
+        , com.bun.miitmdid
+        , com.taptap.sdk
+        , com.tapsdk.moment
+        , com.tds.tapdb" />
+
+
+    <!-- 代理抓包配置   -->
     <application android:networkSecurityConfig="@xml/network_security_config">
 
         <!--   启动项      -->

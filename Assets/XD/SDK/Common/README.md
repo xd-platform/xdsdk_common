@@ -104,9 +104,13 @@ RU //俄语
 
 #### 根据登录类型登录
 ```
-1. Default 是自动登录 (以上次登录成功的信息登录，如果之前没登录过就会失败)
-2. 推荐登录流程：先用Default自动登录，如果失败了就显示登录按钮给用户手动点击登录
-3. 不同类型登录都需要配置信息和后台开通权限，如Tap登录需要在Tap开发者后台配置信息，然后在XDConfig.json里配置信息，然后XD服务端开通权限
+1.要时候Tap登录前，需要现在Tap开发者后台里配置安卓包名、签名文件MD5、iOS Bundle ID，然后在测试用户列表里加入Tap账号id, 之后才可以用Tap APP登录。
+2.登录流程：先LoginByType(Default)自动登录(自动登录: 以上次登录成功过的账户继续登录)，如果自动登录失败，再显示Tap 或 游客登录按钮给用户点击授权登录。
+3.登录成功后需要调用 【XDGCommon.TrackUser(string userId);】, TapDB 统计用户。
+4.登录成功后如果要使用 TDSUser 信息，需要执行 【var tdsUser = await TDSUser.GetCurrent().Result.Fetch();】 后才可以使用。
+5.这里的登录成功指的是 XDSDK 登录成功，如果是国内需要接入防沉迷模块，需要在登录成功后游戏自行接入防沉迷接口，之后才是游戏最终登录成功。防沉迷实名认证需要在Tap开发者后台单独申请。
+6.不同类型登录都需要配置信息和后台开通权限，如Tap登录需要在Tap开发者后台配置信息，然后在XDConfig.json里配置信息，然后XD服务端开通权限
+
  XDGAccount.LoginByType(LoginType, user => {
                 //登录成功后调用 XDGCommon.TrackUser(user.userId);  //tap db用户统计
                 
@@ -127,6 +131,7 @@ Guest    //游客登录
 #### SDK自带弹框的登录
 ```
 添加弹框显示的按钮，根据需要添加
+也需参考上面单点登录6条注意事项
 
 var loginTypes = new List<LoginType>();
 loginTypes.Add(LoginType.TapTap);

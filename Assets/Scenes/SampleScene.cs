@@ -120,6 +120,7 @@ public class SampleScene : MonoBehaviour{
     }
 
     public void InitDevelop_CN(){
+        XDGCommon.ReplaceChannelAndVersion("replace_channel", "replace_version1.0");
         SetDevelopUrl();
         InitRelease_CN();
     }
