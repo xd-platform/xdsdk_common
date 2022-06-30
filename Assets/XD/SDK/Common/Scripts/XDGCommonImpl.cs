@@ -46,7 +46,7 @@ namespace XD.SDK.Common{
                 }
 
                 var wrapper = new XDGInitResultWrapper(result.content);
-                if (wrapper.localConfigInfo.tapSdkConfig != null){
+                if (wrapper.localConfigInfo.tapSdkConfig != null && wrapper.isSuccess){
                     var info = wrapper.localConfigInfo.tapSdkConfig;
                     var region = RegionType.CN;
                     if (info.region != 0){ //0国内，否则海外
