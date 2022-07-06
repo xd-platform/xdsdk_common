@@ -384,15 +384,6 @@ public class SampleScene : MonoBehaviour{
         });
     }
 
-    public void refreshFacebookToken(){
-        if (User == null){
-            ResultText.text = "请先登录 Facebook";
-        } else{
-            ResultText.text = "刷新 Facebook Token";
-            XDGTokenManager.updateFacebookToken(User);   
-        }
-    }
-
     private void SetDevelopUrl(){
 #if !UNITY_EDITOR && UNITY_ANDROID
         var jc = new AndroidJavaClass("com.xd.intl.common.utils.EnvHelper");

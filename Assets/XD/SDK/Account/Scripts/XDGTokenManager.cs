@@ -5,7 +5,7 @@ using XD.SDK.Common;
 
 namespace XD.SDK.Account{
     public class XDGTokenManager{
-        private static long DaySeconds = 24 * 60 * 60; // 24 小时有多少秒
+        private static long DaySeconds = 2 * 60; // 24 小时有多少秒
 
         public static void updateFacebookToken(XDGUser xdgUser){
             var preTime = getFacebookRefreshTime(); //上一次刷新时间
