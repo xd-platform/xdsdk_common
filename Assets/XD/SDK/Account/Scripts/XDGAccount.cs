@@ -8,6 +8,10 @@ namespace XD.SDK.Account{
             XDGAccountImpl.GetInstance().Login(loginTypes, (u) => {
                 callback(u);
                 EventManager.LoginSuccessEvent();
+
+                if (u.loginType.ToLower().Equals("facebook")){
+                    XDGTokenManager.updateFacebookRefreshTime();
+                }
             }, (e) => {
                 errorCallback(e);
                 EventManager.LoginFailEvent(e.error_msg);
@@ -18,6 +22,13 @@ namespace XD.SDK.Account{
             XDGAccountImpl.GetInstance().LoginByType(loginType, (u) => {
                 callback(u);
                 EventManager.LoginSuccessEvent();
+
+                if (loginType == LoginType.Default){ //自动登录需要异步刷 Facebook token
+                    // XDGTokenManager.updateFacebookToken(u);
+                } else if (loginType == LoginType.Facebook){
+                    XDGTokenManager.updateFacebookRefreshTime();
+                }
+
             }, (e) => {
                 errorCallback(e);
                 EventManager.LoginFailEvent(e.error_msg);
@@ -44,5 +55,19 @@ namespace XD.SDK.Account{
         public static void OpenUnregister(){
             XDGAccountImpl.GetInstance().OpenUnregister();
         }
+        
+        //641 FB token
+        public static void IsTokenActiveWithType(LoginType loginType, Action<bool> callback){
+            XDGAccountImpl.GetInstance().IsTokenActiveWithType(loginType, callback);
+        }
+        
+        public static void BindByType(LoginType loginType, Action<bool,XDGError> callback){
+            XDGAccountImpl.GetInstance().BindByType(loginType, callback);
+        }
+        
+        public static void GetFacebookToken(Action<string, string> successCallback, Action<XDGError> errorCallback){
+            XDGAccountImpl.GetInstance().GetFacebookToken(successCallback, errorCallback);
+        }
+
     }
 }

@@ -48,6 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 //trackUser
 + (void)userId:(NSString *)userId;
 
+//set AF customerId
++ (void)customerId:(NSString *)customerId;
+
 //trackEvent
 + (void)eventName:(NSString *)eventName;
 
@@ -95,6 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //清除缓存
 + (void)clearAllUserDefaultsData;
+
 
 @end
 

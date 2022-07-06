@@ -73,3 +73,4 @@ FOUNDATION_EXPORT const unsigned char XDCommonSDKVersionString[];
 #import <XDCommonSDK/XDPlateWebController.h>
 #import <XDCommonSDK/XDGAlertView.h>
 #import <XDCommonSDK/XDGCoreService.h>
+#import <XDCommonSDK/XDGThirdTokenManager.h>

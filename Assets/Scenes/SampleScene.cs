@@ -25,8 +25,9 @@ public class SampleScene : MonoBehaviour{
     public InputField GoogleProductField;
     public InputField WebPayServiceField;
     public InputField WebPayProductField;
+    public InputField BindField;
 
-    private string UserId;
+    private XDGUser User;
     private bool isCN = false;
 
     private void Start(){
@@ -148,7 +149,7 @@ public class SampleScene : MonoBehaviour{
         }
 
         XDGAccount.Login(loginTypes, user => {
-            UserId = user.userId;
+            User = user;
             ResultText.text = JsonUtility.ToJson(user);
         }, error => {
             ResultText.text = error.error_msg;
@@ -157,7 +158,7 @@ public class SampleScene : MonoBehaviour{
 
     public void AutoLogin(){
         XDGAccount.LoginByType(LoginType.Default, user => {
-                UserId = user.userId;
+                User = user;
                 ResultText.text = JsonUtility.ToJson(user);
             },
             error => {
@@ -170,7 +171,7 @@ public class SampleScene : MonoBehaviour{
         var isTap = (type == LoginType.TapTap) ? true : false;
         
         XDGAccount.LoginByType(type, user => {
-                UserId = user.userId;
+                User = user;
                 ResultText.text = JsonUtility.ToJson(user);
                 
                 // StartAnti(user.userId, isTap);
@@ -187,7 +188,7 @@ public class SampleScene : MonoBehaviour{
 
     public void GetUserInfo(){
         XDGAccount.GetUser((user) => {
-                UserId = user.userId;
+                User = user;
                 ResultText.text = JsonUtility.ToJson(user);
             },
             (error) => {
@@ -200,7 +201,7 @@ public class SampleScene : MonoBehaviour{
     }
 
     public void OpenFeedbackCenter(){
-        XDGCommon.Report("serverId", UserId, "roleName");
+        XDGCommon.Report("serverId", User.userId, "roleName");
     }
 
     public void OpenAppStore(){
@@ -235,7 +236,7 @@ public class SampleScene : MonoBehaviour{
 
         ResultText.text = $"苹果支付 {productId}";
 
-        XDGPayment.PayWithProduct("", productId, UserId, "serverId", "ext",
+        XDGPayment.PayWithProduct("", productId, User.userId, "serverId", "ext",
             wrapper => {
                 XDGTool.Log("支付结果" + JsonUtility.ToJson(wrapper));
                 if (wrapper.xdgError != null){
@@ -259,7 +260,7 @@ public class SampleScene : MonoBehaviour{
 
         ResultText.text = $"谷歌支付 {productId}";
 
-        XDGPayment.PayWithProduct("", productId, UserId, "serverId", "ext",
+        XDGPayment.PayWithProduct("", productId, User.userId, "serverId", "ext",
             wrapper => {
                 XDGTool.Log("支付结果" + JsonUtility.ToJson(wrapper));
                 if (wrapper.xdgError != null){
@@ -354,7 +355,7 @@ public class SampleScene : MonoBehaviour{
             productId,
             productId,
             price,
-            UserId,
+            User.userId,
             serverId, 
             "ext",
             (type, msg) => {
@@ -362,6 +363,35 @@ public class SampleScene : MonoBehaviour{
             });
     }
 
+    public void isFacebookTokenActive(){
+        XDGAccount.IsTokenActiveWithType(LoginType.Facebook, (b) => {
+            ResultText.text = $"结果：{b}";
+        });
+    }
+
+    public void getFacebookToken(){
+        XDGAccount.GetFacebookToken((uid, token) => {
+            ResultText.text = $"uid：{uid},  token: {token}";
+        }, (error) => {
+            ResultText.text = $"失败：{JsonUtility.ToJson(error)}";
+        });
+    }
+
+    public void bindType(){
+        var type = GetLoginType(BindField.text);
+        XDGAccount.BindByType(type, (b, error) => {
+            ResultText.text = $"绑定结果：{b},  error:{JsonUtility.ToJson(error)}";
+        });
+    }
+
+    public void refreshFacebookToken(){
+        if (User == null){
+            ResultText.text = "请先登录 Facebook";
+        } else{
+            ResultText.text = "刷新 Facebook Token";
+            XDGTokenManager.updateFacebookToken(User);   
+        }
+    }
 
     private void SetDevelopUrl(){
 #if !UNITY_EDITOR && UNITY_ANDROID

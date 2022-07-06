@@ -32,7 +32,7 @@ namespace XD.SDK.Account{
             var command = new Command.Builder()
                 .Service(XDG_ACCOUNT_SERVICE)
                 .Method("login")
-                .Args("login",  getLoginTypeStr(loginTypes)) 
+                .Args("login", getLoginTypeStr(loginTypes))
                 .Callback(true)
                 .CommandBuilder();
 
@@ -57,7 +57,6 @@ namespace XD.SDK.Account{
                     }
 
                     ActiveLearnCloudToken(userWrapper.user, callback, errorCallback);
-
                 } catch (Exception e){
                     errorCallback(new XDGError(result.code, result.message));
                     XDGTool.LogError("Login 报错" + e.Message);
@@ -83,7 +82,7 @@ namespace XD.SDK.Account{
                     str += "TWITTER,";
                 } else if (type == LoginType.Guest){
                     str += "GUEST,";
-                } 
+                }
                 // else if (type == LoginType.WeChat){
                 //     str += "WECHAT,";
                 // } else if (type == LoginType.QQ){
@@ -97,7 +96,7 @@ namespace XD.SDK.Account{
         private async void ActiveLearnCloudToken(XDGUser user, Action<XDGUser> callback,
             Action<XDGError> errorCallback){
             XDGTool.Log("LoginSync 开始执行  ActiveLearnCloudToken");
-            
+
             if (user == null || XDGTool.IsEmpty(user.userId)){
                 errorCallback(new XDGError(-1001, "user is null"));
                 XDGTool.LogError("LoginSync 报错：user 是空！");
@@ -188,24 +187,21 @@ namespace XD.SDK.Account{
                 null);
             EngineBridge.GetInstance().CallHandler(command, (result) => {
                 XDGTool.Log("AddUserStatusChangeCallback 方法结果: " + result.ToJSON());
-                
+
                 if (!XDGTool.checkResultSuccess(result)){
                     callback(XDGUserStatusCodeType.ERROR, "Unknow error");
                     return;
                 }
 
                 XDGUserStatusChangeWrapper wrapper = new XDGUserStatusChangeWrapper(result.content);
-                if (wrapper.code == (int)XDGUserStatusCodeType.LOGOUT){
+                if (wrapper.code == (int) XDGUserStatusCodeType.LOGOUT){
                     TDSUser.Logout();
                     callback(XDGUserStatusCodeType.LOGOUT, wrapper.message);
-                    
-                }else if (wrapper.code == (int)XDGUserStatusCodeType.BIND){
+                } else if (wrapper.code == (int) XDGUserStatusCodeType.BIND){
                     callback(XDGUserStatusCodeType.BIND, wrapper.message);
-                    
-                }else if (wrapper.code == (int)XDGUserStatusCodeType.UNBIND){
+                } else if (wrapper.code == (int) XDGUserStatusCodeType.UNBIND){
                     callback(XDGUserStatusCodeType.UNBIND, wrapper.message);
-                    
-                }else {
+                } else{
                     XDGTool.LogError($"AddUserStatusChangeCallback 未知回调 :{result.ToJSON()}");
                     callback(XDGUserStatusCodeType.ERROR, wrapper.message);
                 }
@@ -266,7 +262,7 @@ namespace XD.SDK.Account{
                     return;
                 }
 
-                if ( wrapper.user == null){
+                if (wrapper.user == null){
                     XDGTool.LogError($"LoginByType wrapper user 是空 ：{result.ToJSON()}");
                 }
 
@@ -274,9 +270,113 @@ namespace XD.SDK.Account{
             });
         }
 
-        public void OpenUnregister(){ 
+        public void OpenUnregister(){
             var command = new Command(XDG_ACCOUNT_SERVICE, "accountCancellation", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
+
+        // 641 FB token
+        public void IsTokenActiveWithType(LoginType loginType, Action<bool> callback){
+            var command = new Command.Builder()
+                .Service(XDG_ACCOUNT_SERVICE)
+                .Method("isTokenActiveWithType")
+                .Args("isTokenActiveWithType", XDGUser.GetLoginTypeString(loginType))
+                .Callback(true)
+                .CommandBuilder();
+                
+            EngineBridge.GetInstance().CallHandler(command, result => {
+                XDGTool.Log("isTokenActiveWithType 方法结果: " + result.ToJSON());
+                if (!XDGTool.checkResultSuccess(result)){
+                    XDGTool.LogError($"isTokenActiveWithType 失败1：{result.ToJSON()} ");
+                    callback(false);
+                    return;
+                }
+                
+                var contentDic = Json.Deserialize(result.content) as Dictionary<string, object>;
+                var success = SafeDictionary.GetValue<bool>(contentDic, "success");
+                callback(success);
+            }); 
+        }
+                
+        public void BindByType(LoginType loginType, Action<bool, XDGError> callback){
+            var command = new Command.Builder()
+                .Service(XDG_ACCOUNT_SERVICE)
+                .Method("bindByType")
+                .Args("bindByType", XDGUser.GetLoginTypeString(loginType))
+                .Callback(true)
+                .CommandBuilder();
+                
+            EngineBridge.GetInstance().CallHandler(command, result => {
+                XDGTool.Log("bindByType 方法结果: " + result.ToJSON());
+                
+                if (!XDGTool.checkResultSuccess(result)){
+                    XDGTool.LogError($"bindByType 失败1：{result.ToJSON()} ");
+                    callback(false, new XDGError(result.code, result.message));
+                    return;
+                }
+                
+                var contentDic = Json.Deserialize(result.content) as Dictionary<string, object>;
+                var success = SafeDictionary.GetValue<bool>(contentDic, "success");
+                var errorDic = SafeDictionary.GetValue<Dictionary<string, object>>(contentDic, "error");
+                
+                XDGError error = null;
+                if (errorDic != null){
+                    error = new XDGError(errorDic);
+                    XDGTool.LogError($"bindByType 失败2：{result.ToJSON()} ");
+                }
+                callback(success, error);
+            }); 
+        }
+
+        public void GetFacebookToken(Action<string, string> successCallback, Action<XDGError> errorCallback){
+            var command = new Command.Builder()
+                .Service(XDG_ACCOUNT_SERVICE)
+                .Method("getFacebookToken")
+                .Callback(true)
+                .CommandBuilder();
+                
+            EngineBridge.GetInstance().CallHandler(command, result => {
+                XDGTool.Log("getFacebookToken 方法结果: " + result.ToJSON());
+                if (!XDGTool.checkResultSuccess(result)){
+                    XDGTool.LogError($"getFacebookToken 失败1：{result.ToJSON()} ");
+                    errorCallback(new XDGError(result.code, result.message));
+                    return;
+                }
+                
+                var contentDic = Json.Deserialize(result.content) as Dictionary<string, object>;
+                var userId = SafeDictionary.GetValue<string>(contentDic, "userID");
+                var accessToken = SafeDictionary.GetValue<string>(contentDic, "access_token");
+                var errorDic = SafeDictionary.GetValue<Dictionary<string, object>>(contentDic, "error");
+
+                if (errorDic != null){
+                    XDGTool.LogError($"getFacebookToken 失败2：{result.ToJSON()} ");
+                    errorCallback(new XDGError(errorDic));
+                } else{
+                    successCallback(userId, accessToken);
+                }
+            }); 
+        }
+        
+        public void updateThirdPlatformTokenWithCallback(Action<bool> callback){
+            var command = new Command.Builder()
+                .Service(XDG_ACCOUNT_SERVICE)
+                .Method("updateThirdPlatformTokenWithCallback")
+                .Callback(true)
+                .CommandBuilder();
+                
+            EngineBridge.GetInstance().CallHandler(command, result => {
+                XDGTool.Log("updateThirdPlatformTokenWithCallback 方法结果: " + result.ToJSON());
+                if (!XDGTool.checkResultSuccess(result)){
+                    XDGTool.LogError($"updateThirdPlatformTokenWithCallback 失败1：{result.ToJSON()} ");
+                    callback(false);
+                    return;
+                }
+                
+                var contentDic = Json.Deserialize(result.content) as Dictionary<string, object>;
+                var success = SafeDictionary.GetValue<bool>(contentDic, "success");
+                callback(success);
+            }); 
+        }
+        
     }
 }

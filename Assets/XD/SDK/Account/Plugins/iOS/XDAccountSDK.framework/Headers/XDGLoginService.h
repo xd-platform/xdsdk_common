@@ -28,6 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)accountCancellation;
 
+
+//641 FB token处理
++ (void)updateThirdPlatformTokenWithCallback:(void (^)(NSString * _Nonnull))callback;
+
++ (void)isTokenActiveWithType:(NSString *)isTokenActiveWithType
+               bridgeCallback:(void (^)(NSString * _Nonnull))callback;
+
++ (void)getFacebookToken:(void (^)(NSString * _Nonnull))callback;
+
++ (void)bindByType:(NSString *)bindByType
+    bridgeCallback:(void (^)(NSString * _Nonnull))callback;
+
 @end
 
 NS_ASSUME_NONNULL_END
