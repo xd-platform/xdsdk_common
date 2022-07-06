@@ -9,7 +9,7 @@ namespace XD.SDK.Common{
         public static string userId = "";  //错误日志打印用
         
         public static void Log(string msg){
-            Debug.Log("\n------------------ XDGSDK Log V640------------------\n"+msg + "\n\n");
+            Debug.Log("\n------------------ XDGSDK Log V641------------------\n"+msg + "\n\n");
         }
         
         public static void LogError(string msg){
@@ -17,7 +17,7 @@ namespace XD.SDK.Common{
         }
         
         private static void Print(string msg){
-            Debug.LogError("\n------------------ XDGSDK Error V640------------------\n" + msg + "\n\n");
+            Debug.LogError("\n------------------ XDGSDK Error V641------------------\n" + msg + "\n\n");
         }
         
         public static bool IsEmpty(string str){

@@ -8,10 +8,10 @@ namespace XD.SDK.Account{
         private static long DaySeconds = 24 * 60 * 60; // 24 小时有多少秒
 
         public static void updateFacebookToken(XDGUser xdgUser){
-            // var preTime = getFacebookRefreshTime(); //上一次刷新时间
-            // if (preTime == 0 || (getCurrentSecond() - preTime) < DaySeconds){ //第一次 或 不到 24小时
-            //     return;
-            // }
+            var preTime = getFacebookRefreshTime(); //上一次刷新时间
+            if (preTime == 0 || (getCurrentSecond() - preTime) < DaySeconds){ //第一次 或 不到 24小时
+                return;
+            }
 
             try{
                 XDGAccountImpl.GetInstance().updateThirdPlatformTokenWithCallback(async (success) => {
@@ -25,7 +25,7 @@ namespace XD.SDK.Account{
                                     var fbDic = tdsUser.AuthData["facebook"] as Dictionary<string, object>;
                                     var platToken = fbDic["access_token"] as string;
                                     var platUserId = fbDic["uid"] as string;
-                                    XDGTool.Log($"刷新前是 uid: {platUserId}, token:{platToken}");
+                                    XDGTool.Log($"FB token刷新前是 uid: {platUserId}, token:{platToken}");
 
                                     if (string.IsNullOrEmpty(platToken) || string.IsNullOrEmpty(platUserId)){
                                         XDGTool.LogError($"获取FB token失败, 有空: uid:{platUserId},  token: {platToken}");

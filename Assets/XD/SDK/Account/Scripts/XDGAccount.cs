@@ -24,7 +24,7 @@ namespace XD.SDK.Account{
                 EventManager.LoginSuccessEvent();
 
                 if (loginType == LoginType.Default){ //自动登录需要异步刷 Facebook token
-                    // XDGTokenManager.updateFacebookToken(u);
+                    XDGTokenManager.updateFacebookToken(u);
                 } else if (loginType == LoginType.Facebook){
                     XDGTokenManager.updateFacebookRefreshTime();
                 }
