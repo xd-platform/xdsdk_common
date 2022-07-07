@@ -37,8 +37,7 @@ namespace XD.SDK.Account{
                                             if (newUid.Equals(platUserId) && !newToken.Equals(platToken)){
                                                 //uid相同，token不同
                                                 fbDic["access_token"] = newToken;
-                                                await tdsUser.SaveToLocal();
-                                                await tdsUser.Save();
+                                                await tdsUser.AssociateAuthData(fbDic, "facebook");
                                                 updateFacebookRefreshTime();
                                                 XDGTool.Log(
                                                     $"刷新FB成功后 uid: {newUid}, token:{newToken}。\n 刷新前是 uid: {platUserId}, token:{platToken}");
