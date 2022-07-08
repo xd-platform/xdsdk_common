@@ -43,7 +43,7 @@ public static class XDGIOSProcessor{
             }
 
             var json = File.ReadAllText(configJsonPath);
-            var md = JsonConvert.DeserializeObject<XDGConfigModel>(json);
+            var md = JsonConvert.DeserializeObject<XDConfigModel>(json);
             if (md == null){
                 Debug.LogError("json 配置文件解析失败: " + configJsonPath);
                 return;
@@ -59,7 +59,7 @@ public static class XDGIOSProcessor{
         } 
     }
 
-    private static void SetThirdLibraryId_CN(string pathToBuildProject, XDGConfigModel configModel){
+    private static void SetThirdLibraryId_CN(string pathToBuildProject, XDConfigModel configModel){
         if (configModel == null){
             Debug.LogError("打包失败  ----  XDConfig-cn 配置文件Model是空");
             return;
