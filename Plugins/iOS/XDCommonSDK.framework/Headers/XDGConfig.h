@@ -11,6 +11,7 @@
 #import <XDCommonSDK/XDLineInfo.h>
 #import <XDCommonSDK/XDTwitterInfo.h>
 #import <XDCommonSDK/XDGoogleInfo.h>
+#import <XDCommonSDK/XDFirebaseInfo.h>
 #import <XDCommonSDK/XDAdjustInfo.h>
 #import <XDCommonSDK/XDAppsFlyerInfo.h>
 #import <XDCommonSDK/XDGGameBindEntry.h>
@@ -53,6 +54,8 @@ typedef NS_ENUM (NSInteger, XDSDKRegionType) {
 @property (nonatomic, strong) XDTwitterInfo   *twitterInfo;
 /// Google 配置信息
 @property (nonatomic, strong) XDGoogleInfo    *googleInfo;
+
+@property (nonatomic, strong) XDFirebaseInfo  *firebaseInfo;
 /// Adjust 配置信息
 @property (nonatomic, strong) XDAdjustInfo    *adjustInfo;
 /// AppsFlyer 配置信息
