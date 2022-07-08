@@ -61,6 +61,7 @@ typedef void (^XDConfigHandler)(BOOL success, XDGConfig *_Nullable config, NSStr
 + (BOOL)facebookEnable;
 + (BOOL)taptapEnable;
 + (BOOL)tapdbEnable;
++ (BOOL)firebaseEnable;
 + (BOOL)adjustEnable;
 + (BOOL)appsflyersEnable;
 + (BOOL)lineEnable;

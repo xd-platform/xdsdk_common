@@ -29,7 +29,8 @@
         "app_id":"333676195299012",
         "client_token":"52372eb46fd7343e588160c51ca0955d",
         "permissions":[
-            "public_profile"
+            "public_profile",
+            "user_friends"
         ]
     },
     "line":{
