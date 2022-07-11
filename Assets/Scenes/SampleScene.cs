@@ -14,7 +14,6 @@ using XD.SDK.Account;
 using XD.SDK.Common;
 using XD.SDK.Payment;
 using Random = UnityEngine.Random;
-using Plugins.AntiAddictionUIKit; // 命名空间
 
 public class SampleScene : MonoBehaviour{
     public Text ResultText;
@@ -82,6 +81,7 @@ public class SampleScene : MonoBehaviour{
     }
 
     public void InitRelease(){
+        isCN = false;
         XDGCommonImpl.GetInstance().SetDebugMode();
         XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig.json");
         XDGCommon.InitSDK(((success, msg) => {
@@ -109,7 +109,6 @@ public class SampleScene : MonoBehaviour{
         XDGCommon.InitSDK(((success, msg) => {
             if (success){
                 ResultText.text = $"初始化成功 {success} {msg}";
-                InitAntiSDK();
             } else{
                 ResultText.text = $"初始化失败 {success} {msg}";
             }
@@ -181,7 +180,6 @@ public class SampleScene : MonoBehaviour{
 
     public void Logout(){
         XDGAccount.Logout();
-        // AntiAddictionUIKit.Logout();
     }
 
     public void GetUserInfo(){
@@ -418,42 +416,5 @@ public class SampleScene : MonoBehaviour{
         }
 
         return LoginType.Default;
-    }
-
-    //---------防沉迷接入--------
-
-    private void InitAntiSDK(){
-        // string gameIdentifier = "Wzy7xYhKtYdnLUXevV"; //国内的 tap client id
-        // bool useTimeLimit = true; // 是否启用时长限制功能
-        // bool usePaymentLimit = true; // 是否启用消费限制功能
-        // bool showSwitchAccount = false; // 是否显示切换账号按钮
-        //
-        // AntiAddictionUIKit.Init(gameIdentifier, useTimeLimit, usePaymentLimit, showSwitchAccount,
-        //     (antiAddictionCallbackData) => {
-        //         int code = antiAddictionCallbackData.code;
-        //         MsgExtraParams extras = antiAddictionCallbackData.extras;
-        //         // 根据 code 不同提示玩家不同信息，详见下面的说明
-        //         if (code == 500){
-        //             // 开始计时
-        //             AntiAddictionUIKit.EnterGame();
-        //             Debug.Log("玩家登录后判断当前玩家可以进行游戏");
-        //         }
-        //         
-        //         XDGTool.Log($"防沉迷 code {code},  data: {JsonUtility.ToJson(extras)}");
-        //     },
-        //     (exception) => {
-        //         // 处理异常
-        //         XDGTool.Log($"防沉迷异常: {exception}");
-        //     }
-        // );
-    }
-    
-    private void StartAnti(string userId, bool isTap){
-        // if (string.IsNullOrEmpty(userId)){
-        //     XDGTool.Log("防沉迷UserId是空");
-        //     return;
-        // }
-        // XDGTool.Log($"防沉迷start: {userId},  isTap:{isTap}");
-        // AntiAddictionUIKit.Startup(isTap, userId);
     }
 }

@@ -44,6 +44,9 @@
         "CLIENT_ID": "888194877532-08sa8mvbgoqb54a605miomb9um2jqfab.apps.googleusercontent.com",
         "CLIENT_ID_FOR_ANDROID": "888194877532-qtsvqehpob7kinfvo9j441emn3sh2tf3.apps.googleusercontent.com"
     },
+    "firebase":{
+        "enableTrack":true
+    },
     "adjust":{
         "app_token":"44y4ryktle4g",
         "events": [
