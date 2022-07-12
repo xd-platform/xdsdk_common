@@ -8,6 +8,6 @@
 
 ## 6.4.1
 ```
-Facebook Token 自动登录刷新
+Facebook token自动登录刷新
 解决防沉迷库冲突问题
 ```

@@ -5,7 +5,7 @@
     "com.leancloud.realtime": "https://github.com/leancloud/csharp-sdk-upm.git#realtime-0.10.12",
     "com.leancloud.storage": "https://github.com/leancloud/csharp-sdk-upm.git#storage-0.10.12",
     "com.taptap.tds.bootstrap": "https://github.com/TapTap/TapBootstrap-Unity.git#3.9.0",
-    "com.taptap.tds.common": "https://github.com/TapTap/TapCommon-Unity.git#3.9.0",
+    "com.taptap.tds.common": "https://github.com/TapTap/TapCommon-Unity.git#3.10.0", //修复了多国语言数字问题
     "com.taptap.tds.login": "https://github.com/TapTap/TapLogin-Unity.git#3.9.0",
     "com.taptap.tds.tapdb": "https://github.com/TapTap/TapDB-Unity.git#3.9.0",
     "com.xd.sdk.common": "https://github.com/xd-platform/xdsdk_common.git#6.4.1",
@@ -18,7 +18,7 @@
     "com.leancloud.realtime": "0.10.12",
     "com.leancloud.storage": "0.10.12",
     "com.taptap.tds.bootstrap": "3.9.0",
-    "com.taptap.tds.common": "3.9.0",
+    "com.taptap.tds.common": "3.10.0",   //修复了多国语言数字问题
     "com.taptap.tds.login": "3.9.0",
     "com.taptap.tds.tapdb": "3.9.0",
     "com.xd.sdk.common": "6.4.1",
