@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (TDSSDK)
-+ (UIImage *)tds_imageNamed:(NSString *)name;
-+ (UIImage *)tds_resizeableImageNamed:(NSString *)name;
++ (UIImage *)xdg_imageNamed:(NSString *)name;
++ (UIImage *)xdg_resizeableImageNamed:(NSString *)name;
 @end
 
 NS_ASSUME_NONNULL_END
