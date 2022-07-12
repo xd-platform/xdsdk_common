@@ -46,8 +46,14 @@ namespace XD.SDK.Payment{
 
         public void PayWithProduct(string orderId, string productId, string roleId, string serverId, string ext,
             Action<XDGOrderInfoWrapper> callback){
+
+            var oid = orderId;
+            if (string.IsNullOrEmpty(oid)){
+                oid = XDGTool.GetRandomStr(12) + new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() + "";
+            }
+
             var dic = new Dictionary<string, object>{
-                {"orderId", orderId},
+                {"orderId", oid},
                 {"productId", productId},
                 {"roleId", roleId},
                 {"serverId", serverId},
@@ -78,8 +84,14 @@ namespace XD.SDK.Payment{
             string serverId,
             string extras,
             Action<WebPayResultType, string> callback){
+            
+            var oid = orderId;
+            if (string.IsNullOrEmpty(oid)){
+                oid = XDGTool.GetRandomStr(12) + new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() + "";
+            }
+            
             var dic = new Dictionary<string, object>{
-                {"orderId", orderId},
+                {"orderId", oid},
                 {"productId", productId},
                 {"productName", productName},
                 {"payAmount", payAmount},
@@ -144,10 +156,16 @@ namespace XD.SDK.Payment{
 
         public void RestorePurchase(string purchaseToken, string orderId, string productId, string roleId,
             string serverId, string ext, Action<XDGOrderInfoWrapper> callback){
+            
+            var oid = orderId;
+            if (string.IsNullOrEmpty(oid)){
+                oid = XDGTool.GetRandomStr(12) + new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() + "";
+            }
+
             var dic = new Dictionary<string, object>{
                 {"purchaseToken", purchaseToken},
                 {"productId", productId},
-                {"orderId", orderId},
+                {"orderId", oid},
                 {"roleId", roleId},
                 {"serverId", serverId},
                 {"ext", ext}
@@ -190,56 +208,6 @@ namespace XD.SDK.Payment{
                     XDGTool.Log("CheckRefundStatusWithUI result: " + result.ToJSON());
                     callback(new XDGRefundResultWrapper(result.content));
                 });
-        }
-
-        public void InlinePay(string orderId, string productId, string productName, string region, string serverId,
-            string roleId,
-            string ext, Action<XDGInlinePayResult> callback){
-            // var dic = new Dictionary<string, object>
-            // {
-            //     { "orderId", orderId },
-            //     { "productId", productId },
-            //     { "productName", productName },
-            //     { "region", region },
-            //     { "serverId", serverId },
-            //     { "roleId", roleId },
-            //     { "ext", ext }
-            // };
-            // var command = new Command(XDG_PAYMENT_SERVICE, "inlinePay", true, dic);
-            // EngineBridge.GetInstance().CallHandler(command, (result) =>
-            // {
-            //     Debug.Log("InlinePay bridge result:" + result.ToJSON());
-            //     if (!XDGTool.checkResultSuccess(result))
-            //     {
-            //         var payResult = new XDGInlinePayResult(GlobalUnKnowError.UN_KNOW,
-            //             $"InlinePay Failed:{result.message}");
-            //
-            //         callback(payResult);
-            //         return;
-            //     }
-            //
-            //     callback(new XDGInlinePayResult(result.content));
-            // });
-        }
-
-        public void QueryProductList(string[] productIds, Action<ProductSkuWrapper> callback){
-            // var dic = new Dictionary<string, object>
-            // {
-            //     { "productIds", productIds }
-            // };
-            //
-            // var command = new Command.Builder()
-            //     .Service(XDG_PAYMENT_SERVICE)
-            //     .Method("queryProductList")
-            //     .Args(dic)
-            //     .Callback(true)
-            //     .CommandBuilder();
-            //
-            // EngineBridge.GetInstance().CallHandler(command, result =>
-            // {
-            //     XDGTool.Log("queryWithProductIds 方法结果: " + result.ToJSON());
-            //     callback(new ProductSkuWrapper(result.content));
-            // });
         }
     }
 }

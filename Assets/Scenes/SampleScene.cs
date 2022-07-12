@@ -366,7 +366,7 @@ public class SampleScene : MonoBehaviour{
     }
 
     public void getFacebookToken(){
-        XDGAccount.GetFacebookToken((uid, token) => {
+        XDGAccountImpl.GetInstance().GetFacebookToken((uid, token) => {
             ResultText.text = $"uid：{uid},  token: {token}";
         }, (error) => {
             ResultText.text = $"失败：{JsonUtility.ToJson(error)}";

@@ -31,9 +31,9 @@ namespace XD.SDK.Account{
                                         XDGTool.LogError($"获取FB token失败, 有空: uid:{platUserId},  token: {platToken}");
                                         return;
                                     }
-
+                                    
                                     //获取最新信息
-                                    XDGAccount.GetFacebookToken(async (newUid, newToken) => {
+                                    XDGAccountImpl.GetInstance().GetFacebookToken(async (newUid, newToken) => {
                                             if (newUid.Equals(platUserId) && !newToken.Equals(platToken)){
                                                 //uid相同，token不同
                                                 fbDic["access_token"] = newToken;

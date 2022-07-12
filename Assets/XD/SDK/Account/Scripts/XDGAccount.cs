@@ -61,12 +61,9 @@ namespace XD.SDK.Account{
             XDGAccountImpl.GetInstance().IsTokenActiveWithType(loginType, callback);
         }
         
+        //除了 Default 和 Guest
         public static void BindByType(LoginType loginType, Action<bool,XDGError> callback){
             XDGAccountImpl.GetInstance().BindByType(loginType, callback);
-        }
-        
-        public static void GetFacebookToken(Action<string, string> successCallback, Action<XDGError> errorCallback){
-            XDGAccountImpl.GetInstance().GetFacebookToken(successCallback, errorCallback);
         }
 
     }
