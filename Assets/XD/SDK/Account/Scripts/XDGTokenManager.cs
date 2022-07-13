@@ -10,6 +10,9 @@ namespace XD.SDK.Account{
         public static void updateFacebookToken(XDGUser xdgUser){
             var preTime = getFacebookRefreshTime(); //上一次刷新时间
             if (preTime == 0 || (getCurrentSecond() - preTime) < DaySeconds){ //第一次 或 不到 24小时
+                if (preTime == 0){
+                    updateFacebookRefreshTime();
+                }
                 return;
             }
 
