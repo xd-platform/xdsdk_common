@@ -18,6 +18,8 @@ typedef NS_ENUM(NSInteger,XDGUserStateChangeCode) {
  */
 typedef void (^XDGLoginManagerRequestCallback)(XDGUser * _Nullable result, NSError * _Nullable error);
 
+typedef void (^XDGBindManagerRequestCallback)(BOOL success, NSError *_Nullable error);
+
 typedef void(^XDGLoginSyncCallback)(NSDictionary * _Nullable result,NSError * _Nullable error);
 
 /**
@@ -56,6 +58,10 @@ typedef void (^XDGUserStatusChangeCallback)(XDGUserStateChangeCode userStateChan
 
 /// Open accountCancellation
 + (void)accountCancellation;
+
++ (void)bindByType:(LoginEntryType)bindType bindHandler:(XDGBindManagerRequestCallback)handler;
+
++ (BOOL)isTokenActiveWithType:(LoginEntryType)type;
 
 + (void)loginSync:(XDGLoginSyncCallback)handler;
 

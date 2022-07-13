@@ -5,26 +5,26 @@
     "com.leancloud.realtime": "https://github.com/leancloud/csharp-sdk-upm.git#realtime-0.10.12",
     "com.leancloud.storage": "https://github.com/leancloud/csharp-sdk-upm.git#storage-0.10.12",
     "com.taptap.tds.bootstrap": "https://github.com/TapTap/TapBootstrap-Unity.git#3.9.0",
-    "com.taptap.tds.common": "https://github.com/TapTap/TapCommon-Unity.git#3.9.0",
+    "com.taptap.tds.common": "https://github.com/TapTap/TapCommon-Unity.git#3.10.0", //修复了多国语言数字问题
     "com.taptap.tds.login": "https://github.com/TapTap/TapLogin-Unity.git#3.9.0",
     "com.taptap.tds.tapdb": "https://github.com/TapTap/TapDB-Unity.git#3.9.0",
-    "com.xd.sdk.common": "https://github.com/xd-platform/xdsdk_common.git#6.4.0",
-    "com.xd.sdk.account": "https://github.com/xd-platform/xdsdk_account.git#6.4.0",
-    "com.xd.sdk.payment": "https://github.com/xd-platform/xdsdk_payment.git#6.4.0",          //可选，没有支付可以不加
-    "com.xd.sdk.oversea": "https://github.com/xd-platform/xdsdk_oversea.git#6.4.0",          //可选，海外用的，国内不加
+    "com.xd.sdk.common": "https://github.com/xd-platform/xdsdk_common.git#6.4.1",
+    "com.xd.sdk.account": "https://github.com/xd-platform/xdsdk_account.git#6.4.1",
+    "com.xd.sdk.payment": "https://github.com/xd-platform/xdsdk_payment.git#6.4.1",          //可选，没有支付可以不加
+    "com.xd.sdk.oversea": "https://github.com/xd-platform/xdsdk_oversea.git#6.4.1",          //可选，海外用的，国内不加
     "com.tapsdk.antiaddiction":"https://github.com/taptap/TapAntiAddiction-Unity.git#3.9.0", //可选,不是国内没有防沉迷可以不加，防沉迷需要游戏自行接入,XDSDK里不包含 
     
     //2. 通过NPM方式添加引用 (内网可用)
     "com.leancloud.realtime": "0.10.12",
     "com.leancloud.storage": "0.10.12",
     "com.taptap.tds.bootstrap": "3.9.0",
-    "com.taptap.tds.common": "3.9.0",
+    "com.taptap.tds.common": "3.10.0",   //修复了多国语言数字问题
     "com.taptap.tds.login": "3.9.0",
     "com.taptap.tds.tapdb": "3.9.0",
-    "com.xd.sdk.common": "6.4.0",
-    "com.xd.sdk.account": "6.4.0",
-    "com.xd.sdk.payment": "6.4.0",           //可选，没有支付可以不加
-    "com.xd.sdk.oversea": "6.4.0",      //可选，海外用的，国内不加
+    "com.xd.sdk.common": "6.4.1",
+    "com.xd.sdk.account": "6.4.1",
+    "com.xd.sdk.payment": "6.4.1",           //可选，没有支付可以不加
+    "com.xd.sdk.oversea": "6.4.1",      //可选，海外用的，国内不加
     "com.tapsdk.antiaddiction":"3.9.0",      //可选,不是国内没有防沉迷可以不加，防沉迷需要游戏自行接入,XDSDK里不包含 
     
     "scopedRegistries": [
@@ -53,7 +53,6 @@
 * 将 `XDConfig.json` 放在 `/Assets/Plugins` 中 ([海外配置下载这个文件](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/oversea/XDConfig.json),  [国内配置下载这个文件](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/mainland/XDConfig.json))
 * 可选配置：如果有用Firebase，需要将`GoogleService-Info.plist`放在`/Assets/Plugins/iOS`中(iOS用)，将`google-services.json`放在`/Assets/Plugins/Android`中(Android用)，这个两个文件是游戏从[Firebase后台](https://console.firebase.google.com)下载的。
 * 可选配置：如果有用Twitter或Firebase，需要将[AndroidManifest.xml](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/oversea/AndroidManifest.xml) 放在`/Assets/Plugins/Android`中，按需修改。
-* 可选配置：按需添加Google, Twitter, LINE等第三方库，将[XDGAndroidProcessor.cs](https://github.com/xd-platform/xd_sdk_resource/tree/master/640/XDGAndroidProcessor.cs) 放在`/Assets/Editor`中，可按需删除 implementation 库引用。如果没有使用Firebase，则可以搜索删除firebase和google对应的配置。
 
 ## 3.接口使用
 #### 切换语言
@@ -307,6 +306,25 @@ XDGPayment.QueryWithProductIds(productIds, info => {
             }
         });
 ```
+
+#### 检查Facebook Token是否可用(目前只支持FB)
+```
+XDGAccount.IsTokenActiveWithType(LoginType.Facebook, (b) => {
+            ResultText.text = $"结果：{b}";
+        });
+```
+
+#### 绑定第三方
+```
+LoginType 除了 Default 和 Guest, 其他第三方类型都可以
+XDGAccount.BindByType(LoginType, (success, error) => {
+   ResultText.text = $"绑定结果：{success},  error:{JsonUtility.ToJson(error)}";
+});
+```
+
+
+
+
 
 #### Android 11 相关配置
 

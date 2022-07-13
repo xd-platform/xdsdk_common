@@ -16,6 +16,13 @@
       "dependencies": {},
       "hash": "7897313a90163d26a33648ebb47a36af28af8098"
     },
+    "com.tapsdk.antiaddiction": {
+      "version": "3.9.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://nexus.tapsvc.com/repository/npm-registry"
+    },
     "com.taptap.tds.bootstrap": {
       "version": "https://github.com/TapTap/TapBootstrap-Unity.git#3.9.0",
       "depth": 0,
@@ -53,6 +60,13 @@
       },
       "hash": "be9fc237a61249c0a9faea1f81b40d25af4179f4"
     },
+    "com.taptap.tds.support": {
+      "version": "3.9.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://nexus.tapsvc.com/repository/npm-registry"
+    },
     "com.taptap.tds.tapdb": {
       "version": "https://github.com/TapTap/TapDB-Unity.git#3.9.0",
       "depth": 0,
@@ -63,10 +77,12 @@
       "hash": "4f83ea96e762772a99edf98cc9e23aa6202235ed"
     },
     "com.unity.collab-proxy": {
-      "version": "1.9.0",
+      "version": "1.5.7",
       "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {

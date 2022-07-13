@@ -5,3 +5,9 @@
 海外6.3.1: https://github.com/xd-platform/sdk_intl_common_upm
 国内6.2.4: https://github.com/xd-platform/sdk_cn_common_upm
 ```
+
+## 6.4.1
+```
+Facebook token自动登录刷新
+解决防沉迷库冲突问题
+```

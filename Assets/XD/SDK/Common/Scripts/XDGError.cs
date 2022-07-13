@@ -22,6 +22,9 @@ namespace XD.SDK.Common
             {
                 code = SafeDictionary.GetValue<int>(dic,"code");
                 error_msg = SafeDictionary.GetValue<string>(dic,"error_msg");
+                if (string.IsNullOrEmpty(error_msg)){
+                    error_msg = SafeDictionary.GetValue<string>(dic,"errorMsg");
+                }
             }
         }
         
@@ -30,7 +33,10 @@ namespace XD.SDK.Common
             if (dic != null)
             {
                 code = SafeDictionary.GetValue<int>(dic,"code");
-                error_msg = SafeDictionary.GetValue<string>(dic,"error_msg");      
+                error_msg = SafeDictionary.GetValue<string>(dic,"error_msg");     
+                if (string.IsNullOrEmpty(error_msg)){
+                    error_msg = SafeDictionary.GetValue<string>(dic,"errorMsg");
+                }
             }
         }
         

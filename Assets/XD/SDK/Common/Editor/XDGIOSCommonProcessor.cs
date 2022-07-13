@@ -8,6 +8,7 @@ using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using XD.SDK.Common.Editor;
 using LC.Newtonsoft.Json;
+using System.Linq;
 
 public static class XDGIOSCommonProcessor{
     [PostProcessBuild(199)]
@@ -56,7 +57,7 @@ public static class XDGIOSCommonProcessor{
                 return;
             }
             var json = File.ReadAllText(jsonPath);
-            var md = JsonConvert.DeserializeObject<XDGConfigModel>(json);
+            var md = JsonConvert.DeserializeObject<XDConfigModel>(json);
             if (md == null){
                 Debug.LogError("json 配置文件解析失败: " + jsonPath);
                 return;
@@ -195,7 +196,7 @@ public static class XDGIOSCommonProcessor{
         File.WriteAllText(_plistPath, _plist.WriteToString());
     }
 
-    private static void SetThirdLibraryId(string pathToBuildProject, XDGConfigModel configModel){
+    private static void SetThirdLibraryId(string pathToBuildProject, XDConfigModel configModel){
         if (configModel == null){
             Debug.LogError("打包失败  ----  XDConfig 配置文件Model是空");
             return;
@@ -209,7 +210,7 @@ public static class XDGIOSCommonProcessor{
         var facebookId = (configModel.facebook != null ? configModel.facebook.app_id : null);
         var facebookToken = (configModel.facebook != null ? configModel.facebook.client_token : null);
         var taptapId = (configModel.tapsdk != null ? configModel.tapsdk.client_id : null);
-        var googleId = (configModel.google != null ? configModel.google.REVERSED_CLIENT_ID : null);
+        var googleId = (configModel.google != null ? configModel.google.CLIENT_ID : null); //注意要反转一下！
         var twitterId = (configModel.twitter != null ? configModel.twitter.consumer_key : null);
         var bundleId = configModel.bundle_id;
 
@@ -241,11 +242,13 @@ public static class XDGIOSCommonProcessor{
         }
 
         if (!string.IsNullOrEmpty(googleId)){
+            var reverseGoogleId = reverseStr(googleId);
+            
             dict2 = array.AddDict();
             dict2.SetString("CFBundleURLName", "Google");
             PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
             array2 = dict2.CreateArray("CFBundleURLSchemes");
-            array2.AddString(googleId);
+            array2.AddString(reverseGoogleId);
         }
 
         if (!string.IsNullOrEmpty(facebookId)){
@@ -273,6 +276,14 @@ public static class XDGIOSCommonProcessor{
         }
 
         File.WriteAllText(_plistPath, _plist.WriteToString());
+    }
+
+    private static string reverseStr(string str){ //用.分割然后反转,谷歌配置用
+        if (string.IsNullOrEmpty(str)){
+            return "";
+        }
+        var list = str.Split('.').Reverse();
+        return string.Join(".", list);
     }
 
     private static void CopyThirdResource(string target, string projPath, PBXProject proj, string parentFolder,

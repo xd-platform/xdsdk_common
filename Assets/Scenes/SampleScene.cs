@@ -14,7 +14,6 @@ using XD.SDK.Account;
 using XD.SDK.Common;
 using XD.SDK.Payment;
 using Random = UnityEngine.Random;
-// using Plugins.AntiAddictionUIKit; // 命名空间
 
 public class SampleScene : MonoBehaviour{
     public Text ResultText;
@@ -25,8 +24,9 @@ public class SampleScene : MonoBehaviour{
     public InputField GoogleProductField;
     public InputField WebPayServiceField;
     public InputField WebPayProductField;
+    public InputField BindField;
 
-    private string UserId;
+    private XDGUser User;
     private bool isCN = false;
 
     private void Start(){
@@ -81,6 +81,7 @@ public class SampleScene : MonoBehaviour{
     }
 
     public void InitRelease(){
+        isCN = false;
         XDGCommonImpl.GetInstance().SetDebugMode();
         XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig.json");
         XDGCommon.InitSDK(((success, msg) => {
@@ -108,7 +109,6 @@ public class SampleScene : MonoBehaviour{
         XDGCommon.InitSDK(((success, msg) => {
             if (success){
                 ResultText.text = $"初始化成功 {success} {msg}";
-                // InitAntiSDK();
             } else{
                 ResultText.text = $"初始化失败 {success} {msg}";
             }
@@ -148,7 +148,7 @@ public class SampleScene : MonoBehaviour{
         }
 
         XDGAccount.Login(loginTypes, user => {
-            UserId = user.userId;
+            User = user;
             ResultText.text = JsonUtility.ToJson(user);
         }, error => {
             ResultText.text = error.error_msg;
@@ -157,7 +157,7 @@ public class SampleScene : MonoBehaviour{
 
     public void AutoLogin(){
         XDGAccount.LoginByType(LoginType.Default, user => {
-                UserId = user.userId;
+                User = user;
                 ResultText.text = JsonUtility.ToJson(user);
             },
             error => {
@@ -170,10 +170,8 @@ public class SampleScene : MonoBehaviour{
         var isTap = (type == LoginType.TapTap) ? true : false;
         
         XDGAccount.LoginByType(type, user => {
-                UserId = user.userId;
+                User = user;
                 ResultText.text = JsonUtility.ToJson(user);
-                
-                // StartAnti(user.userId, isTap);
             },
             error => {
                 ResultText.text = "登录失败: " + error.ToJSON();
@@ -182,12 +180,11 @@ public class SampleScene : MonoBehaviour{
 
     public void Logout(){
         XDGAccount.Logout();
-        // AntiAddictionUIKit.Logout();
     }
 
     public void GetUserInfo(){
         XDGAccount.GetUser((user) => {
-                UserId = user.userId;
+                User = user;
                 ResultText.text = JsonUtility.ToJson(user);
             },
             (error) => {
@@ -200,7 +197,7 @@ public class SampleScene : MonoBehaviour{
     }
 
     public void OpenFeedbackCenter(){
-        XDGCommon.Report("serverId", UserId, "roleName");
+        XDGCommon.Report("serverId", User.userId, "roleName");
     }
 
     public void OpenAppStore(){
@@ -235,7 +232,7 @@ public class SampleScene : MonoBehaviour{
 
         ResultText.text = $"苹果支付 {productId}";
 
-        XDGPayment.PayWithProduct("", productId, UserId, "serverId", "ext",
+        XDGPayment.PayWithProduct("", productId, User.userId, "serverId", "ext",
             wrapper => {
                 XDGTool.Log("支付结果" + JsonUtility.ToJson(wrapper));
                 if (wrapper.xdgError != null){
@@ -259,7 +256,7 @@ public class SampleScene : MonoBehaviour{
 
         ResultText.text = $"谷歌支付 {productId}";
 
-        XDGPayment.PayWithProduct("", productId, UserId, "serverId", "ext",
+        XDGPayment.PayWithProduct("", productId, User.userId, "serverId", "ext",
             wrapper => {
                 XDGTool.Log("支付结果" + JsonUtility.ToJson(wrapper));
                 if (wrapper.xdgError != null){
@@ -354,7 +351,7 @@ public class SampleScene : MonoBehaviour{
             productId,
             productId,
             price,
-            UserId,
+            User.userId,
             serverId, 
             "ext",
             (type, msg) => {
@@ -362,6 +359,26 @@ public class SampleScene : MonoBehaviour{
             });
     }
 
+    public void isFacebookTokenActive(){
+        XDGAccount.IsTokenActiveWithType(LoginType.Facebook, (b) => {
+            ResultText.text = $"结果：{b}";
+        });
+    }
+
+    public void getFacebookToken(){
+        XDGAccountImpl.GetInstance().GetFacebookToken((uid, token) => {
+            ResultText.text = $"uid：{uid},  token: {token}";
+        }, (error) => {
+            ResultText.text = $"失败：{JsonUtility.ToJson(error)}";
+        });
+    }
+
+    public void bindType(){
+        var type = GetLoginType(BindField.text);
+        XDGAccount.BindByType(type, (b, error) => {
+            ResultText.text = $"绑定结果：{b},  error:{JsonUtility.ToJson(error)}";
+        });
+    }
 
     private void SetDevelopUrl(){
 #if !UNITY_EDITOR && UNITY_ANDROID
@@ -400,41 +417,4 @@ public class SampleScene : MonoBehaviour{
 
         return LoginType.Default;
     }
-
-    //---------防沉迷接入--------
-
-    // private void InitAntiSDK(){
-    //     string gameIdentifier = "Wzy7xYhKtYdnLUXevV"; //国内的 tap client id
-    //     bool useTimeLimit = true; // 是否启用时长限制功能
-    //     bool usePaymentLimit = true; // 是否启用消费限制功能
-    //     bool showSwitchAccount = false; // 是否显示切换账号按钮
-    //
-    //     AntiAddictionUIKit.Init(gameIdentifier, useTimeLimit, usePaymentLimit, showSwitchAccount,
-    //         (antiAddictionCallbackData) => {
-    //             int code = antiAddictionCallbackData.code;
-    //             MsgExtraParams extras = antiAddictionCallbackData.extras;
-    //             // 根据 code 不同提示玩家不同信息，详见下面的说明
-    //             if (code == 500){
-    //                 // 开始计时
-    //                 AntiAddictionUIKit.EnterGame();
-    //                 Debug.Log("玩家登录后判断当前玩家可以进行游戏");
-    //             }
-    //             
-    //             XDGTool.Log($"防沉迷 code {code},  data: {JsonUtility.ToJson(extras)}");
-    //         },
-    //         (exception) => {
-    //             // 处理异常
-    //             XDGTool.Log($"防沉迷异常: {exception}");
-    //         }
-    //     );
-    // }
-    //
-    // private void StartAnti(string userId, bool isTap){
-    //     if (string.IsNullOrEmpty(userId)){
-    //         XDGTool.Log("防沉迷UserId是空");
-    //         return;
-    //     }
-    //     XDGTool.Log($"防沉迷start: {userId},  isTap:{isTap}");
-    //     AntiAddictionUIKit.Startup(isTap, userId);
-    // }
 }
