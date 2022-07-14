@@ -7,13 +7,25 @@ using Random = System.Random;
 namespace XD.SDK.Common{
     public class XDGTool{
         public static string userId = ""; //错误日志打印用
+        private static string xdid = "";
 
         public static void Log(string msg){
             Debug.Log("\n------------------ XDGSDK Log V641------------------\n" + msg + "\n\n");
         }
 
         public static void LogError(string msg){
-            Print("userId:【" + userId + "】" + msg);
+            if (string.IsNullOrEmpty(xdid)){
+                try{
+                    XDGCommonImpl.GetInstance().GetDid(did => {
+                        xdid = did;
+                        Print($"userId:【{userId}】, xdid: 【{xdid}】, msg:{msg}");
+                    });
+                } catch (Exception e){
+                    Print($"userId:【{userId}】, msg:{msg}。 get did error:{e.Message}");
+                }
+            } else{
+                Print($"userId:【{userId}】, xdid: 【{xdid}】, msg:{msg}");
+            }
         }
 
         private static void Print(string msg){
