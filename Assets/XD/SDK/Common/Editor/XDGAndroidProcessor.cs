@@ -23,8 +23,8 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         var googleJsonPath = parentFolder + "/Assets/Plugins/Android/google-services.json";
         if (File.Exists(googleJsonPath)){
             Debug.Log("拷贝谷歌 google-services");
-            File.Copy(googleJsonPath, projectPath + "/launcher/google-services.json");
-            File.Copy(googleJsonPath, projectPath + "/unityLibrary/src/main/assets/google-services.json");
+            File.Copy(googleJsonPath, projectPath + "/launcher/google-services.json",true);
+            File.Copy(googleJsonPath, projectPath + "/unityLibrary/src/main/assets/google-services.json", true);
 
             //动态配置Firebase信息
             launchStr.Append(@"
