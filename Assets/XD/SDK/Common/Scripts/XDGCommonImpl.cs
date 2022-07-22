@@ -61,6 +61,10 @@ namespace XD.SDK.Common{
                         info.gameVersion = GameVersion;
                     }
 
+                    if (string.IsNullOrEmpty(info.gameVersion)){
+                        info.gameVersion = ""; //不可以null 否则3.9.0 tapdb初始化不了
+                    }
+                    
                     var config = new TapConfig.Builder()
                         .ClientID(info.clientId) // 必须，开发者中心对应 Client ID
                         .ClientToken(info.clientToken) // 必须，开发者中心对应 Client Token
