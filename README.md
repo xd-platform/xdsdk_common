@@ -8,10 +8,10 @@
     "com.taptap.tds.common": "https://github.com/TapTap/TapCommon-Unity.git#3.10.0", //修复了多国语言数字问题
     "com.taptap.tds.login": "https://github.com/TapTap/TapLogin-Unity.git#3.9.0",
     "com.taptap.tds.tapdb": "https://github.com/TapTap/TapDB-Unity.git#3.9.0",
-    "com.xd.sdk.common": "https://github.com/xd-platform/xdsdk_common.git#6.4.1",
-    "com.xd.sdk.account": "https://github.com/xd-platform/xdsdk_account.git#6.4.1",
-    "com.xd.sdk.payment": "https://github.com/xd-platform/xdsdk_payment.git#6.4.1",          //可选，没有支付可以不加
-    "com.xd.sdk.oversea": "https://github.com/xd-platform/xdsdk_oversea.git#6.4.1",          //可选，海外用的，国内不加
+    "com.xd.sdk.common": "https://github.com/xd-platform/xdsdk_common.git#6.4.2",
+    "com.xd.sdk.account": "https://github.com/xd-platform/xdsdk_account.git#6.4.2",
+    "com.xd.sdk.payment": "https://github.com/xd-platform/xdsdk_payment.git#6.4.2",          //可选，没有支付可以不加
+    "com.xd.sdk.oversea": "https://github.com/xd-platform/xdsdk_oversea.git#6.4.2",          //可选，海外用的，国内不加
     "com.tapsdk.antiaddiction":"https://github.com/taptap/TapAntiAddiction-Unity.git#3.9.0", //可选,不是国内没有防沉迷可以不加，防沉迷需要游戏自行接入,XDSDK里不包含 
     
     //2. 通过NPM方式添加引用 (内网可用)
@@ -21,10 +21,10 @@
     "com.taptap.tds.common": "3.10.0",   //修复了多国语言数字问题
     "com.taptap.tds.login": "3.9.0",
     "com.taptap.tds.tapdb": "3.9.0",
-    "com.xd.sdk.common": "6.4.1",
-    "com.xd.sdk.account": "6.4.1",
-    "com.xd.sdk.payment": "6.4.1",           //可选，没有支付可以不加
-    "com.xd.sdk.oversea": "6.4.1",      //可选，海外用的，国内不加
+    "com.xd.sdk.common": "6.4.2",
+    "com.xd.sdk.account": "6.4.2",
+    "com.xd.sdk.payment": "6.4.2",           //可选，没有支付可以不加
+    "com.xd.sdk.oversea": "6.4.2",      //可选，海外用的，国内不加
     "com.tapsdk.antiaddiction":"3.9.0",      //可选,不是国内没有防沉迷可以不加，防沉迷需要游戏自行接入,XDSDK里不包含 
     
     "scopedRegistries": [
