@@ -18,13 +18,13 @@ namespace XD.SDK.Common{
                 try{
                     XDGCommonImpl.GetInstance().GetDid(did => {
                         xdid = did;
-                        Print($"userId:【{userId}】, xdid: 【{xdid}】, msg:{msg}");
+                        Print($"userId:【{userId}】, did: 【{xdid}】, msg:{msg}");
                     });
                 } catch (Exception e){
                     Print($"userId:【{userId}】, msg:{msg}。 get did error:{e.Message}");
                 }
             } else{
-                Print($"userId:【{userId}】, xdid: 【{xdid}】, msg:{msg}");
+                Print($"userId:【{userId}】, did: 【{xdid}】, msg:{msg}");
             }
         }
 
