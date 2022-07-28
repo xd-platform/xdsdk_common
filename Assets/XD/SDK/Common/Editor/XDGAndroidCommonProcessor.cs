@@ -16,7 +16,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         //拷贝 SDK json 文件，必须的
         var configJson = parentFolder + "/Assets/Plugins/XDConfig.json";
         if (File.Exists(configJson)){
-            File.Copy(configJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json");
+            File.Copy(configJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json", true);
         } else{
             Debug.LogError("打包失败 ---  拷贝的json配置文件不存在");
             return;
@@ -24,7 +24,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
 
         var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
         if (File.Exists(cnJson)){
-            File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json");
+            File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json", true);
         }
 
         //配置路径

@@ -61,6 +61,10 @@ namespace XD.SDK.Common{
                         info.gameVersion = GameVersion;
                     }
 
+                    if (string.IsNullOrEmpty(info.gameVersion)){
+                        info.gameVersion = ""; //不可以null 否则3.9.0 tapdb初始化不了
+                    }
+                    
                     var config = new TapConfig.Builder()
                         .ClientID(info.clientId) // 必须，开发者中心对应 Client ID
                         .ClientToken(info.clientToken) // 必须，开发者中心对应 Client Token
@@ -433,6 +437,22 @@ namespace XD.SDK.Common{
                 .CommandBuilder();
             EngineBridge.GetInstance().CallHandler(command);
 #endif
+        }
+        
+        public void GetDid(Action<string> callback){
+            var command = new Command.Builder()
+                .Service(COMMON_MODULE_UNITY_BRIDGE_NAME)
+                .Method("getDid")
+                .Callback(true)
+                .CommandBuilder();
+            EngineBridge.GetInstance().CallHandler(command, result => {
+                XDGTool.Log("===> getDid: " + result.ToJSON());
+                if (!checkResultSuccess(result)){
+                    callback($"getDid Failed:{result.message}");
+                    return;
+                }
+                callback(result.content);
+            });
         }
 
         private bool checkResultSuccess(Result result){

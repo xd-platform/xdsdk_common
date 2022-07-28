@@ -8,15 +8,16 @@ namespace XD.SDK.Account{
         private static long DaySeconds = 24 * 60 * 60; // 24 小时有多少秒
 
         public static void updateFacebookToken(XDGUser xdgUser){
-            var preTime = getFacebookRefreshTime(); //上一次刷新时间
-            if (preTime == 0 || (getCurrentSecond() - preTime) < DaySeconds){ //第一次 或 不到 24小时
-                if (preTime == 0){
-                    updateFacebookRefreshTime();
-                }
-                return;
-            }
-
             try{
+                var preTime = getFacebookRefreshTime(); //上一次刷新时间
+                if (preTime == 0 || (getCurrentSecond() - preTime) < DaySeconds){ //第一次 或 不到 24小时
+                    if (preTime == 0){
+                        updateFacebookRefreshTime();
+                    }
+
+                    return;
+                }
+
                 XDGAccountImpl.GetInstance().updateThirdPlatformTokenWithCallback(async (success) => {
                     if (success){
                         foreach (var bound in xdgUser.boundAccounts){
@@ -34,7 +35,7 @@ namespace XD.SDK.Account{
                                         XDGTool.LogError($"获取FB token失败, 有空: uid:{platUserId},  token: {platToken}");
                                         return;
                                     }
-                                    
+
                                     //获取最新信息
                                     XDGAccountImpl.GetInstance().GetFacebookToken(async (newUid, newToken) => {
                                             if (newUid.Equals(platUserId) && !newToken.Equals(platToken)){
@@ -74,7 +75,12 @@ namespace XD.SDK.Account{
                 return 0;
             }
 
-            return long.Parse(timeStr);
+            try{
+                return long.Parse(timeStr);
+            } catch (Exception e){
+                XDGTool.LogError($"long parse 解析失败：timeStr = {timeStr}  msg: {e.Message}");
+                return 0;
+            }
         }
 
         public static void updateFacebookRefreshTime(){
