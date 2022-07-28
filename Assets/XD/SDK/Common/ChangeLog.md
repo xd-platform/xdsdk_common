@@ -1,6 +1,6 @@
 ## 6.4.2
 ```
-long parse 解析失败 try cache 
+long parse 解析失败 try catch 
 ```
 
 
