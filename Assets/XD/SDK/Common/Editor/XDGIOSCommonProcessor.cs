@@ -31,6 +31,7 @@ public static class XDGIOSCommonProcessor{
             proj.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
             proj.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ObjC ");
             proj.AddFrameworkToProject(unityFrameworkTarget, "Accelerate.framework", true);
+            proj.AddFrameworkToProject(unityFrameworkTarget, "AuthenticationServices.framework", true);
 
             //创建文件夹
             var resourcePath = Path.Combine(path, "SDKResource");
