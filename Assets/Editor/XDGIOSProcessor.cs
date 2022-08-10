@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
@@ -17,8 +18,17 @@ public static class XDGIOSProcessor{
 
             //国内配置文件 Demo用
             var jsonPath_CN = parentPath + "/Assets/Plugins/XDConfig-cn.json";
-            SetCNConfig(path, jsonPath_CN); 
+            SetCNConfig(path, jsonPath_CN);
+            AddAppleLogin(path);
         }
+    }
+    
+    public static void AddAppleLogin(string path){
+        // https://blog.csdn.net/qq_39339846/article/details/112298425 
+        string projectPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
+        var manager = new ProjectCapabilityManager(projectPath, "Unity-iPhone.entitlements", "Unity-iPhone");
+        manager.AddSignInWithApple();
+        manager.WriteToFile();
     }
 
     private static void SetCNConfig(string path, string configJsonPath){
@@ -56,7 +66,7 @@ public static class XDGIOSProcessor{
             SetThirdLibraryId_CN(path, md);
 
             File.WriteAllText(projPath, proj.WriteToString()); //保存
-        } 
+        }
     }
 
     private static void SetThirdLibraryId_CN(string pathToBuildProject, XDConfigModel configModel){

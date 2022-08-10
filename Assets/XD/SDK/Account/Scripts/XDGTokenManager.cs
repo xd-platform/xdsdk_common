@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using TapTap.Bootstrap;
+using TapTap.Common;
 using XD.SDK.Common;
 
 namespace XD.SDK.Account{
     public class XDGTokenManager{
+        private static readonly string RefreshFacebookDateKey = "RefreshFacebookDateKeySDK";
         private static long DaySeconds = 24 * 60 * 60; // 24 小时有多少秒
 
         public static void updateFacebookToken(XDGUser xdgUser){
@@ -70,7 +72,7 @@ namespace XD.SDK.Account{
         }
 
         public static long getFacebookRefreshTime(){
-            var timeStr = DataStorage.LoadString(DataStorage.RefreshFacebookDateKey);
+            var timeStr = DataStorage.LoadString(RefreshFacebookDateKey);
             if (string.IsNullOrEmpty(timeStr)){
                 return 0;
             }
@@ -85,11 +87,17 @@ namespace XD.SDK.Account{
 
         public static void updateFacebookRefreshTime(){
             var time = getCurrentSecond() + "";
-            DataStorage.SaveString(DataStorage.RefreshFacebookDateKey, time);
+            DataStorage.SaveString(RefreshFacebookDateKey, time);
         }
 
         public static long getCurrentSecond(){ //获取当前时间  秒
-            return new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+            var timeSpan = DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            try{
+                return Convert.ToInt64(timeSpan.TotalSeconds);
+            } catch (Exception e){
+                XDGTool.LogError($"生成时间戳失败：timeSpan{timeSpan}  msg:{e.Message}");
+                return 0;
+            }
         }
     }
 }
