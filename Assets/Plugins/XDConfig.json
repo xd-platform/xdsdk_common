@@ -19,7 +19,8 @@
         },
         "permissions":[
             "public_profile",
-            "user_friends"
+            "user_friends",
+            "email"
         ]
     },
     "logos":["https://res.xdcdn.net/TDS/Global/res/xd_logo.png",
@@ -30,7 +31,8 @@
         "client_token":"52372eb46fd7343e588160c51ca0955d",
         "permissions":[
             "public_profile",
-            "user_friends"
+            "user_friends",
+            "email"
         ]
     },
     "line":{

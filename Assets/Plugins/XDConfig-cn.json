@@ -19,7 +19,8 @@
         },
         "permissions":[
             "public_profile",
-            "user_friends"
+            "user_friends",
+            "email"
         ]
     },
     "logos":["https://res.xdcdn.net/TDS/Global/res/xd_logo.png",

@@ -14,7 +14,7 @@ typedef void(^AlertInputRightCallback)(void);
 @property (nonatomic) BOOL touchBgDismiss;
 
 // 需要检查的字符串
-@property (nonatomic) NSString *targetCheckString;
+@property (nonatomic, copy) NSString *targetCheckString;
 
 + (TDSGlobalInputCheckAlertView *)createAlertInputView:(NSString *)title
                                 content:(NSString *)content

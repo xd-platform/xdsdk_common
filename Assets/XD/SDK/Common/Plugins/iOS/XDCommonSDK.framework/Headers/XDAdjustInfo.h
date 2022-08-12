@@ -10,9 +10,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XDAdjustInfo : NSObject
-@property (nonatomic) NSString *appToken;
+@property (nonatomic, copy) NSString *appToken;
 
-@property (nonatomic) NSDictionary *evensTokenDic;
+@property (nonatomic, strong) NSDictionary *evensTokenDic;
 
 + (instancetype)instanceWithInfoDic:(NSDictionary *)infoDic;
 

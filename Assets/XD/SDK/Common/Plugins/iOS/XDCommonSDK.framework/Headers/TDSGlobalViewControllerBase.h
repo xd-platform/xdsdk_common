@@ -7,7 +7,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TDSGlobalViewControllerBase : UIViewController
 
-@property (nonatomic) UIView *containerView;
+@property (nonatomic,strong) UIView *containerView;
 
 // 内容宽度
 - (CGFloat)getContainerWidth;

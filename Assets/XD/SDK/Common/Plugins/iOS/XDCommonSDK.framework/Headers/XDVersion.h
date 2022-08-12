@@ -5,4 +5,4 @@
 //  Created by Fattycat on 2022/5/13.
 //
 
-#define XDSDK_VERSION @"6.4.0"
+#define XDSDK_VERSION @"6.5.0"

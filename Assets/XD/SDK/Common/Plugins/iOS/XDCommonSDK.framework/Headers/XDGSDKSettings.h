@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger,XDGLanguageLocale) {
     XDGLanguageLocaleSpanish,                               // 西班牙语
     XDGLanguageLocaleTurkish,                               // 土耳其语
     XDGLanguageLocaleRussian,                               // 俄语
+    XDGLanguageLocaleVietnamese,                            // 越南语
 };
 
 /// SDK Settings

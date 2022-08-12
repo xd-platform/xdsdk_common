@@ -151,7 +151,8 @@ public class SampleScene : MonoBehaviour{
             User = user;
             ResultText.text = JsonUtility.ToJson(user);
         }, error => {
-            ResultText.text = error.error_msg;
+            ResultText.text = "登录失败: " + JsonConvert.SerializeObject(error);
+            XDGTool.Log("登录失败: " + JsonConvert.SerializeObject(error));
         });
     }
 
@@ -161,7 +162,8 @@ public class SampleScene : MonoBehaviour{
                 ResultText.text = JsonUtility.ToJson(user);
             },
             error => {
-                ResultText.text = "登录失败: " + error.ToJSON();
+                ResultText.text = "登录失败: " + JsonConvert.SerializeObject(error);
+                XDGTool.Log("登录失败: " + JsonConvert.SerializeObject(error));
             });
     }
 
@@ -174,7 +176,8 @@ public class SampleScene : MonoBehaviour{
                 ResultText.text = JsonUtility.ToJson(user);
             },
             error => {
-                ResultText.text = "登录失败: " + error.ToJSON();
+                ResultText.text = "登录失败: " + JsonConvert.SerializeObject(error);
+                XDGTool.Log("登录失败: " + JsonConvert.SerializeObject(error));
             });
     }
 
@@ -378,6 +381,17 @@ public class SampleScene : MonoBehaviour{
         XDGAccount.BindByType(type, (b, error) => {
             ResultText.text = $"绑定结果：{b},  error:{JsonUtility.ToJson(error)}";
         });
+    }
+
+    public void test(){
+        var str = "{\"error\":{\"code\":40902, \"error_msg\":\"第三方登录方式绑定邮箱关联账号已存在当前登录方式的另一个账号绑定\", \"extra_data\":{\"loginType\":\"google\", \"conflicts\":[{\"loginType\":\"taptap\", \"userId\":\"386882063988707329\"}], \"email\":\"z1969910954@gmail.com\"}}}";
+        var contentDic = Json.Deserialize(str) as Dictionary<string, object>;
+        var errorDic = SafeDictionary.GetValue<Dictionary<string, object>>(contentDic, "error");
+
+        if (errorDic != null){
+            var aa = new XDGError(errorDic);
+            XDGTool.Log(JsonConvert.SerializeObject(aa));
+        }
     }
 
     private void SetDevelopUrl(){
