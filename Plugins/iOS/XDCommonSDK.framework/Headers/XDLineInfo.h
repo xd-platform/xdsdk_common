@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XDLineInfo : NSObject
-@property (nonatomic) NSString *channelId;
+@property (nonatomic, copy) NSString *channelId;
 + (instancetype)instanceWithInfoDic:(NSDictionary *)infoDic;
 @end
 

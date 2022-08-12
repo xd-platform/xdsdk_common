@@ -11,8 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XDTwitterInfo : NSObject
 
-@property (nonatomic) NSString *consumerKey;
-@property (nonatomic) NSString *consumerSecret;
+@property (nonatomic, copy) NSString *consumerKey;
+@property (nonatomic, copy) NSString *consumerSecret;
 
 + (instancetype)instanceWithInfoDic:(NSDictionary *)infoDic;
 
