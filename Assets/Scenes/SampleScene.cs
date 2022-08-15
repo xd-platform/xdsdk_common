@@ -61,12 +61,12 @@ public class SampleScene : MonoBehaviour{
         }
 
         var x = Int32.Parse(txt);
-        if (x >= 0 && x <= 12){
+        if (x >= 0 && x <= 13){
             var type = (LangType) x;
             XDGCommon.SetLanguage(type);
             ResultText.text = $"设置语言：{type}";
         } else{
-            ResultText.text = "请输入0到12";
+            ResultText.text = "请输入0到13";
         }
     }
 
@@ -384,8 +384,10 @@ public class SampleScene : MonoBehaviour{
     }
 
     public void test(){
-        var str = "{\"error\":{\"code\":40902, \"error_msg\":\"第三方登录方式绑定邮箱关联账号已存在当前登录方式的另一个账号绑定\", \"extra_data\":{\"loginType\":\"google\", \"conflicts\":[{\"loginType\":\"taptap\", \"userId\":\"386882063988707329\"}], \"email\":\"z1969910954@gmail.com\"}}}";
-        var contentDic = Json.Deserialize(str) as Dictionary<string, object>;
+       // var str = "{\"error\":{\"code\":40902, \"error_msg\":\"第三方登录方式绑定邮箱关联账号已存在当前登录方式的另一个账号绑定\", \"extra_data\":{\"loginType\":\"google\", \"conflicts\":[{\"loginType\":\"taptap\", \"userId\":\"386882063988707329\"}], \"email\":\"z1969910954@gmail.com\"}}}";
+       var str = "{\n  \"error\" : {\n    \"error_msg\" : \"当前地区无法使用注册\",\n    \"extra_data\" : \"\",\n    \"code\" : 40310\n  }\n}"; 
+       
+       var contentDic = Json.Deserialize(str) as Dictionary<string, object>;
         var errorDic = SafeDictionary.GetValue<Dictionary<string, object>>(contentDic, "error");
 
         if (errorDic != null){
