@@ -47,6 +47,11 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
                 implementation 'com.google.android.gms:play-services-ads-identifier:15.0.1'
 
            ");
+            
+        } else{
+            implStr.Append(@"
+                implementation 'com.google.android.gms:play-services-auth:16.0.1'
+           ");
         }
 
         processXDConfig(); //动态配置安卓库
