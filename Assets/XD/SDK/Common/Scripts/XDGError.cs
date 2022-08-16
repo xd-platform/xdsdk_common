@@ -22,10 +22,12 @@ namespace XD.SDK.Common{
                     error_msg = SafeDictionary.GetValue<string>(dic, "errorMsg");
                 }
 
-                var dataObj = dic["extra_data"]; //有可能空字符串
-                if (dataObj != null && dataObj.GetType() == typeof(Dictionary<string, object>)){
-                    var js = JsonConvert.SerializeObject(dataObj);
-                    extra_data = JsonConvert.DeserializeObject<XDGExtraData>(js);
+                if (dic.ContainsKey("extra_data")){
+                    var dataObj = dic["extra_data"]; //有可能空字符串
+                    if (dataObj != null && dataObj.GetType() == typeof(Dictionary<string, object>)){
+                        var js = JsonConvert.SerializeObject(dataObj);
+                        extra_data = JsonConvert.DeserializeObject<XDGExtraData>(js);
+                    }   
                 }
             }
         }
