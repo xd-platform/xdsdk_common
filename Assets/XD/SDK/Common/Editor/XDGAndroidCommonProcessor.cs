@@ -22,11 +22,6 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
             return;
         }
 
-        var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
-        if (File.Exists(cnJson)){
-            File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json", true);
-        }
-
         //配置路径
         var gradlePropertiesFile = projectPath + "/gradle.properties";
         var baseProjectGradle = projectPath + "/build.gradle";

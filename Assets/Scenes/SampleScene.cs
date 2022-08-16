@@ -80,7 +80,26 @@ public class SampleScene : MonoBehaviour{
         ResultText.text = $"设置地区：{region}";
     }
 
-    public void InitRelease(){
+    public void InitRelease(){ //海外正式
+        isCN = false;
+        XDGCommonImpl.GetInstance().SetDebugMode();
+        XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig-release.json");
+        XDGCommon.InitSDK(((success, msg) => {
+            if (success){
+                ResultText.text = $"初始化成功 {success} {msg}";
+            } else{
+                ResultText.text = $"初始化失败 {success} {msg}";
+            }
+        }));
+
+        XDGAccount.AddUserStatusChangeCallback((type, msg) => {
+            ResultText.text = $"用户状态回调 code: {type}  msg:{msg}";
+        });
+    }
+
+    public void InitDevelop(){ //海外测试
+        SetDevelopUrl();
+        
         isCN = false;
         XDGCommonImpl.GetInstance().SetDebugMode();
         XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig.json");
@@ -97,12 +116,27 @@ public class SampleScene : MonoBehaviour{
         });
     }
 
-    public void InitDevelop(){
-        SetDevelopUrl();
-        InitRelease();
+    public void InitRelease_CN(){ //国内正式
+        isCN = true;
+        XDGCommonImpl.GetInstance().SetDebugMode();
+        XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig-cn-release.json");
+        XDGCommon.InitSDK(((success, msg) => {
+            if (success){
+                ResultText.text = $"初始化成功 {success} {msg}";
+            } else{
+                ResultText.text = $"初始化失败 {success} {msg}";
+            }
+        }));
+
+        XDGAccount.AddUserStatusChangeCallback((type, msg) => {
+            ResultText.text = $"用户状态回调 code: {type}  msg:{msg}";
+        });
     }
 
-    public void InitRelease_CN(){
+    public void InitDevelop_CN(){ //国内测试
+        XDGCommon.ReplaceChannelAndVersion("replace_channel", "replace_version1.0");
+        SetDevelopUrl();
+       
         isCN = true;
         XDGCommonImpl.GetInstance().SetDebugMode();
         XDGCommonImpl.GetInstance().updateConfigFileName("XDConfig-cn.json");
@@ -117,12 +151,6 @@ public class SampleScene : MonoBehaviour{
         XDGAccount.AddUserStatusChangeCallback((type, msg) => {
             ResultText.text = $"用户状态回调 code: {type}  msg:{msg}";
         });
-    }
-
-    public void InitDevelop_CN(){
-        XDGCommon.ReplaceChannelAndVersion("replace_channel", "replace_version1.0");
-        SetDevelopUrl();
-        InitRelease_CN();
     }
 
     public void ClearLocalData(){
