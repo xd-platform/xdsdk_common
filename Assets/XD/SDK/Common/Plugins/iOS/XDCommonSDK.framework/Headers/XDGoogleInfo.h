@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XDGoogleInfo : NSObject
 
-@property (nonatomic) NSString *clientId;
+@property (nonatomic, copy) NSString *clientId;
 
 + (instancetype)instanceWithInfoDic:(NSDictionary *)infoDic;
 @end

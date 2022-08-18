@@ -33,6 +33,8 @@ extern void tdsg_dispatch_on_default_thread(dispatch_block_t block);
 /// @param errorDesc 错误描述
 + (NSError *)customError:(NSString * _Nullable)domain code:(NSInteger)errorCode desc:(NSString *)errorDesc;
 
++ (NSError *)customError:(NSString * _Nullable)domain code:(NSInteger)errorCode desc:(NSString *)errorDesc extraData:(NSDictionary *)extraMap;
+
 + (void)addShadowToView:(UIView *)targetView innerShadowColor:
 (int)innerShadowColor outerShadowColor:(int)outerShadowColor shadowOffset:(CGSize)shadowOffset;
 

@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XDFacebookInfo : NSObject
 
-@property (nonatomic) NSString *appId;
+@property (nonatomic, copy) NSString *appId;
 
 + (instancetype)instanceWithInfoDic:(NSDictionary *)infoDic;
 @end
