@@ -14,5 +14,6 @@ namespace XD.SDK.Common
         ES = 10,
         TR = 11,
         RU = 12,
+        VI = 13, 
     }
 }

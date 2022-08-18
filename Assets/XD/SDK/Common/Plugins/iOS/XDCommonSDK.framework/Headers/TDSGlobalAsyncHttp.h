@@ -81,4 +81,12 @@ typedef void(^GetAllCallBack)(NSArray *resultArr,BOOL successAll);
                   callBack:(CallBackBlock)callBackBlock
             failedCallback:(CallBackBlock)failedCallback;
 
++ (TDSGlobalAsyncHttp *)httpPost:(NSString *)urlStr
+             requestParams:(NSDictionary *)requestParams
+               queryParams:(NSDictionary *)queryParams
+              customHeader:(NSDictionary *)customHeaderParams
+                    params:(NSDictionary *)params
+                  callBack:(CallBackBlock)callBackBlock
+            failedCallback:(CallBackBlock)failedCallback;
+
 @end
