@@ -21,9 +21,15 @@
         <package android:name="viva.republica.toss" />
         <!-- gojek -->
         <package android:name="com.gojek.app" />
-        <!-- line -->
-        <package android:name="jp.naver.line.android" />
-
+        
+        <!-- Facebook -->
+        <package android:name="com.facebook.katana"/>
+        <!-- Facebook 有端分享 -->
+        <provider android:authorities="com.facebook.katana.provider.PlatformProvider"/>
+        <!-- Twitter -->
+        <package android:name="com.twitter.android"/>
+        <!-- LINE -->
+        <package android:name="jp.naver.line.android"/>
     </queries>
 
     <uses-sdk tools:overrideLibrary="com.tds,com.tds.common
