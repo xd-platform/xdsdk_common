@@ -6,6 +6,7 @@ using LeanCloud;
 using LeanCloud.Storage;
 using TapTap.Bootstrap;
 using TapTap.Common;
+using TapTap.Login;
 using TapTap.Moment;
 using UnityEngine;
 using UnityEngine.UI;
@@ -409,6 +410,11 @@ public class SampleScene : MonoBehaviour{
         XDGAccount.BindByType(type, (b, error) => {
             ResultText.text = $"绑定结果：{b},  error:{JsonUtility.ToJson(error)}";
         });
+    }
+
+    public async void gouHuoApiTest(){
+        var success = await TapLogin.GetTestQualification();
+        ResultText.text = $"篝火result： {success}";
     }
 
     public void test(){

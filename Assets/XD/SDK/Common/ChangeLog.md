@@ -1,3 +1,11 @@
+## 6.5.1
+```
+谷歌支付结算库billing升级到4.1.0 
+修复防沉迷国内海外跳转问题
+移除TapDB用的 oaid_1.0.23.aar (海外不需要用，国内游戏自行下载添加这个v25版本的) https://github.com/xd-platform/xd_sdk_resource/blob/master/Other/oaid_sdk_1.0.25.aar 
+依赖TapSDK 3.13.0,  LCSDK 0.10.12
+```
+
 ## 6.5.0
 ```
 安卓添加苹果网页登录
