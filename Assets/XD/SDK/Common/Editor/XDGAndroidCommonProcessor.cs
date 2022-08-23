@@ -22,11 +22,6 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
             return;
         }
 
-        var cnJson = parentFolder + "/Assets/Plugins/XDConfig-cn.json";
-        if (File.Exists(cnJson)){
-            File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/XDConfig-cn.json", true);
-        }
-
         //配置路径
         var gradlePropertiesFile = projectPath + "/gradle.properties";
         var baseProjectGradle = projectPath + "/build.gradle";
@@ -38,9 +33,8 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
             Debug.Log("编辑 unityLibraryGradle");
             var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(unityLibraryGradle);
             writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])", @"
-                implementation 'androidx.appcompat:appcompat:1.3.1'
                 implementation 'com.android.installreferrer:installreferrer:2.2'
-                implementation 'com.android.billingclient:billing:3.0.0'
+                implementation 'com.android.billingclient:billing:4.1.0'
                 implementation 'androidx.recyclerview:recyclerview:1.2.1'
                 implementation 'com.google.code.gson:gson:2.8.6'
             ");

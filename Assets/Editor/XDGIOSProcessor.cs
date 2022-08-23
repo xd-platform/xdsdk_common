@@ -14,11 +14,12 @@ public static class XDGIOSProcessor{
     [PostProcessBuild(200)]
     public static void OnPostprocessBuild(BuildTarget BuildTarget, string path){
         if (BuildTarget == BuildTarget.iOS){
-            var parentPath = Directory.GetParent(Application.dataPath)?.FullName;
-
+            
             //国内配置文件 Demo用
-            var jsonPath_CN = parentPath + "/Assets/Plugins/XDConfig-cn.json";
-            SetCNConfig(path, jsonPath_CN);
+            SetCNConfig(path, "XDConfig-cn");
+            SetCNConfig(path, "XDConfig-cn-release");
+            SetCNConfig(path, "XDConfig-release");
+
             AddAppleLogin(path);
         }
     }
@@ -31,7 +32,10 @@ public static class XDGIOSProcessor{
         manager.WriteToFile();
     }
 
-    private static void SetCNConfig(string path, string configJsonPath){
+    private static void SetCNConfig(string path, string jsonName){
+        var parentPath = Directory.GetParent(Application.dataPath)?.FullName;
+        var configJsonPath = parentPath + "/Assets/Plugins/" + jsonName+".json";
+        
         var projPath = PBXProject.GetPBXProjectPath(path);
         var proj = new PBXProject();
         proj.ReadFromString(File.ReadAllText(projPath));
@@ -59,17 +63,17 @@ public static class XDGIOSProcessor{
                 return;
             }
 
-            var filePath = Path.Combine(folderPath, "XDConfig-cn.json");
+            var filePath = Path.Combine(folderPath, jsonName + ".json");
             File.Copy(configJsonPath, filePath);
 
             XDGIOSCommonProcessor.AddXcodeConfig(target, proj, filePath); //先拷贝，后配置
-            SetThirdLibraryId_CN(path, md);
+            SetThirdLibraryId_CN(path, md, jsonName);
 
             File.WriteAllText(projPath, proj.WriteToString()); //保存
         }
     }
 
-    private static void SetThirdLibraryId_CN(string pathToBuildProject, XDConfigModel configModel){
+    private static void SetThirdLibraryId_CN(string pathToBuildProject, XDConfigModel configModel, string jsonName){
         if (configModel == null){
             Debug.LogError("打包失败  ----  XDConfig-cn 配置文件Model是空");
             return;
@@ -98,7 +102,7 @@ public static class XDGIOSProcessor{
 
         PlistElementDict dict2 = array.AddDict();
         if (taptapId != null){
-            dict2.SetString("CFBundleURLName", "TapCN");
+            dict2.SetString("CFBundleURLName", "TapCN" + jsonName);
             PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
             array2.AddString($"tt{taptapId}");
         }
