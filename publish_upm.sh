@@ -29,8 +29,8 @@ publishUPM() {
         echo "start push $2 to git@github.com:xd-platform/$4.git"
         git remote add "$2" git@github.com:xd-platform/"$4".git
     else
-        echo "start push $2 to git@github.com:suguiming/$4.git"  
-        git remote add "$2" git@github.com:suguiming/"$4".git
+        echo "start push $2 to git@github.com:luckisnow/$4.git"  
+        git remote add "$2" git@github.com:luckisnow/"$4".git
     fi;
     
     git checkout github_upm --force
