@@ -4,7 +4,7 @@ rootPath=$(pwd)
 npm_source_dic_root="$rootPath"/Assets/XD/SDK
 
 # 多个模块一起发布
-npm_module_name=("Account" "Common" "Payment" "Oversea")
+npm_module_name=("Account" "Common" "Payment" "Oversea" "Mainland")
 
 # 单个模块发布
 #npm_module_name=("Account")

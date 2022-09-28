@@ -1,7 +1,7 @@
 {
-  "name": "com.xd.sdk.oversea",
+  "name": "com.xd.sdk.mainland",
   "version": "6.5.2",
-  "description": "XD-SDK Oversea",
+  "description": "XD-SDK Mainland",
   "unity": "2018.3",
   "license": "MIT",
   "dependencies": {
