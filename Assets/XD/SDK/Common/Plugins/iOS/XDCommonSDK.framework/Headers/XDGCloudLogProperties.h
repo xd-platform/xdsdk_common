@@ -13,6 +13,7 @@ extern NSString *const XDGCloudLogProperties_TAG;
 extern NSString *const XDGCloudLogProperties_NAME;
 extern NSString *const XDGCloudLogProperties_DEVICE_ID;
 extern NSString *const XDGCloudLogProperties_ACCOUNT;
+extern NSString *const XDGCloudLogProperties_APPSFLYER_UID;
 extern NSString *const XDGCloudLogProperties_LOG_ID;
 extern NSString *const XDGCloudLogProperties_SOURCE;
 extern NSString *const XDGCloudLogProperties_TIME;

@@ -1,0 +1,10 @@
+{
+  "name": "com.xd.sdk.mainland",
+  "version": "6.5.3",
+  "description": "XD-SDK Mainland",
+  "unity": "2018.3",
+  "license": "MIT",
+  "dependencies": {
+
+  }
+}
