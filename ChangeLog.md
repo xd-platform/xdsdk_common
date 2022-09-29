@@ -1,3 +1,9 @@
+## 6.5.3
+```
+替换 Android iOS Native 的 Library
+修复 Unity 2020.3.15 之前版本 Android 导出的问题
+依赖TapSDK 3.16.0
+```
 ## 6.5.1
 ```
 谷歌支付结算库billing升级到4.1.0 
