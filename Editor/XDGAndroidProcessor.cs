@@ -100,6 +100,16 @@ apply plugin: 'com.google.firebase.crashlytics'
         }
 #endif
 
+#if UNITY_2019_1_OR_NEWER
+        //classpath 
+        if (File.Exists(baseProjectGradle)){
+            Debug.Log("编辑 baseProjectGradle");
+            var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(baseProjectGradle);
+            writerHelper.WriteBelow(@"task clean(type: Delete) {
+    delete rootProject.buildDir
+}", baseStr.ToString());
+        }
+#else
         //classpath 
         if (File.Exists(baseProjectGradle)){
             Debug.Log("编辑 baseProjectGradle");
@@ -113,6 +123,7 @@ apply plugin: 'com.google.firebase.crashlytics'
     dependencies {", baseStr.ToString());
 
         }
+#endif
         else
         {
             Debug.LogError("打包失败 ---  baseProjectGradle 不存在");
@@ -197,7 +208,7 @@ apply plugin: 'com.google.firebase.crashlytics'
     /// </summary>
     private void processUnityVersionChange(string projectPath)
     {
-#if !UNITY_2019_1_OR_NEWER
+#if !UNITY_2020_3_OR_NEWER
         var baseProjectGradle = projectPath + "/build.gradle";
         var writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
         // 升级 Android Gradle Plugin 版本
