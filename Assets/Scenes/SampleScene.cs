@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using LC.Newtonsoft.Json;
 using LeanCloud;
-using LeanCloud.Storage;
-using TapTap.Bootstrap;
 using TapTap.Common;
 using TapTap.Login;
 using TapTap.Moment;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using XD.SDK.Account;
 using XD.SDK.Common;
 using XD.SDK.Payment;
