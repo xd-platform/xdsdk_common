@@ -2,9 +2,9 @@
 # 获取当前分支
 currentBranch=$(git symbolic-ref --short -q HEAD)
 
-upmModule=("xdsdk-account-upm" "xdsdk-common-upm" "xdsdk-payment-upm" "xdsdk-oversea-upm")
-module=("Account" "Common" "Payment" "Oversea")
-githubRepoName=("xdsdk_account" "xdsdk_common" "xdsdk_payment" "xdsdk_oversea")
+upmModule=("xdsdk-account-upm" "xdsdk-common-upm" "xdsdk-payment-upm" "xdsdk-oversea-upm" "xdsdk-mainland-upm")
+module=("Account" "Common" "Payment" "Oversea" "Mainland")
+githubRepoName=("xdsdk_account" "xdsdk_common" "xdsdk_payment" "xdsdk_oversea" "xdsdk_mainland")
 
 #单发模块
 #upmModule=("xd-sdk-payment-upm")
@@ -29,8 +29,8 @@ publishUPM() {
         echo "start push $2 to git@github.com:xd-platform/$4.git"
         git remote add "$2" git@github.com:xd-platform/"$4".git
     else
-        echo "start push $2 to git@github.com:suguiming/$4.git"  
-        git remote add "$2" git@github.com:suguiming/"$4".git
+        echo "start push $2 to git@github.com:luckisnow/$4.git"  
+        git remote add "$2" git@github.com:luckisnow/"$4".git
     fi;
     
     git checkout github_upm --force
