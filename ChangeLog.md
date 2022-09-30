@@ -1,9 +1,21 @@
-## 6.5.3
-```
-替换 Android iOS Native 的 Library
-修复 Unity 2020.3.15 之前版本 Android 导出的问题
-依赖TapSDK 3.16.0
-```
+## 6.5.3 (2020 年 09 月 29 日)
+
+### Feature
+
+- 阿里云日志上报支持上传 AppsFlyer 的 UID 数据。
+- [Android] 协议弹窗、个人中心弹窗按钮增加按压状态
+
+### BugFix
+
+- 修复 Unity 2020.3.15 之前版本的 Android 导出问题
+- [iOS] 修复调用 trackEvent 接口时会崩溃问题
+- [iOS] AppsFlyer ATT 等待时长从 600s 缩短到 120s，以避免过多的设备新装数据丢失
+
+### TapSDK Dependencies
+
+- TapBootstrap、TapCommon、TapLogin、TapDB: **3.16.0**
+- LeanCloud: **0.10.12**
+  
 ## 6.5.1
 ```
 谷歌支付结算库billing升级到4.1.0 
