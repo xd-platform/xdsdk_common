@@ -24,6 +24,10 @@ namespace XD.SDK.Common.Editor
         {
             StreamReader streamReader = new StreamReader(filePath);
             string all = streamReader.ReadToEnd();
+            if (string.IsNullOrEmpty(all))
+            {
+                Debug.LogError("读取文件失败 ---  文件路径 : " + filePath);
+            }
             // 兼容不同 OS 的 Line Separators
             below = Regex.Replace(below, "\r\n", "\n", RegexOptions.IgnoreCase);
             all = Regex.Replace(all, "\r\n", "\n", RegexOptions.IgnoreCase);
@@ -46,6 +50,13 @@ namespace XD.SDK.Common.Editor
         {
             StreamReader streamReader = new StreamReader(filePath);
             string all = streamReader.ReadToEnd();
+            if (string.IsNullOrEmpty(all))
+            {
+                Debug.LogError("读取文件失败 ---  文件路径 : " + filePath);
+            }
+            // 兼容不同 OS 的 Line Separators
+            below = Regex.Replace(below, "\r\n", "\n", RegexOptions.IgnoreCase);
+            all = Regex.Replace(all, "\r\n", "\n", RegexOptions.IgnoreCase);
             streamReader.Close();
             int beginIndex = all.IndexOf(below, StringComparison.Ordinal);
             if (beginIndex == -1)

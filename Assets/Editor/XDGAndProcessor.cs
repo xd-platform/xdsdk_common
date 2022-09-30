@@ -20,7 +20,15 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
         var cnJson = parentFolder + "/Assets/Plugins/" + name + ".json";
         if (File.Exists(cnJson)){
-            File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/" + name + ".json", true);
+#if UNITY_2019_1_OR_NEWER
+        File.Copy(cnJson, projectPath + "/unityLibrary/src/main/assets/" + name + ".json", true);
+#else
+        File.Copy(cnJson, projectPath + "/src/main/assets/" + name + ".json", true);
+#endif
+        }
+        else
+        {
+            Debug.LogError("打包 ---  无法找到json配置!  json 路径: " + cnJson);
         }
     }
 
