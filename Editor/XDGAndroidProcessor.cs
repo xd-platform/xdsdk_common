@@ -65,7 +65,7 @@ apply plugin: 'com.google.firebase.crashlytics'
             implStr.Append(@"
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
            ");
-            Debug.LogError("打包失败 ---  googleJsonPath 不存在");
+            Debug.LogWarning("打包警告 ---  googleJsonPath 不存在");
         }
 
         processXDConfig(); //动态配置安卓库
@@ -96,7 +96,7 @@ apply plugin: 'com.google.firebase.crashlytics'
         }
         else
         {
-            Debug.LogError("打包失败 ---  launcherGradle 不存在");
+            Debug.LogWarning("打包警告 ---  launcherGradle 不存在");
         }
 #endif
 
@@ -126,7 +126,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 #endif
         else
         {
-            Debug.LogError("打包失败 ---  baseProjectGradle 不存在");
+            Debug.LogWarning("打包警告 ---  baseProjectGradle 不存在");
         }
 
         //implementation 
@@ -138,7 +138,7 @@ apply plugin: 'com.google.firebase.crashlytics'
         }
         else
         {
-            Debug.LogError("打包失败 ---  unityLibraryGradle 不存在");
+            Debug.LogWarning("打包警告 ---  unityLibraryGradle 不存在");
         }
 
         processUnityVersionChange(projectPath);
