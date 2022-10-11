@@ -17,11 +17,11 @@
       "hash": "7897313a90163d26a33648ebb47a36af28af8098"
     },
     "com.tapsdk.antiaddiction": {
-      "version": "https://github.com/taptap/TapAntiAddiction-Unity.git#3.13.0",
+      "version": "3.13.0",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
       "dependencies": {},
-      "hash": "0e8bcba59635e130116bc3fdd551a22ea428e7ec"
+      "url": "https://nexus.tapsvc.com/repository/npm-registry"
     },
     "com.taptap.tds.bootstrap": {
       "version": "https://github.com/TapTap/TapBootstrap-Unity.git#3.13.0",
@@ -36,11 +36,11 @@
       "hash": "a9bc62e19f8bb9d260c71d0b86ff617d8221b0fb"
     },
     "com.taptap.tds.common": {
-      "version": "https://github.com/taptap/TapCommon-Unity.git#3.13.0",
+      "version": "3.13.0",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
       "dependencies": {},
-      "hash": "0aa4eaf99492d971b941f819764073f6261bbaaf"
+      "url": "https://nexus.tapsvc.com/repository/npm-registry"
     },
     "com.taptap.tds.login": {
       "version": "https://github.com/TapTap/TapLogin-Unity.git#3.13.0",
@@ -61,11 +61,11 @@
       "hash": "c4438d2d9aca304385e09f95bfa9a6ea4efec037"
     },
     "com.taptap.tds.support": {
-      "version": "https://github.com/taptap/TapSupport-Unity.git#3.13.0",
+      "version": "3.13.0",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
       "dependencies": {},
-      "hash": "c70a31956c7e29763df4a1f92ff877f0cc8d47b2"
+      "url": "https://nexus.tapsvc.com/repository/npm-registry"
     },
     "com.taptap.tds.tapdb": {
       "version": "https://github.com/TapTap/TapDB-Unity.git#3.13.0",
@@ -77,7 +77,7 @@
       "hash": "d8a74fe7f70f24aeca4dec8ec2bac117f026de2f"
     },
     "com.unity.collab-proxy": {
-      "version": "1.15.17",
+      "version": "1.17.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -102,7 +102,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.15",
+      "version": "2.0.16",
       "depth": 0,
       "source": "registry",
       "dependencies": {
