@@ -186,7 +186,7 @@ apply plugin: 'com.google.firebase.crashlytics'
         
         if (configMd.adjust != null && !string.IsNullOrEmpty(configMd.adjust.app_token)){
             implStr.Append(@"
-        implementation 'com.adjust.sdk:adjust-android:4.24.1'
+    implementation 'com.adjust.sdk:adjust-android:4.24.1'
 
            ");
         }
