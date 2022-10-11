@@ -50,7 +50,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         }
         else
         {
-            Debug.LogError("打包失败 ---  unityLibraryGradle 不存在");
+            Debug.LogWarning("打包警告 ---  unityLibraryGradle 不存在");
         }
 
         //需要
