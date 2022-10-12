@@ -35,7 +35,7 @@ namespace XD.SDK.Common.Editor
             int beginIndex = all.IndexOf(below, StringComparison.Ordinal);
             if (beginIndex == -1)
             {
-                Debug.LogError(filePath + "中没有找到字符串" + below);
+                Debug.LogWarning(filePath + "中没有找到字符串" + below);
                 return;
             }
 
@@ -61,7 +61,7 @@ namespace XD.SDK.Common.Editor
             int beginIndex = all.IndexOf(below, StringComparison.Ordinal);
             if (beginIndex == -1)
             {
-                Debug.LogError(filePath + "中没有找到字符串" + below);
+                Debug.LogWarning(filePath + "中没有找到字符串" + below);
                 return;
             }
 
