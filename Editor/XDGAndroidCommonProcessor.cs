@@ -22,7 +22,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
             File.Copy(configJson, projectPath + "/src/main/assets/XDConfig.json", true);
         #endif
         } else{
-            Debug.LogError("打包失败 ---  拷贝的json配置文件不存在");
+            Debug.LogWarning("打包警告 ---  拷贝的json配置文件不存在");
             return;
         }
 

@@ -186,7 +186,7 @@ apply plugin: 'com.google.firebase.crashlytics'
         
         if (configMd.adjust != null && !string.IsNullOrEmpty(configMd.adjust.app_token)){
             implStr.Append(@"
-    implementation 'com.adjust.sdk:adjust-android:4.24.1'
+        implementation 'com.adjust.sdk:adjust-android:4.24.1'
 
            ");
         }
@@ -208,15 +208,59 @@ apply plugin: 'com.google.firebase.crashlytics'
     /// </summary>
     private void processUnityVersionChange(string projectPath)
     {
-#if !UNITY_2020_3_OR_NEWER
+#if !UNITY_2019_1_OR_NEWER
         var baseProjectGradle = projectPath + "/build.gradle";
         var writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
         // 升级 Android Gradle Plugin 版本
-        writerHelper.Replace(@"classpath 'com.android.tools.build:gradle:3.4.0'", 
-            @"classpath 'com.android.tools.build:gradle:4.0.1'");
-#endif
+        //https://stackoverflow.com/questions/62969917/how-can-i-fix-unexpected-element-queries-found-in-manifest-error
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 3, 3);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 4, 3);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 5, 4);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 6, 4);
+#elif !UNITY_2020_3_OR_NEWER
+        var launcherGradle = projectPath + "/launcher/build.gradle";
+        var unityLibraryGradle = projectPath + "/unityLibrary/build.gradle";
+        var writerHelper = new XDGScriptHandlerProcessor(launcherGradle);
+        // // 升级 Android Gradle Plugin 版本
+        // //https://stackoverflow.com/questions/62969917/how-can-i-fix-unexpected-element-queries-found-in-manifest-error
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 3, 3);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 4, 3);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 5, 4);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 6, 4);
+        writerHelper = new XDGScriptHandlerProcessor(unityLibraryGradle);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 3, 3);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 4, 3);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 5, 4);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 6, 4);
         
+        var baseProjectGradle = projectPath + "/build.gradle";
+        writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
+        // 升级 Android Gradle Plugin 版本
+        //https://stackoverflow.com/questions/62969917/how-can-i-fix-unexpected-element-queries-found-in-manifest-error
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 3, 3);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 4, 3);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 5, 4);
+        UpdateAndroidGradlePluginVersion(writerHelper, 3, 6, 4);
+#endif
     }
+        
+    /// <summary>
+    /// 升级 Android Gradle Plugin Patch 版本号,使得能支持 AndroidManifest.xml 中的 <queries>
+    /// </summary>
+    /// <param name="writerHelper"></param>
+    /// <param name="mainVersion"></param>
+    /// <param name="subVersion"></param>
+    /// <param name="targetPatchVersion"></param>
+    private void UpdateAndroidGradlePluginVersion(XDGScriptHandlerProcessor writerHelper, int mainVersion, int subVersion, int targetPatchVersion)
+    {
+        if (writerHelper == null) return;
+        for (int i = 0; i < targetPatchVersion; i++)
+        {
+            writerHelper.Replace(string.Format($"classpath 'com.android.tools.build:gradle:{mainVersion}.{subVersion}.{i}'"), 
+                string.Format($"classpath 'com.android.tools.build:gradle:{mainVersion}.{subVersion}.{targetPatchVersion}'"));
+        }
+    }
+    
     public int callbackOrder{
         get{ return 999; }
     }
