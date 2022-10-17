@@ -1,3 +1,21 @@
+## 6.6.0 (2022 年 10 月 17 日)
+
+### Feature
+
+- RegionType 为 Global 的网页支付内嵌 WebView 已废弃，改为使用 Chrome Custom Tabs 实现，在接入/升级 SDK
+时需要额外注意关于[网页支付的配置](https://docs.xdglobalapi.com/docs/guide/guide_unity_config)
+- 支持沙盒无感登录
+
+### BugFix
+
+- 优化 Unity 2020.3.15 之前版本的 Android 导出问题
+- 修复在某些情况下，在内嵌动态中登录 Tap 账户时，XDUser 被切换的问题
+
+### TapSDK Dependencies
+
+- TapBootstrap、TapCommon、TapLogin、TapDB: **3.16.0**
+- LeanCloud: **0.10.12**
+  
 ## 6.5.3 (2022 年 09 月 29 日)
 
 ### Feature
