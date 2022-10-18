@@ -30,6 +30,9 @@
         <package android:name="com.twitter.android"/>
         <!-- LINE -->
         <package android:name="jp.naver.line.android"/>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService"/>
+        </intent>
     </queries>
 
     <uses-sdk tools:overrideLibrary="com.tds,com.tds.common
@@ -55,7 +58,22 @@
             </intent-filter>
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
         </activity>
-        
+        <!--        增加配置才能跳回 App-->
+        <activity   
+                android:name="com.xd.intl.payment.ui.SchemeCCTActivity"
+                android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="xdhn5rcjei2jxcyls0"/>
+            </intent-filter>
+        </activity>
+
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="\333676195299012" />

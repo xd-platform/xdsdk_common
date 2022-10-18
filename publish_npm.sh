@@ -21,7 +21,7 @@ publishNPM() {
   cd "$rootPath" || exit
 }
 
-for (( index = 1; index <= ${#npm_module_name[@]}; index++ )); do
+for (( index = 0; index < ${#npm_module_name[@]}; index++ )); do
     cd "$npm_source_dic_root"/"${npm_module_name[$index]}" || continue
     
     echo "ready to publish ${npm_module_name[$index]} NPM, Path: $npm_source_dic_root"/"${npm_module_name[$index]}"

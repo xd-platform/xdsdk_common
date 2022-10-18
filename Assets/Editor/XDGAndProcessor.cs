@@ -28,7 +28,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         }
         else
         {
-            Debug.LogError("打包 ---  无法找到json配置!  json 路径: " + cnJson);
+            Debug.LogWarning("打包警告 ---  无法找到json配置!  json 路径: " + cnJson);
         }
     }
 
