@@ -42,6 +42,11 @@ typedef NS_ENUM(NSInteger,XDGLanguageLocale) {
 /// 更新初始化文件名
 /// @param fileName 初始化文件名
 + (void)updateConfigFileName:(NSString *)fileName;
+
+/// 设置退出游戏的回调，游戏可以收到回调后自行处理
+/// @param handler 回调
++ (void)setExitHandler:(void (^)(void))handler;
+
 @end
 
 NS_ASSUME_NONNULL_END

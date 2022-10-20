@@ -32,6 +32,7 @@ extern NSString *const XDGCloudLogProperties_HEIGHT;
 extern NSString *const XDGCloudLogProperties_LANG;
 extern NSString *const XDGCloudLogProperties_STRUCTURE;
 extern NSString *const XDGCloudLogProperties_BATTERY;
+extern NSString *const XDGCloudLogProperties_USER_LOGIN_TYPE;
 extern NSString *const XDGCloudLogProperties_LOGIN_TYPE;
 extern NSString *const XDGCloudLogProperties_NETWORK;
 extern NSString *const XDGCloudLogProperties_PROVIDER;

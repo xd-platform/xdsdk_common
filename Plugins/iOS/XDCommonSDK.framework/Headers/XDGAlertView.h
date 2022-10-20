@@ -52,6 +52,8 @@ typedef void(^XDGAlertViewDismissCallback)(void);
 /// @param otherButton 其他按钮标题
 + (XDGAlertView *)alertWithTitle:(nullable NSString *)title message:(NSString *)message alertType:(XDGAlertViewType)type cancelTitle:(nullable NSString *)cancelTitle otherButton:(nullable NSString *)otherButton, ... NS_REQUIRES_NIL_TERMINATION;
 
+
++ (XDGAlertView *)createAlertView:(nullable NSString *)title message:(NSString *)message alertType:(XDGAlertViewType)type cancelTitle:(nullable NSString *)cancelTitle otherButton:(nullable NSArray *)otherButtons;
 /// 展示弹窗
 - (void)show;
 

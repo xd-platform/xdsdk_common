@@ -5,6 +5,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XDGTrackerManager : NSObject
+/// 跟踪用户，默认是 XDID
++ (void)trackUser;
 /// 跟踪用户
 /// @param userId 用户唯一ID，非角色ID
 + (void)trackUser:(NSString *)userId;

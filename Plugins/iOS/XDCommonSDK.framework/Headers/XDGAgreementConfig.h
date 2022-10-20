@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <XDCommonSDK/XDGAgreementBean.h>
+#import <XDCommonSDK/XDGAgreement.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XDGAgreementConfig : NSObject
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *version;
 @property (nonatomic, strong) NSString *region;
 @property (nonatomic, assign) BOOL isKRPushServiceSwitchEnable;
-@property (nonatomic, strong) NSArray<XDGAgreementBean *> *agreements;
+@property (nonatomic, strong) NSArray<XDGAgreement *> *agreements;
 
 + (XDGAgreementConfig *)defaultConfig:(BOOL)isCN;
 

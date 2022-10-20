@@ -12,29 +12,29 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface XDGCoreService : NSObject
+/// 获取版本号
 + (NSString *)getSDKVersionName;
+/// 获取当前deviceid
 + (NSString *)getDid;
-
+/// 开启 IDFA
 + (void)enableIDFA:(NSNumber *)enableIDFA;
-
-// 获取当前用户位置
+/// 获取当前用户位置
 + (void)getRegionInfo:(void (^)(NSString *result))callback;
-
+/// 设置 debug 模式
 + (void)setDebugMode:(NSNumber *)setDebugMode;
-
+/// 设置语言类型
 + (void)langType:(NSNumber *)langType;
-
+/// 初始化SDK
 + (void)initSDK:(void (^)(NSString *result))callback;
-
+/// 是否初始化
 + (NSNumber *)isInitialized;
-
+/// 展示 loading
 + (void)showLoading;
-
+/// 关闭 loading
 + (void)hideLoading;
-
-// report
+/// 上报
 + (void)serverId:(NSString *)serverId roleId:(NSString *)roleId roleName:(NSString *)roleName;
-
+/// 商店评分
 + (void)storeReview;
 
 #pragma mark - 分享
@@ -44,26 +44,24 @@ NS_ASSUME_NONNULL_BEGIN
 ////shareWithUriMessage
 //+ (void)shareFlavors:(NSNumber *)type uri:(NSString *)uri message:(NSString *)message bridgeCallback:(void (^)(NSString *result))callback;
 
-
-//trackUser
+/// trackUser
 + (void)userId:(NSString *)userId;
 
-//set AF customerId
+/// set AF customerId
 + (void)customerId:(NSString *)customerId;
 
-//trackEvent
+/// trackEvent
 + (void)eventName:(NSString *)eventName;
 
-//setCurrentUserPushServiceEnable
+/// 开启当前用户的推送
 + (void)enable:(NSNumber *)enable;
-
 
 // trackRole
 + (void)serverId:(NSString *)serverId
           roleId:(NSString *)roleId
         roleName:(NSString *)roleName
            level:(NSNumber *)level;
-
+///
 + (void)trackAchievement;
 
 + (void)eventCompletedTutorial;
@@ -76,16 +74,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The user need push service or not. Call after user logged in.
 + (NSNumber *)isCurrentUserPushServiceEnable;
-
+/// 登陆成功埋点
 + (void)loginSuccessEvent;
-
+/// 登录失败埋点
 + (void)loginFailMsg:(NSString *)loginFailMsg;
-
+/// 获取图片路径
 + (NSString *)getImagePath;
-
 
 /// 设置SDK期望地区，DF, EN, KR等
 + (void)setTargetCountryOrRegion:(NSString *)setTargetCountryOrRegion;
+/// 设置关闭回调
++ (void)setExitHandler:(void (^)(NSString *_Nonnull))callback;
+/// 获取协议列表
++ (NSString *)getAgreementList;
+/// 展示协议
++ (void)showDetailAgreement:(NSString *)type;
 
 //不要协议弹框，默认有的
 + (void)disableAgreementUI;

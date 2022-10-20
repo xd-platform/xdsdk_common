@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^XDGInitCallback)(BOOL success, NSString *_Nullable msg);
 
-typedef NS_ENUM (NSInteger, XDSDKRegionType) {
+typedef NS_ENUM(NSInteger, XDSDKRegionType) {
     XDSDKRegionTypeCN = 0,
     XDSDKRegionTypeGlobal
 };
@@ -31,7 +31,7 @@ typedef NS_ENUM (NSInteger, XDSDKRegionType) {
 
 #pragma mark 以下内容必须配置
 /// 区域选择，可选 XDSDKRegionTypeCN、XDSDKRegionTypeGlobal
-@property (nonatomic, assign)XDSDKRegionType regionType;
+@property (nonatomic, assign) XDSDKRegionType regionType;
 /// XDGSDK client id
 @property (nonatomic, copy) NSString *clientId;
 /// 是否开启 IDFA
@@ -45,19 +45,19 @@ typedef NS_ENUM (NSInteger, XDSDKRegionType) {
 
 #pragma mark 以下内容按需配置
 /// Facebook 配置信息
-@property (nonatomic, strong) XDFacebookInfo  *facebookInfo;
+@property (nonatomic, strong) XDFacebookInfo *facebookInfo;
 /// Facebook  授权权限，如果使用 Facebook 登录，必须配置
 @property (nonatomic, strong) NSArray *facebookLoginPersmissions;
 /// Line 配置信息
-@property (nonatomic, strong) XDLineInfo      *lineInfo;
+@property (nonatomic, strong) XDLineInfo *lineInfo;
 /// Twitter 配置信息
-@property (nonatomic, strong) XDTwitterInfo   *twitterInfo;
+@property (nonatomic, strong) XDTwitterInfo *twitterInfo;
 /// Google 配置信息
-@property (nonatomic, strong) XDGoogleInfo    *googleInfo;
+@property (nonatomic, strong) XDGoogleInfo *googleInfo;
 
-@property (nonatomic, strong) XDFirebaseInfo  *firebaseInfo;
+@property (nonatomic, strong) XDFirebaseInfo *firebaseInfo;
 /// Adjust 配置信息
-@property (nonatomic, strong) XDAdjustInfo    *adjustInfo;
+@property (nonatomic, strong) XDAdjustInfo *adjustInfo;
 /// AppsFlyer 配置信息
 @property (nonatomic, strong) XDAppsFlyerInfo *appsflyerInfo;
 /// 统一登录窗口中的品牌向 logo 素材 URL 数组，需要3个，不配置的话默认https://res.xdcdn.net/TDS/Global/res/xd_logo.png
@@ -67,7 +67,7 @@ typedef NS_ENUM (NSInteger, XDSDKRegionType) {
 /// XDGSDK app id
 @property (nonatomic, copy) NSString *appId;
 /// 用户中心窗口中绑定入口选项
-@property (nonatomic, strong) NSArray<XDGGameBindEntry*> *bindEntries;
+@property (nonatomic, strong) NSArray<XDGGameBindEntry *> *bindEntries;
 /// 发行区域
 @property (nonatomic, copy) NSString *region;
 /// 客服链接，默认

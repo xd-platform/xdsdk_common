@@ -7,10 +7,6 @@
 #import <XDCommonSDK/XDGRegionInfo.h>
 
 NS_ASSUME_NONNULL_BEGIN
-/**
- Describe the result of init
- */
-//typedef void(^XDGInitCallback)(BOOL success,NSString *msg);
 
 @interface XDGSDK : NSObject
 /// 获取当前 SDK 版本
@@ -27,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否已经初始化
 + (BOOL)isInitialized;
+
++ (NSArray<XDGAgreement *> *)getAgreementList;
+
++ (void)showDetailAgreement:(NSString *)type;
 
 /// 当前登录用户，打开客服中心
 /// @param serverId 服务器 ID，可为空

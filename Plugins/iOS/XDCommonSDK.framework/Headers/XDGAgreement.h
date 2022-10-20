@@ -1,5 +1,5 @@
 //
-//  XDGAgreementBean.h
+//  XDGAgreement.h
 //  XDCommonSDK
 //
 //  Created by Fattycat on 2022/10/14.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XDGAgreementBean : NSObject
+@interface XDGAgreement : NSObject
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *url;
 @end
