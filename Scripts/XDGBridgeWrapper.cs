@@ -49,4 +49,36 @@ namespace XD.SDK.Common{
             info = new XDGRegionInfo(infoDic);
         }
     }
+    
+    public class XDGAgreementWrapper
+    {
+        public string type;
+        public string url;
+        
+        public XDGAgreementWrapper(Dictionary<string, object> dic){
+            if (dic == null)
+            {
+                Debug.LogFormat($"dic == null");
+                return;
+            }
+            string keys = "";
+            foreach (var value in dic.Keys)
+            {
+                keys += $"{value} ";
+            }
+            string values = "";
+            foreach (var value in dic.Values)
+            {
+                values += $"{value.ToString()} ";
+            }
+            Debug.LogFormat($"keys: {keys} values: {values}");
+            type = SafeDictionary.GetValue<string>(dic, "type");
+            url = SafeDictionary.GetValue<string>(dic, "url");
+        }
+
+        public override string ToString()
+        {
+            return $"[type:{type};url:{url}]";
+        }
+    }
 }

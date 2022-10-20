@@ -31,8 +31,27 @@ namespace XD.SDK.Common{
             XDGCommonImpl.GetInstance().TrackRole(serverId, roleId, roleName, level);
         }
 
-        public static void TrackUser(string userId){
-            XDGCommonImpl.GetInstance().TrackUser(userId);
+        public static void TrackUser(string userId = null)
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                try
+                {
+                    XDGCommonImpl.GetInstance().GetDid(did => 
+                    {
+                        var xdid = did;
+                        XDGCommonImpl.GetInstance().TrackUser(xdid);
+                    });
+                } 
+                catch (Exception)
+                {
+                    XDGTool.LogError($"Get XDId error!");
+                }
+            }
+            else
+            {
+                XDGCommonImpl.GetInstance().TrackUser(userId);
+            }
         }
 
         public static void TrackEvent(string eventName){
@@ -86,6 +105,13 @@ namespace XD.SDK.Common{
         public static void ReplaceChannelAndVersion(string channel, string gameVersion){
             XDGCommonImpl.GetInstance().ReplaceChannelAndVersion(channel, gameVersion);
         }
-
+        
+        public static void GetAgreementList(Action<List<XDGAgreementWrapper>> callback){
+            XDGCommonImpl.GetInstance().GetAgreementList(callback);
+        }
+        
+        public static void ShowDetailAgreement(string agreementUrl){
+            XDGCommonImpl.GetInstance().ShowDetailAgreement(agreementUrl);
+        }
     }
 }

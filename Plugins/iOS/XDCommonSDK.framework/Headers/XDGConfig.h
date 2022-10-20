@@ -74,8 +74,6 @@ typedef NS_ENUM (NSInteger, XDSDKRegionType) {
 @property (nonatomic, copy) NSString *reportUrl;
 /// 注销账户链接，默认
 @property (nonatomic, copy) NSString *logoutUrl;
-/// 协议内容
-@property (nonatomic, strong) XDGAgreementConfig *agreement;
 
 - (BOOL)isCN;
 

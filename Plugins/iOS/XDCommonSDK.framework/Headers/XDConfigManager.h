@@ -32,19 +32,11 @@ typedef void (^XDConfigHandler)(BOOL success, XDGConfig *_Nullable config, NSStr
 
 + (void)readLocalConfig:(XDConfigHandler)handler;
 
-+ (void)loadRemoteOrCachedServiceTerms:(XDGConfig *)config handler:(XDConfigHandler)handler;
++ (void)updateConfigWithCache;
 
-+ (void)requestServerConfig:(BOOL)firstRequest;
-
-+ (void)requestServerConfig:(BOOL)firstRequest handler:(void(^)(BOOL success))handler;
++ (void)requestServerConfig;
 
 + (void)initTapSDK;
-
-+ (BOOL)needShowAgreement;
-
-+ (NSString *)getAgreementUrl;
-
-+ (void)uploadUserAgreement;
 
 + (void)updateBindEntriesConfig:(NSArray *)config;
 

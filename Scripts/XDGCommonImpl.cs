@@ -458,5 +458,66 @@ namespace XD.SDK.Common{
         private bool checkResultSuccess(Result result){
             return result.code == Result.RESULT_SUCCESS && !string.IsNullOrEmpty(result.content);
         }
+        
+        public void GetAgreementList(Action<List<XDGAgreementWrapper>> callback)
+        {
+            try
+            {
+                Debug.LogFormat("尝试 获取 AgreementList");
+                var command = new Command.Builder()
+                    .Service(COMMON_MODULE_UNITY_BRIDGE_NAME)
+                    .Method("getAgreementList")
+                    .Callback(true)
+                    .CommandBuilder();
+                EngineBridge.GetInstance().CallHandler(command, result => {
+                    XDGTool.Log("===> GetAgreementList: " + result.ToJSON());
+                    if (!checkResultSuccess(result)){
+                        return;
+                    }
+                    var content = result.content;
+                    callback ?.Invoke(GetAgreementList(content));
+                });
+            }
+            catch (Exception e)
+            {
+                Debug.LogErrorFormat($"获取 AgreementList 遇到错误!\n{e.Message}\n{e.StackTrace}");
+            }
+        }
+        
+        public List<XDGAgreementWrapper> GetAgreementList (string jsonStr)
+        {
+            List<XDGAgreementWrapper> result = null;
+            var dic = Json.Deserialize(jsonStr) as Dictionary<string, object>;
+            var list = SafeDictionary.GetValue<List<object>>(dic, "list");
+            if (list == null)  return result;
+            result = new List<XDGAgreementWrapper>();
+            foreach (var agreementStr in list)
+            {
+                var agreement = new XDGAgreementWrapper(agreementStr as Dictionary<string, object>);
+                result.Add(agreement);
+            }
+
+            return result;
+        }
+        
+        public void ShowDetailAgreement(string agreementUrl)
+        {
+            try
+            {
+                Debug.LogFormat("尝试 显示详细Agreement");
+                var command = new Command.Builder()
+                    .Service(COMMON_MODULE_UNITY_BRIDGE_NAME)
+                    .Method("showDetailAgreement")
+                    .Args("showDetailAgreement", agreementUrl)
+                    .OnceTime(true)
+                    .CommandBuilder();
+                EngineBridge.GetInstance().CallHandler(command);
+                XDGTool.Log($"===> ShowDetailAgreement:  {agreementUrl}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogErrorFormat($"显示详细Agreement遇到错误!\n{e.Message}\n{e.StackTrace}");
+            }
+        }
     }
 }
