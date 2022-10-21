@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置关闭回调
 + (void)setExitHandler:(void (^)(NSString *_Nonnull))callback;
 /// 获取协议列表
-+ (NSString *)getAgreementList;
++ (void)getAgreementList:(void (^)(NSString *result))callback;
 /// 展示协议
 + (void)showDetailAgreement:(NSString *)type;
 

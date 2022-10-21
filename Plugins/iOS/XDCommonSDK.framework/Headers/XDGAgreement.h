@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XDGAgreement : NSObject
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *url;
++ (XDGAgreement *)instanceWithType:(NSString *)type url:(NSString *)url;
 @end
 
 NS_ASSUME_NONNULL_END

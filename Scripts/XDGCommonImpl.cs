@@ -486,46 +486,11 @@ namespace XD.SDK.Common{
             }
         }
 
-        // 原始 iOS 的 Json 会比 Android 传过来的 Json 多 escape 一次,需要还原回去
-        // 比如:
-        //   iOS:
-        //   \"{\\\"list\\\":[{\\\"type\\\":\\\"terms-of-service\\\",\\\"url\\\":\\\"https:\\/\\/protocol.xd.com\\/sdk-agreement-1.0.0.html\\\"},{\\\"type\\\":\\\"privacy-policy\\\",\\\"url\\\":\\\"https:\\/\\/protocol.xd.com\\/sdk-privacy-1.0.0.html\\\"}]}\"
-        //   Android:
-        //   {\"list\":[{\"type\":\"terms-of-service\", \"url\":\"https:\\/\\/protocol.xd.com\\/sdk-agreement-1.0.0.html\"}, {\"type\":\"privacy-policy\", \"url\":\"https:\\/\\/protocol.xd.com\\/sdk-privacy-1.0.0.html\"}]}
-        private static string FormatIOSJsonFormat(string origin)
-        {
-            if (string.IsNullOrWhiteSpace(origin)) return origin;
-            if (origin.Length <= 0) return origin;
-            // 去掉所有转义字符
-            var text = Regex.Unescape(origin);
-            StringBuilder sb = new StringBuilder(text);
-            // 掐头去尾
-            if (sb[0] == '"')  sb.Remove(0, 1);
-            if (sb[sb.Length - 1] == '"')  sb.Remove(sb.Length - 1, 1);
-            // 添加唯一需要转义的字符 '/'
-            for (int i = 1; i < sb.Length - 1; i++)
-            {
-                var cc = sb[i];
-                if ('/' == cc)
-                {
-                    sb = sb.Insert(i, '\\');
-                    i++;
-                }
-            }
-
-            return sb.ToString();
-        }
-        
-        public List<XDGAgreementWrapper> GetAgreementList (string jsonStr)
+        private List<XDGAgreementWrapper> GetAgreementList (string jsonStr)
         {
             XDGTool.Log("[GetAgreementList] jsonStr:\n" + jsonStr);
-            var text = jsonStr;
-            #if UNITY_IOS
-            text = FormatIOSJsonFormat(jsonStr);
-            #endif
-            XDGTool.Log("[GetAgreementList] text:\n" + text);
             List<XDGAgreementWrapper> result = null;
-            var dicStrStr = Json.Deserialize(text);
+            var dicStrStr = Json.Deserialize(jsonStr);
             var dic = dicStrStr as Dictionary<string, object>;
             var list = SafeDictionary.GetValue<List<object>>(dic, "list");
             if (list == null)  return result;
