@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)userLoginSuccess;
 + (void)userLogout;
 + (BOOL)hasOldVersionAgreeementSigned;
++ (void)saveCurrentUser;
 
 /// 推送开关
 + (BOOL)needPushService;

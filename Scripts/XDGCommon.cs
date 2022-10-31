@@ -113,5 +113,10 @@ namespace XD.SDK.Common{
         public static void ShowDetailAgreement(string agreementUrl){
             XDGCommonImpl.GetInstance().ShowDetailAgreement(agreementUrl);
         }
+
+        public static void SetExitHandler(Action onExitHandler)
+        {
+            XDGCommonImpl.GetInstance().SetExitHandler(onExitHandler);
+        }
     }
 }

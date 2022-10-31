@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSArray<XDGAgreement *> *)getAgreementList;
 
-+ (void)showDetailAgreement:(NSString *)type;
++ (void)showDetailAgreement:(NSString *)url;
 
 /// 当前登录用户，打开客服中心
 /// @param serverId 服务器 ID，可为空
@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -- traker
 /// 跟踪用户
++ (void)trackUser;
+
 /// @param userId 用户唯一ID，非角色ID
 + (void)trackUser:(NSString *)userId;
 

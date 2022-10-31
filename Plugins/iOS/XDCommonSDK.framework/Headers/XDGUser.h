@@ -46,8 +46,6 @@ The user's token.
 /// The current user profile
 + (XDGUser *)currentUser;
 
-+ (void)clearCurrentUser;
-
 - (instancetype)initWithUserID:(NSString *)userID
                           name:(nullable NSString *)name
                       nickName:(NSString *)nickName

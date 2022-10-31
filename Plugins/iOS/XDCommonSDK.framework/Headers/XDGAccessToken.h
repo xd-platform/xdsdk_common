@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用户授权的权限，多个时以逗号隔开 (预留字段)
 @property (nonatomic, copy, readonly) NSString *scope;
 
+/// 是否过期
+@property (nonatomic, assign, getter=isExpired) BOOL expired;
+
 + (XDGAccessToken *)createToken:(NSString *)kid
                        macKey:(NSString *)macKey
                     tokenType:(NSString *)tokenType;

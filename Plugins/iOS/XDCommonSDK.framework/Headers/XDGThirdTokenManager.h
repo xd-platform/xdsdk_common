@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)tokenActiveWithType:(LoginEntryType)type;
 + (void)updateThirdPlatformTokenWithCallback:(void(^)(BOOL result))handler;
 + (void)updateThirdPlatformToken;
+
++ (void)refreshTwitterTokenCache;
++ (void)verifyTwitterToken;
 @end
 
 NS_ASSUME_NONNULL_END

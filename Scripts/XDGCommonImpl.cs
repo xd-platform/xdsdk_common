@@ -465,7 +465,6 @@ namespace XD.SDK.Common{
         {
             try
             {
-                Debug.LogFormat("尝试 获取 AgreementList");
                 var command = new Command.Builder()
                     .Service(COMMON_MODULE_UNITY_BRIDGE_NAME)
                     .Method("getAgreementList")
@@ -520,6 +519,33 @@ namespace XD.SDK.Common{
             catch (Exception e)
             {
                 Debug.LogErrorFormat($"显示详细Agreement遇到错误!\n{e.Message}\n{e.StackTrace}");
+            }
+        }
+        
+        public void SetExitHandler(Action onExitHandler)
+        {
+            try
+            {
+                XDGTool.Log("[unity 设置 exitHandler:");
+                var command = new Command.Builder()
+                    .Service(COMMON_MODULE_UNITY_BRIDGE_NAME)
+                    .Method("setExitHandler")
+                    .Callback(true)
+                    .CommandBuilder();
+                EngineBridge.GetInstance().CallHandler(command, result => {
+                    XDGTool.Log("===> setExitHandler: " + result.ToJSON());
+                    if (!checkResultSuccess(result)){
+                        return;
+                    }
+                    if (onExitHandler == null)
+                        Application.Quit();
+                    else
+                        onExitHandler.Invoke();
+                });
+            }
+            catch (Exception e)
+            {
+                Debug.LogErrorFormat($"SetExitHandler遇到错误!\n{e.Message}\n{e.StackTrace}");
             }
         }
     }

@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <TapCommonSDK/TapConfig.h>
+#import <XDCommonSDK/XDAppleInfo.h>
 #import <XDCommonSDK/XDFacebookInfo.h>
 #import <XDCommonSDK/XDLineInfo.h>
 #import <XDCommonSDK/XDTwitterInfo.h>
@@ -44,6 +45,9 @@ typedef NS_ENUM(NSInteger, XDSDKRegionType) {
 @property (nonatomic, copy) NSString *gameName;
 
 #pragma mark 以下内容按需配置
+/// Apple 网页登录配置信息
+@property (nonatomic, strong) XDAppleInfo *appleInfo;
+
 /// Facebook 配置信息
 @property (nonatomic, strong) XDFacebookInfo *facebookInfo;
 /// Facebook  授权权限，如果使用 Facebook 登录，必须配置

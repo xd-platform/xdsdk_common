@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取协议列表
 + (void)getAgreementList:(void (^)(NSString *result))callback;
 /// 展示协议
-+ (void)showDetailAgreement:(NSString *)type;
++ (void)showDetailAgreement:(NSString *)url;
 
 //不要协议弹框，默认有的
 + (void)disableAgreementUI;
