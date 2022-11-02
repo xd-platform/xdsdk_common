@@ -33,25 +33,7 @@ namespace XD.SDK.Common{
 
         public static void TrackUser(string userId = null)
         {
-            if (string.IsNullOrWhiteSpace(userId))
-            {
-                try
-                {
-                    XDGCommonImpl.GetInstance().GetDid(did => 
-                    {
-                        var xdid = did;
-                        XDGCommonImpl.GetInstance().TrackUser(xdid);
-                    });
-                } 
-                catch (Exception)
-                {
-                    XDGTool.LogError($"Get XDId error!");
-                }
-            }
-            else
-            {
-                XDGCommonImpl.GetInstance().TrackUser(userId);
-            }
+            XDGCommonImpl.GetInstance().TrackUser(userId);
         }
 
         public static void TrackEvent(string eventName){
