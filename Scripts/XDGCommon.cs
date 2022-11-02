@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 
 namespace XD.SDK.Common{
-    public class XDGCommon{
+    public class XDGCommon
+    {
+        public static string UserId { get; set; }
+        
         public static void InitSDK(Action<bool, string> callback){
             XDGCommonImpl.GetInstance().InitSDK(callback);
         }
@@ -33,6 +36,10 @@ namespace XD.SDK.Common{
 
         public static void TrackUser(string userId = null)
         {
+            if (string.IsNullOrEmpty(userId))
+            {
+                userId = UserId;
+            }
             XDGCommonImpl.GetInstance().TrackUser(userId);
         }
 
