@@ -5,10 +5,10 @@
 
 #### Feature
 - [Android][iOS] 协议逻辑调整：用户主动退出登录时会触发协议新签弹窗
-- [Android][iOS] 新增[获取当前子协议列表和展示协议链接窗口的 API](/README.md####获取协议列表)
+- [Android][iOS] 新增[获取当前子协议列表和展示协议链接窗口的 API](/README.md#获取协议列表)
 - [Android][iOS] 新增 TrackUser 不需要参数的接口，会默认传递当前 xdid 
 - [Android][iOS] 以 Twitter 登录的用户如果 Twitter token 失效会拦截自动登录
-- [Android][iOS] [新增自定义退出接口](/README.md####自定义退出接口)
+- [Android][iOS] [新增自定义退出接口](/README.md#自定义退出接口)
 - [iOS] iOS 13 以下的系统支持以网页授权的方式登录 Apple 账号
 - [iOS] 新增 token 失效的 Code (4101)，自动登录失效的 msg 为 "XD token expired."
 
