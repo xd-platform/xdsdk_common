@@ -95,7 +95,7 @@ namespace XD.SDK.Common{
             XDGCommonImpl.GetInstance().ReplaceChannelAndVersion(channel, gameVersion);
         }
         
-        public static void GetAgreementList(Action<List<XDGAgreementWrapper>> callback){
+        public static void GetAgreementList(Action<List<XDGAgreement>> callback){
             XDGCommonImpl.GetInstance().GetAgreementList(callback);
         }
         

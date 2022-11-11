@@ -461,7 +461,7 @@ namespace XD.SDK.Common{
             return result.code == Result.RESULT_SUCCESS && !string.IsNullOrEmpty(result.content);
         }
         
-        public void GetAgreementList(Action<List<XDGAgreementWrapper>> callback)
+        public void GetAgreementList(Action<List<XDGAgreement>> callback)
         {
             try
             {
@@ -485,18 +485,18 @@ namespace XD.SDK.Common{
             }
         }
 
-        private List<XDGAgreementWrapper> GetAgreementList (string jsonStr)
+        private List<XDGAgreement> GetAgreementList (string jsonStr)
         {
             XDGTool.Log("[GetAgreementList] jsonStr:\n" + jsonStr);
-            List<XDGAgreementWrapper> result = null;
+            List<XDGAgreement> result = null;
             var dicStrStr = Json.Deserialize(jsonStr);
             var dic = dicStrStr as Dictionary<string, object>;
             var list = SafeDictionary.GetValue<List<object>>(dic, "list");
             if (list == null)  return result;
-            result = new List<XDGAgreementWrapper>();
+            result = new List<XDGAgreement>();
             foreach (var agreementStr in list)
             {
-                var agreement = new XDGAgreementWrapper(agreementStr as Dictionary<string, object>);
+                var agreement = new XDGAgreement(agreementStr as Dictionary<string, object>);
                 result.Add(agreement);
             }
 

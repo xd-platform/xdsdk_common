@@ -50,12 +50,12 @@ namespace XD.SDK.Common{
         }
     }
     
-    public class XDGAgreementWrapper
+    public class XDGAgreement
     {
         public string type;
         public string url;
         
-        public XDGAgreementWrapper(Dictionary<string, object> dic){
+        public XDGAgreement(Dictionary<string, object> dic){
             if (dic == null) return;
             type = SafeDictionary.GetValue<string>(dic, "type");
             url = SafeDictionary.GetValue<string>(dic, "url");
