@@ -55,6 +55,8 @@ FOUNDATION_EXPORT TDSGlobalHTTPParamKey TDSG_COMMON_PARAM_DEVICE_TIME_KEY;
 
 + (TDSGlobalAsyncHttp *)httpPost:(NSString *)urlStr requestParams:(nullable NSDictionary *)requestParams queryParams:(nullable NSDictionary *)queryParams params:(nullable NSDictionary *)params callBack:(CallBackBlock)callBackBlock failedCallback:(CallBackBlock)failedCallback;
 
++ (NSString *)randomStringInLength:(int)length;
+
 @end
 
 NS_ASSUME_NONNULL_END

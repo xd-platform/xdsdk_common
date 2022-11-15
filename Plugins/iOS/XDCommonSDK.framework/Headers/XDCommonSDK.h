@@ -40,7 +40,7 @@ FOUNDATION_EXPORT const unsigned char XDCommonSDKVersionString[];
 #import <XDCommonSDK/NSString+TDSGlobalTools.h>
 //#import <XDCommonSDK/NSData+TDSGlobalJson.h>
 #import <XDCommonSDK/TDSGlobalDeviceInfoTool.h>
-//#import <XDCommonSDK/TDSGlobalHttpRequest.h>
+#import <XDCommonSDK/TDSGlobalHttpRequest.h>
 #import <XDCommonSDK/TDSGlobalAsyncHttp.h>
 #import <XDCommonSDK/TDSGlobalLog.h>
 //#import <XDCommonSDK/CALayer+TDSGlobal.h>

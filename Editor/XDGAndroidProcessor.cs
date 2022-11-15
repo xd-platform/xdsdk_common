@@ -111,6 +111,7 @@ apply plugin: 'com.google.firebase.crashlytics'
         }
 #else
         //classpath 
+
         if (File.Exists(baseProjectGradle)){
             Debug.Log("编辑 baseProjectGradle");
             var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(baseProjectGradle);

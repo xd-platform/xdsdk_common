@@ -52,6 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 登录失败
 - (void)loginFailed:(NSString *)reason;
+
+// 退出登录
+- (void)logout:(NSString *)reason;
 @end
 
 NS_ASSUME_NONNULL_END

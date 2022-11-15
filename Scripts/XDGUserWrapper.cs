@@ -71,6 +71,12 @@ namespace XD.SDK.Common
                     return LoginType.LINE;
                 case "twitter":
                     return LoginType.Twitter;
+                case "qq":
+                    return LoginType.QQ;
+                case "twitch":
+                    return LoginType.Twitch;
+                case "steam":
+                    return LoginType.Steam;
                 case "guest":
                     return LoginType.Guest;
             }
@@ -92,6 +98,12 @@ namespace XD.SDK.Common
                     return "LINE";
                 case LoginType.Twitter:
                     return "Twitter";
+                case LoginType.QQ:
+                    return "QQ";
+                case LoginType.Twitch:
+                    return "Twitch";
+                case LoginType.Steam:
+                    return "Steam";
                 case LoginType.Guest:
                     return "Guest";
                 default:
@@ -153,7 +165,10 @@ namespace XD.SDK.Common
             Apple,
             LINE,
             Twitter,
-            Guest
+            Guest,
+            QQ,
+            Twitch,
+            Steam,
         }
     
 }
