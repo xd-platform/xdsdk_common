@@ -1,3 +1,14 @@
+## 6.5.4 (2022 年 11 月 17 日)
+
+### BugFix
+
+- [Android] 个人中心、客服页面、注销登录页面、国内网页支付页面的关闭/返回按钮增加按压状态
+- [Android] 个人中心解绑/绑定/复制按钮增加图按压状态
+
+### TapSDK Dependencies
+
+- TapBootstrap、TapCommon、TapLogin、TapDB: **3.16.0**
+- LeanCloud: **0.10.12**
 ## 6.5.3 (2022 年 09 月 29 日)
 
 ### Feature
