@@ -125,7 +125,8 @@ Facebook, //Facebook登录
 Apple,   //iOS 苹果登录
 LINE,    //LINE登录
 Twitter, //Twitter登录 
-Guest    //游客登录              
+Guest,    //游客登录  
+Steam    //Steam登陆            
 ```
 
 #### SDK自带弹框的登录
@@ -140,6 +141,7 @@ loginTypes.Add(LoginType.Google);
 loginTypes.Add(LoginType.Facebook);
 loginTypes.Add(LoginType.Twitter);
 loginTypes.Add(LoginType.LINE);
+loginTypes.Add(LoginType.Steam);
 
 XDGAccount.Login(loginTypes, user => {
       //登录成功后调用 XDGCommon.TrackUser();  //tap db用户统计

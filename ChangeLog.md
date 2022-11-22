@@ -1,3 +1,37 @@
+## 6.8.0 (2022 年 11 月 xx 日)
+<Tabs groupId="group_platform">
+
+<TabItem value="unity" label="Unity">
+
+#### Feature
+- [Android][iOS]支持 [Steam 登录]
+- 增加 logout 埋点
+
+#### TapSDK Dependencies
+- TapBootstrap、TapCommon、TapLogin、TapDB: _**3.16.0**_
+- LeanCloud: _**0.10.12**_
+  
+</TabItem>
+
+<TabItem value="ue" label="UE">
+
+#### Feature
+
+
+</TabItem>
+
+<TabItem value="unitypc" label="UnityPC">
+
+
+</TabItem>
+
+<TabItem value="uepc" label="UE PC">
+
+
+</TabItem>
+
+</Tabs>
+
 ## 6.7.0 (2022 年 11 月 xx 日)
 <Tabs groupId="group_platform">
 
