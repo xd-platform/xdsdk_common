@@ -60,15 +60,8 @@ typedef void (^XDConfigHandler)(BOOL success, XDGConfig *_Nullable config, NSStr
 + (BOOL)twitterEnable;
 
 + (BOOL)needReportService;
-+ (BOOL)isGameInKoreaAndPushServiceEnable;
-+ (BOOL)isGameInNA;
-
 
 +(void)updateConfig:(XDGConfig *)config;
-
-+ (void)recordKRPushSetting:(BOOL)pushOn;
-
-+ (BOOL)getKRPushSetting;
 @end
 
 NS_ASSUME_NONNULL_END

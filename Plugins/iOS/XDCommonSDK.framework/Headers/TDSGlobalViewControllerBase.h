@@ -23,15 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 // 自动消失
 - (void)showAutoHud:(NSString *)text;
 - (void)showAutoHud:(NSString *)text completion:(nullable void (^)(void))completion;
-- (void)showHud:(NSString *)text;
 - (void)hideHud;
 
 - (void)showLoading;
 - (void)showLoading:(nullable NSString *)text;
 - (void)showLoading:(nullable NSString *)text graceTime:(NSTimeInterval)graceTime;
 - (void)showLoading:(nullable NSString *)text graceTime:(NSTimeInterval)graceTime inView:(UIView *)targetView;
-- (void)showLoadingWithView:(nullable UIView *)customView;
-- (void)showLoadingWithView:(nullable UIView *)customView graceTime:(NSTimeInterval)graceTime;
 
 - (void)removeLoading;
 - (void)removeLoadingForView:(UIView *)targetView;

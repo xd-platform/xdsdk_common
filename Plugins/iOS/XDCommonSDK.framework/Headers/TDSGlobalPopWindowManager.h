@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)dismiss:(BOOL)animate;
 
 /// 全局提示
-/// @param msg 提示内容
-+ (void)showHud:(NSString *)msg;
 + (void)showAutoHud:(NSString *)text;
 + (void)showAutoHud:(NSString *)text completion:(nullable void (^)(void))completion;
 + (void)showAutoHud:(NSString *)text duration:(CGFloat)duration completion:(nullable void (^)(void))completion;

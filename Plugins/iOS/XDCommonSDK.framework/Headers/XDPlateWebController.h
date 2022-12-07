@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XDPlateWebController : TDSGlobalViewControllerBase
 
-@property (nonatomic,copy) NSString *WebControllerTitle;
+@property (nonatomic,copy) NSString *webControllerTitle;
 
 + (XDPlateWebController *)createWebController:(NSString *)url;
 

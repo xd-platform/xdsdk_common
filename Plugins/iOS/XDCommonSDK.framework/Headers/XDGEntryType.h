@@ -21,7 +21,11 @@ FOUNDATION_EXPORT LoginEntryType const LoginEntryTypeSteam;
 
 + (NSString *)logoImageByEntryType:(LoginEntryType)entryType;
 
++ (NSString *)logoImagePressedByEntryType:(LoginEntryType)entryType;
+
 + (NSString *)buttonImageByEntryType:(LoginEntryType)entryType;
+
++ (NSString *)buttonImagePressedByEntryType:(LoginEntryType)entryType;
 
 + (LoginEntryType)entryTypeByString:(NSString *)entryTypeInString;
 

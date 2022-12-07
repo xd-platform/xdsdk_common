@@ -24,8 +24,7 @@ FOUNDATION_EXPORT const unsigned char XDCommonSDKVersionString[];
 
 #import <XDCommonSDK/XDGEntryType.h>
 #import <XDCommonSDK/XDGGameBindEntry.h>
-#import <XDCommonSDK/XDGMainButton.h>
-//#import <XDCommonSDK/XDGTrackerManager.h>
+#import <XDCommonSDK/XDGTrackerManager.h>
 #import <XDCommonSDK/XDGReportManager.h>
 //#import <XDCommonSDK/XDGMessageManager.h>
 //#import <XDCommonSDK/XDGShare.h>
@@ -51,26 +50,30 @@ FOUNDATION_EXPORT const unsigned char XDCommonSDKVersionString[];
 #import <XDCommonSDK/TDSGlobalSDKAsyncHttp.h>
 //#import <XDCommonSDK/TDSGlobalDomainChecker.h>
 #import <XDCommonSDK/TDSGlobalAutoLayout.h>
-#import <XDCommonSDK/TDSGlobalInputCheckAlertView.h>
 #import <XDCommonSDK/TDSGlobalCommonUtility.h>
 #import <XDCommonSDK/TDSGlobalNetStatusManager.h>
 #import <XDCommonSDK/TDSGlobalMultiLanguage.h>
 #import <XDCommonSDK/TDSGlobalWKCookieWebview.h>
 //#import <XDCommonSDK/TDSGlobalLabel.h>
-#import <XDCommonSDK/TDSGlobalTitleView.h>
 #import <XDCommonSDK/TDSGlobalWebController.h>
-#import <XDCommonSDK/TDSGProgressHUD.h>
 #import <XDCommonSDK/TDSGlobalViewControllerBase.h>
 #import <XDCommonSDK/TDSGlobalPopWindowManager.h>
-#import <XDCommonSDK/TDSGlobalCustomLoadingView.h>
 #import <XDCommonSDK/TDSGlobalNotifications.h>
-#import <XDCommonSDK/TDSLoadingInfoView.h>
 #import <XDCommonSDK/TDSGlobalUIDefine.h>
 #import <XDCommonSDK/UIImage+TDSSDK.h>
 //#import <XDCommonSDK/TDSGlobalReachability.h>
-#import <XDCommonSDK/TDSGlobalAlertView.h>
 #import <XDCommonSDK/TDSGlobalRouterSchemes.h>
 #import <XDCommonSDK/XDPlateWebController.h>
 #import <XDCommonSDK/XDGAlertView.h>
 #import <XDCommonSDK/XDGCoreService.h>
 #import <XDCommonSDK/XDGThirdTokenManager.h>
+#import <XDCommonSDK/XDGUIKit.h>
+#import <XDCommonSDK/XDGNavicationBar.h>
+#import <XDCommonSDK/XDGCheckBox.h>
+#import <XDCommonSDK/XDGButton.h>
+#import <XDCommonSDK/XDGCardView.h>
+#import <XDCommonSDK/XDGDialog.h>
+#import <XDCommonSDK/XDGProgressHUD.h>
+#import <XDCommonSDK/XDGInputCheckDialog.h>
+#import <XDCommonSDK/XDGErrorView.h>
+

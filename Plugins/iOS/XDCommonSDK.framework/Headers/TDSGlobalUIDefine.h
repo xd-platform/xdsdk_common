@@ -26,6 +26,14 @@ extern int const TDSG_CONTENT_COMMON_FONT_SIZE;
 extern int const TDSG_CONTENT_DESC_FONT_COLOR;
 extern int const TDSG_INFO_DESC_FONT_COLOR;
 
+extern int const XDG_COLOR_CONTENT_BG;
+extern int const XDG_COLOR_GRAY_3;
+extern int const XDG_COLOR_GRAY_4;
+extern int const XDG_COLOR_GRAY_5;
+extern int const XDG_COLOR_GRAY_6;
+extern int const XDG_COLOR_BLUE;
+extern int const XDG_COLOR_RED;
+
 @interface TDSGlobalUIDefine : NSObject
 
 
