@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)logEvent:(XDGCloudLogProperties *)properties;
 
 - (void)generateStaticPresetPropertiesWithDeviceInfo;
+
++ (NSString *)getProvider;
+
++ (NSString *)getMCCNC;
 @end
 
 NS_ASSUME_NONNULL_END

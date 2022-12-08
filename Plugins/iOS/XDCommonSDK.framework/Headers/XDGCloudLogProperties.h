@@ -36,6 +36,7 @@ extern NSString *const XDGCloudLogProperties_USER_LOGIN_TYPE;
 extern NSString *const XDGCloudLogProperties_LOGIN_TYPE;
 extern NSString *const XDGCloudLogProperties_NETWORK;
 extern NSString *const XDGCloudLogProperties_PROVIDER;
+extern NSString *const XDGCloudLogProperties_MCCNC;
 extern NSString *const XDGCloudLogProperties_SESSION_UUID;
 extern NSString *const XDGCloudLogProperties_EVENT_INDEX;
 
