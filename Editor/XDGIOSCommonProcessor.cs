@@ -52,7 +52,7 @@ public static class XDGIOSCommonProcessor{
             CopyThirdResource(target, projPath, proj, parentFolder, resourcePath);
             
             //拷贝 XDConfig.json
-            var jsonPath = parentFolder + "/Assets/Plugins/XDConfig.json";
+            var jsonPath = parentFolder + "/Assets/Plugins/Mobile/XDConfig.json";
             if (!File.Exists(jsonPath)){
                 Debug.LogError("XDConfig.json 配置文件不存在，这个是必须的");
                 return;

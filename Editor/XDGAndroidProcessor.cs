@@ -147,16 +147,16 @@ apply plugin: 'com.google.firebase.crashlytics'
 
     private void processXDConfig(){
         var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
-        var jsonPath = parentFolder + "/Assets/Plugins/XDConfig.json";
+        var jsonPath = parentFolder + "/Assets/Plugins/Mobile/XDConfig.json";
         if (!File.Exists(jsonPath)){
-            Debug.LogError("/Assets/Plugins/XDConfig.json 配置文件不存在！");
+            Debug.LogError("/Assets/Plugins/Mobile/XDConfig.json 配置文件不存在！");
             return;
         }
         
 
         var configMd = JsonConvert.DeserializeObject<XDConfigModel>(File.ReadAllText(jsonPath));
         if (configMd == null){
-            Debug.LogError("/Assets/Plugins/XDConfig.json 解析失败！");
+            Debug.LogError("/Assets/Plugins/Mobile/XDConfig.json 解析失败！");
             return;
         }
 

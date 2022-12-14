@@ -14,7 +14,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
 
         //拷贝 SDK json 文件，必须的
-        var configJson = parentFolder + "/Assets/Plugins/XDConfig.json";
+        var configJson = parentFolder + "/Assets/Plugins/Mobile/XDConfig.json";
         if (File.Exists(configJson)){
         #if UNITY_2019_1_OR_NEWER
             File.Copy(configJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json", true);
