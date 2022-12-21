@@ -1,8 +1,8 @@
 {
   "name": "com.xd.sdk.common",
-  "version": "6.8.1",
+  "version": "6.0.1",
   "description": "XD Common",
-  "unity": "2018.3",
+  "unity": "2019.4",
   "license": "MIT",
   "dependencies": {
 
