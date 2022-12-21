@@ -40,7 +40,6 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         writer.WriteLine("android.useAndroidX=true");
         writer.WriteLine("android.enableJetifier=true");
         writer.WriteLine("org.gradle.parallel=true");
-        writer.WriteLine("android.enableR8=false");
         writer.Flush();
         writer.Close();
 #endif

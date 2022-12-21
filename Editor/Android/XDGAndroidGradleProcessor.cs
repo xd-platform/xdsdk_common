@@ -17,7 +17,6 @@ namespace XD.SDK.Common.Editor
 
         public void OnPostGenerateGradleAndroidProject(string path)
         {
-            Debug.LogErrorFormat("恢复 Custom Gradle Template");
             for (int i = (int)CustomTemplateType.AndroidManifest; i <= (int)CustomTemplateType.GradleProperties; i++)
             {
                 AndroidUtils.ToggleCustomTemplateFile((CustomTemplateType)i,
