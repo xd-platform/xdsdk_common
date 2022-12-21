@@ -31,45 +31,25 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
             File.Copy(googleJsonPath, projectPath + "/google-services.json",true);
             File.Copy(googleJsonPath, projectPath + "/src/main/assets/google-services.json", true);
 #endif
-
-            //动态配置Firebase信息
-            launchStr.Append(@"
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
-            ");
-
-#if UNITY_2019_1_OR_NEWER
-            baseStr.Append(@"allprojects {
-    buildscript {
-        dependencies {
-            classpath 'com.google.gms:google-services:4.0.2'
-            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
-        }
-    }
-}");
-#else
-            baseStr.Append(@"
-    classpath 'com.google.gms:google-services:4.0.2'
-    classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
-");
-#endif
-            implStr.Append(@"
-    implementation 'com.google.firebase:firebase-core:18.0.0'
-    implementation 'com.google.firebase:firebase-messaging:21.1.0'
-    implementation 'com.google.android.gms:play-services-auth:16.0.1'
-    implementation 'com.google.android.gms:play-services-ads-identifier:15.0.1'
-
-           ");
             
-        } else{
-            implStr.Append(@"
-    implementation 'com.google.android.gms:play-services-auth:16.0.1'
-           ");
-            Debug.LogWarning("打包警告 ---  googleJsonPath 不存在");
+// #if UNITY_2019_1_OR_NEWER
+//             baseStr.Append(@"allprojects {
+//     buildscript {
+//         dependencies {
+//             classpath 'com.google.gms:google-services:4.0.2'
+//             classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
+//         }
+//     }
+// }");
+// #else
+//             baseStr.Append(@"
+//     classpath 'com.google.gms:google-services:4.0.2'
+//     classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
+// ");
+// #endif
+
         }
-
-        processXDConfig(); //动态配置安卓库
-
+        
         //配置路径
         var gradlePropertiesFile = projectPath + "/gradle.properties";
         var baseProjectGradle = projectPath + "/build.gradle";
@@ -85,13 +65,13 @@ apply plugin: 'com.google.firebase.crashlytics'
         //apply plugin 
         if (File.Exists(launcherGradle)){
             Debug.Log("编辑 launcherGradle");
-            var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(launcherGradle);
+            var writerHelper = new XDGScriptHandlerProcessor(launcherGradle);
             writerHelper.WriteBelow(@"apply plugin: 'com.android.application'", launchStr.ToString());
         }
 #else
         if (File.Exists(launcherGradle)){
             Debug.Log("编辑 launcherGradle");
-            var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(launcherGradle);
+            var writerHelper = new XDGScriptHandlerProcessor(launcherGradle);
             writerHelper.WriteBelow(@"apply plugin: 'com.android.application'", launchStr.ToString());
         }
         else
@@ -104,7 +84,7 @@ apply plugin: 'com.google.firebase.crashlytics'
         //classpath 
         if (File.Exists(baseProjectGradle)){
             Debug.Log("编辑 baseProjectGradle");
-            var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(baseProjectGradle);
+            var writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
             writerHelper.WriteBelow(@"task clean(type: Delete) {
     delete rootProject.buildDir
 }", baseStr.ToString());
@@ -114,7 +94,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 
         if (File.Exists(baseProjectGradle)){
             Debug.Log("编辑 baseProjectGradle");
-            var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(baseProjectGradle);
+            var writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
             writerHelper.WriteBelow(@"repositories {
         mavenCentral()
         google()
@@ -142,67 +122,10 @@ apply plugin: 'com.google.firebase.crashlytics'
             Debug.LogWarning("打包警告 ---  unityLibraryGradle 不存在");
         }
 
-        processUnityVersionChange(projectPath);
+        // processUnityVersionChange(projectPath);
     }
 
-    private void processXDConfig(){
-        var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
-        var jsonPath = parentFolder + "/Assets/Plugins/Mobile/XDConfig.json";
-        if (!File.Exists(jsonPath)){
-            Debug.LogError("/Assets/Plugins/Mobile/XDConfig.json 配置文件不存在！");
-            return;
-        }
-        
 
-        var configMd = JsonConvert.DeserializeObject<XDConfigModel>(File.ReadAllText(jsonPath));
-        if (configMd == null){
-            Debug.LogError("/Assets/Plugins/Mobile/XDConfig.json 解析失败！");
-            return;
-        }
-
-        //配置第三方库
-        if (configMd.facebook != null && !string.IsNullOrEmpty(configMd.facebook.app_id)){
-            implStr.Append(@"
-    implementation 'com.facebook.android:facebook-login:12.0.0'
-    implementation 'com.facebook.android:facebook-share:12.0.0'
-
-           ");
-        }
-        
-        if (configMd.twitter != null && !string.IsNullOrEmpty(configMd.twitter.consumer_key)){
-            implStr.Append(@"
-    implementation 'com.twitter.sdk.android:twitter:3.3.0'
-    implementation 'com.twitter.sdk.android:tweet-composer:3.3.0'
-
-           ");
-        }
-        
-        if (configMd.appsflyer != null && !string.IsNullOrEmpty(configMd.appsflyer.dev_key)){
-            implStr.Append(@"
-    implementation 'com.appsflyer:af-android-sdk:6.5.2'
-    implementation 'com.appsflyer:unity-wrapper:6.5.2'
-
-           ");
-        }
-        
-        if (configMd.adjust != null && !string.IsNullOrEmpty(configMd.adjust.app_token)){
-            implStr.Append(@"
-        implementation 'com.adjust.sdk:adjust-android:4.24.1'
-
-           ");
-        }
-        
-        if (configMd.line != null && !string.IsNullOrEmpty(configMd.line.channel_id)){
-            implStr.Append(@"
-    implementation 'com.linecorp:linesdk:5.0.1'
-
-           ");
-        }
-        
-        Debug.Log($"配置 launchStr: \n{launchStr}");
-        Debug.Log($"配置 baseStr: \n{baseStr}");
-        Debug.Log($"配置 implStr: \n{implStr}");
-    }
 
     /// <summary>
     /// 处理因为 Unity 版本不同导致需要做的工作

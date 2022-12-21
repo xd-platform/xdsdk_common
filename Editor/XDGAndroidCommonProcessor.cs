@@ -23,36 +23,12 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         #endif
         } else{
             Debug.LogWarning("打包警告 ---  拷贝的json配置文件不存在");
-            return;
         }
-
+        
+#if !UNITY_2019_1_OR_NEWER
         //配置路径
         var gradlePropertiesFile = projectPath + "/gradle.properties";
-        var baseProjectGradle = projectPath + "/build.gradle";
-        var launcherGradle = projectPath + "/launcher/build.gradle";
-#if UNITY_2019_1_OR_NEWER
-        var unityLibraryGradle = projectPath + "/unityLibrary/build.gradle";
-#else
-        var unityLibraryGradle = projectPath + "/build.gradle";
-#endif
-
-        //implementation 可根据需要添加或删除
-        if (File.Exists(unityLibraryGradle))
-        {
-            Debug.Log("编辑 unityLibraryGradle");
-            var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(unityLibraryGradle);
-            writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])", @"
-    implementation 'com.android.installreferrer:installreferrer:2.2'
-    implementation 'com.android.billingclient:billing:4.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'com.google.code.gson:gson:2.8.6'
-            ");
-        }
-        else
-        {
-            Debug.LogWarning("打包警告 ---  unityLibraryGradle 不存在");
-        }
-
+        
         //需要
         if (File.Exists(gradlePropertiesFile))
         {
@@ -65,9 +41,9 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         writer.WriteLine("android.enableJetifier=true");
         writer.WriteLine("org.gradle.parallel=true");
         writer.WriteLine("android.enableR8=false");
-        writer.WriteLine("unityStreamingAssets=.unity3d");
         writer.Flush();
         writer.Close();
+#endif
     }
 
     public int callbackOrder{
