@@ -27,23 +27,6 @@ namespace XD.SDK.Common.Editor
         private static string m_InternalGradlePropertiesTemplate;
         private static string m_CustomGradlePropertiesTemplate;
         
-        [MenuItem("Android/Report")]
-        private static void Report()
-        {
-            for (int i = (int)CustomTemplateType.AndroidManifest; i <= (int)CustomTemplateType.GradleProperties; i++)
-            {
-                var templateType = (CustomTemplateType)i;
-                Debug.LogFormat($"{templateType} 是否存在 Custom File: { HaveCustomTemplateFile(templateType)}");
-            }
-        }
-        
-        [MenuItem("Android/Test")]
-        private static void Test()
-        {
-            var temp = new XDGAndroidGradleProcessor();
-            temp.OnPreprocessBuild(null);
-        }
-        
         public static void ProcessCustomGradleContext(XDGAndroidGradleContext gradleContext)
         {
             if (gradleContext == null) return;
