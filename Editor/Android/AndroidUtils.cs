@@ -35,9 +35,6 @@ namespace XD.SDK.Common.Editor
                 var templateType = (CustomTemplateType)i;
                 Debug.LogFormat($"{templateType} 是否存在 Custom File: { HaveCustomTemplateFile(templateType)}");
             }
-            
-            var temp = new XDGAndroidGradleProcessor();
-            temp.OnPreprocessBuild(null);
         }
         
         [MenuItem("Android/Test")]
@@ -54,12 +51,12 @@ namespace XD.SDK.Common.Editor
             if (fileInfo == null) return;
             
             // 已经替换过的情况
-            
             var contents = File.ReadAllText(fileInfo.FullName);
             Match match = null;
             match = new Regex($"{gradleContext.processContent}").Match(contents);
             if (match.Success) return;
-
+            
+            // 寻找修改位置
             switch (gradleContext.locationType)
             {
                 case AndroidGradleLocationType.Builtin:
@@ -90,7 +87,8 @@ namespace XD.SDK.Common.Editor
             {
                 index = contents.Length;
             }
-
+            
+            // 替换新的修改内容
             string newContents = null;
             if (gradleContext.processType == AndroidGradleProcessType.Insert)
             {
@@ -126,7 +124,7 @@ namespace XD.SDK.Common.Editor
                 Init();
             }
 
-            GetTemplatePath(templateType, out string internalPath, out string customPath);
+            GetTemplatePath(templateType, out _, out string customPath);
 
             return File.Exists(customPath);
         }

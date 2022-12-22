@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEditor.Android;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
 
 namespace XD.SDK.Common.Editor
 {
@@ -38,7 +37,6 @@ namespace XD.SDK.Common.Editor
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(clazz => interfaceType.IsAssignableFrom(clazz) && clazz.IsClass);
 
-            if (gradleContextProviders == null) return;
             var providers = new List<IAndroidGradleContextProvider>();
             foreach (var gradleContextProviderType in gradleContextProviders)
             {
@@ -50,13 +48,11 @@ namespace XD.SDK.Common.Editor
             foreach (var provider in providers)
             {
                 var gradleContexts = provider.GetAndroidGradleContext();
-                if (gradleContexts != null)
+                if (gradleContexts == null) continue;
+                gradleContexts.Reverse();
+                foreach (var gradleContext in gradleContexts)
                 {
-                    gradleContexts.Reverse();
-                    foreach (var gradleContext in gradleContexts)
-                    {
-                        AndroidUtils.ProcessCustomGradleContext(gradleContext);
-                    }
+                    AndroidUtils.ProcessCustomGradleContext(gradleContext);
                 }
             }
         }
