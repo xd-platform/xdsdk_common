@@ -29,21 +29,11 @@
       ]
     },
     {
-      "locationType": 3,
-      "unityVersionCompatibleType": 1,
+      "locationType": 1,
+      "unityVersionCompatibleType": 0,
       "templateType": 5,
       "processType": 1,
-      "locationParam": null,
-      "processContent": [
-        "allprojects {\n    buildscript {\n        dependencies {\n            classpath 'com.google.gms:google-services:4.0.2'\n            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'\n        }\n    }\n}"
-      ]
-    },
-    {
-      "locationType": 3,
-      "unityVersionCompatibleType": 2,
-      "templateType": 5,
-      "processType": 1,
-      "locationParam": null,
+      "locationParam": "BUILD_SCRIPT_DEPS",
       "processContent": [
         "        classpath 'com.google.gms:google-services:4.0.2'",
         "        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'"
@@ -51,7 +41,7 @@
     },
     {
       "locationType": 1,
-      "unityVersionCompatibleType": 0,
+      "unityVersionCompatibleType": 1,
       "templateType": 6,
       "processType": 1,
       "locationParam": "ADDITIONAL_PROPERTIES",

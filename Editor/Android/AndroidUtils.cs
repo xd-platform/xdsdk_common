@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Regex = System.Text.RegularExpressions.Regex;
 using LC.Newtonsoft.Json;

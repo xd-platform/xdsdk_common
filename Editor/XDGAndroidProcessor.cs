@@ -6,7 +6,7 @@ using UnityEditor.Android;
 using UnityEngine;
 using XD.SDK.Common.Editor;
 
-public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
+public class XDGCommonAndroidProcessor : IPostGenerateGradleAndroidProject{
     
     private StringBuilder launchStr = new StringBuilder();
     private StringBuilder baseStr = new StringBuilder();

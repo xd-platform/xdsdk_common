@@ -36,7 +36,9 @@ namespace XD.SDK.Common.Editor
 
         private void FixProvider(BaseAndroidGradleContextProvider provider)
         {
-            provider.AndroidGradleContext = GetGradleContext();
+            var tmp = GetGradleContext();
+            Debug.LogFormat($"tmp count: {tmp.Count}");
+            provider.AndroidGradleContext = tmp;
         }
 
         private void SaveProvider(BaseAndroidGradleContextProvider provider)
@@ -93,40 +95,40 @@ namespace XD.SDK.Common.Editor
                 };
                 result.Add(firebaseCoreDeps);
                 
-                var google2019Dependencies = new XDGAndroidGradleContext();
-                google2019Dependencies.locationType = AndroidGradleLocationType.End;
-                google2019Dependencies.templateType = CustomTemplateType.BaseGradle;
-                google2019Dependencies.unityVersionCompatibleType = UnityVersionCompatibleType.Unity_2019_3_Above;
-                google2019Dependencies.processContent = new List<string>()
-                {
-                    @"allprojects {
-    buildscript {
-        dependencies {
-            classpath 'com.google.gms:google-services:4.0.2'
-            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
-        }
-    }
-}",
-                };
-                result.Add(google2019Dependencies);
+//                 var google2019Dependencies = new XDGAndroidGradleContext();
+//                 google2019Dependencies.locationType = AndroidGradleLocationType.End;
+//                 google2019Dependencies.templateType = CustomTemplateType.BaseGradle;
+//                 google2019Dependencies.unityVersionCompatibleType = UnityVersionCompatibleType.Unity_2019_3_Above;
+//                 google2019Dependencies.processContent = new List<string>()
+//                 {
+//                     @"allprojects {
+//     buildscript {
+//         dependencies {
+//             classpath 'com.google.gms:google-services:4.0.2'
+//             classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
+//         }
+//     }
+// }",
+//                 };
                 
-                var google2018Dependencies = new XDGAndroidGradleContext();
-                google2018Dependencies.locationType = AndroidGradleLocationType.End;
-                google2018Dependencies.templateType = CustomTemplateType.BaseGradle;
-                google2018Dependencies.unityVersionCompatibleType = UnityVersionCompatibleType.Unity_2019_3_Beblow;
-                google2018Dependencies.processContent = new List<string>()
+                var googleClassPathDependencies = new XDGAndroidGradleContext();
+                googleClassPathDependencies.locationType = AndroidGradleLocationType.Builtin;
+                googleClassPathDependencies.locationParam = "BUILD_SCRIPT_DEPS";
+                googleClassPathDependencies.templateType = CustomTemplateType.BaseGradle;
+                googleClassPathDependencies.unityVersionCompatibleType = UnityVersionCompatibleType.EveryVersion;
+                googleClassPathDependencies.processContent = new List<string>()
                 {
                     @"        classpath 'com.google.gms:google-services:4.0.2'",
                     @"        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'"
                 };
-                result.Add(google2018Dependencies);
+                result.Add(googleClassPathDependencies);
                 
                 // Unity 2018 不支持自定义gradle.properties
                 var gradlePropertiesContext = new XDGAndroidGradleContext();
                 gradlePropertiesContext.locationType = AndroidGradleLocationType.Builtin;
                 gradlePropertiesContext.locationParam = "ADDITIONAL_PROPERTIES";
                 gradlePropertiesContext.templateType = CustomTemplateType.GradleProperties;
-                google2019Dependencies.unityVersionCompatibleType = UnityVersionCompatibleType.Unity_2019_3_Above;
+                gradlePropertiesContext.unityVersionCompatibleType = UnityVersionCompatibleType.Unity_2019_3_Above;
                 gradlePropertiesContext.processContent = new List<string>()
                 {
                     @"android.useAndroidX=true",
