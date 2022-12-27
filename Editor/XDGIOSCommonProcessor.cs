@@ -23,8 +23,8 @@ public static class XDGIOSCommonProcessor{
             string unityFrameworkTarget = proj.TargetGuidByName("UnityFramework");
             string target = proj.GetUnityMainTargetGuid();
 #else
-                string unityFrameworkTarget = proj.TargetGuidByName("Unity-iPhone");
-                string target = proj.TargetGuidByName("Unity-iPhone");
+            string unityFrameworkTarget = proj.TargetGuidByName("Unity-iPhone");
+            string target = proj.TargetGuidByName("Unity-iPhone");
 #endif
 
             //添加基本配置

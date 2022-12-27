@@ -24,7 +24,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         if (File.Exists(googleJsonPath))
         {
             Debug.Log("拷贝谷歌 google-services");
-#if UNITY_2019_1_OR_NEWER
+#if UNITY_2019_3_OR_NEWER
             File.Copy(googleJsonPath, projectPath + "/launcher/google-services.json",true);
             File.Copy(googleJsonPath, projectPath + "/unityLibrary/src/main/assets/google-services.json", true);
 #else
@@ -32,7 +32,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
             File.Copy(googleJsonPath, projectPath + "/src/main/assets/google-services.json", true);
 #endif
             
-// #if UNITY_2019_1_OR_NEWER
+// #if UNITY_2019_3_OR_NEWER
 //             baseStr.Append(@"allprojects {
 //     buildscript {
 //         dependencies {
@@ -53,7 +53,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         //配置路径
         var gradlePropertiesFile = projectPath + "/gradle.properties";
         var baseProjectGradle = projectPath + "/build.gradle";
-#if UNITY_2019_1_OR_NEWER
+#if UNITY_2019_3_OR_NEWER
         var launcherGradle = projectPath + "/launcher/build.gradle";
         var unityLibraryGradle = projectPath + "/unityLibrary/build.gradle";
 #else
@@ -61,7 +61,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         var unityLibraryGradle = baseProjectGradle;
 #endif
         
-#if UNITY_2019_1_OR_NEWER
+#if UNITY_2019_3_OR_NEWER
         //apply plugin 
         if (File.Exists(launcherGradle)){
             Debug.Log("编辑 launcherGradle");
@@ -80,7 +80,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
         }
 #endif
 
-#if UNITY_2019_1_OR_NEWER
+#if UNITY_2019_3_OR_NEWER
         //classpath 
         if (File.Exists(baseProjectGradle)){
             Debug.Log("编辑 baseProjectGradle");
@@ -132,7 +132,7 @@ public class XDGAndroidProcessor : IPostGenerateGradleAndroidProject{
     /// </summary>
     private void processUnityVersionChange(string projectPath)
     {
-#if !UNITY_2019_1_OR_NEWER
+#if !UNITY_2019_3_OR_NEWER
         var baseProjectGradle = projectPath + "/build.gradle";
         var writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
         // 升级 Android Gradle Plugin 版本

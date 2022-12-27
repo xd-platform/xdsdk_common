@@ -2,9 +2,13 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using LC.Newtonsoft.Json;
+using UnityEditor;
 using UnityEditor.Android;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
+using UnityEngine;
 
 namespace XD.SDK.Common.Editor
 {
@@ -16,11 +20,11 @@ namespace XD.SDK.Common.Editor
 
         public void OnPostGenerateGradleAndroidProject(string path)
         {
-            for (int i = (int)CustomTemplateType.AndroidManifest; i <= (int)CustomTemplateType.GradleProperties; i++)
-            {
-                AndroidUtils.ToggleCustomTemplateFile((CustomTemplateType)i,
-                    gardleTemplateToggleRecord[(CustomTemplateType)i]);
-            }
+            // for (int i = (int)CustomTemplateType.AndroidManifest; i <= (int)CustomTemplateType.GradleProperties; i++)
+            // {
+            //     AndroidUtils.ToggleCustomTemplateFile((CustomTemplateType)i,
+            //         gardleTemplateToggleRecord[(CustomTemplateType)i]);
+            // }
         }
         
         public void OnPreprocessBuild(BuildReport report)
@@ -32,27 +36,22 @@ namespace XD.SDK.Common.Editor
                 gardleTemplateToggleRecord.Add((CustomTemplateType)i, haveCustomGradleTemplate);
             }
             
-            var interfaceType = typeof(IAndroidGradleContextProvider);
-            var gradleContextProviders = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(clazz => interfaceType.IsAssignableFrom(clazz) && clazz.IsClass);
-
-            var providers = new List<IAndroidGradleContextProvider>();
-            foreach (var gradleContextProviderType in gradleContextProviders)
-            {
-                var provider = Activator.CreateInstance(gradleContextProviderType) as IAndroidGradleContextProvider;
-                providers.Add(provider);
-            }
-            providers.Sort((a,b)=>a.Priority.CompareTo(b.Priority));
-
+            var providers = AndroidUtils.Load();
+            if (providers == null) return;
+            
             foreach (var provider in providers)
             {
-                var gradleContexts = provider.GetAndroidGradleContext();
-                if (gradleContexts == null) continue;
-                gradleContexts.Reverse();
-                foreach (var gradleContext in gradleContexts)
+                if (provider.AndroidGradleContext == null) continue;
+                foreach (var context in provider.AndroidGradleContext)
                 {
-                    AndroidUtils.ProcessCustomGradleContext(gradleContext);
+                    try
+                    {
+                        AndroidUtils.ProcessCustomGradleContext(context);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogErrorFormat($"[Tap::AndroidGradleProcessor] Process Custom Gradle Context Error! Error Msg:\n{e.Message}\nError Stack:\n{e.StackTrace}");
+                    }
                 }
             }
         }

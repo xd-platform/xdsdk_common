@@ -16,7 +16,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         //拷贝 SDK json 文件，必须的
         var configJson = parentFolder + "/Assets/Plugins/Resources/XDConfig.json";
         if (File.Exists(configJson)){
-        #if UNITY_2019_1_OR_NEWER
+        #if UNITY_2019_3_OR_NEWER
             File.Copy(configJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json", true);
         #else
             File.Copy(configJson, projectPath + "/src/main/assets/XDConfig.json", true);
@@ -25,7 +25,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
             Debug.LogWarning("打包警告 ---  拷贝的json配置文件不存在");
         }
         
-#if !UNITY_2019_1_OR_NEWER
+#if !UNITY_2019_3_OR_NEWER
         //配置路径
         var gradlePropertiesFile = projectPath + "/gradle.properties";
         
