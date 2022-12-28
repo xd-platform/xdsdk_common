@@ -35,7 +35,7 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
             containsAndroidX = s.Contains("android.useAndroidX=true") && s.Contains("android.enableJetifier=true");
         }
 
-        if false == containsAndroidX)
+        if (false == containsAndroidX)
         {
             using(StreamWriter sw = File.AppendText(gradlePropertiesFile))
             {
