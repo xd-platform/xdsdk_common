@@ -26,10 +26,8 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         
 #if !UNITY_2019_3_OR_NEWER
         Debug.Log("修改 gradlePropertiesFile");
-        // Creating a file
         var gradlePropertiesFile = projectPath + "/gradle.properties";
         bool containsAndroidX = false;
-        // Opening the file for reading
         using(StreamReader sr = File.OpenText(gradlePropertiesFile))
         {
             string s = "";
@@ -37,11 +35,11 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
             containsAndroidX = s.Contains("android.useAndroidX=true") && s.Contains("android.enableJetifier=true");
         }
 
-        if (false == containsAndroidX)
+        if false == containsAndroidX)
         {
             using(StreamWriter sw = File.AppendText(gradlePropertiesFile))
             {
-                sw.WriteLine("android.useAndroidX=true");
+                sw.WriteLine("\nandroid.useAndroidX=true");
                 sw.WriteLine("android.enableJetifier=true");
             }
         }
