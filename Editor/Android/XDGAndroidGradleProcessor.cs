@@ -1,10 +1,6 @@
 #if UNITY_EDITOR && UNITY_ANDROID
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.IO;
-using LC.Newtonsoft.Json;
-using UnityEditor;
 using UnityEditor.Android;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;

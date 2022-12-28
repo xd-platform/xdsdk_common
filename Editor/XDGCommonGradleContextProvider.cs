@@ -94,23 +94,7 @@ namespace XD.SDK.Common.Editor
                     @"    implementation 'com.google.code.gson:gson:2.8.6'",
                 };
                 result.Add(firebaseCoreDeps);
-                
-//                 var google2019Dependencies = new XDGAndroidGradleContext();
-//                 google2019Dependencies.locationType = AndroidGradleLocationType.End;
-//                 google2019Dependencies.templateType = CustomTemplateType.BaseGradle;
-//                 google2019Dependencies.unityVersionCompatibleType = UnityVersionCompatibleType.Unity_2019_3_Above;
-//                 google2019Dependencies.processContent = new List<string>()
-//                 {
-//                     @"allprojects {
-//     buildscript {
-//         dependencies {
-//             classpath 'com.google.gms:google-services:4.0.2'
-//             classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
-//         }
-//     }
-// }",
-//                 };
-                
+
                 var googleClassPathDependencies = new XDGAndroidGradleContext();
                 googleClassPathDependencies.locationType = AndroidGradleLocationType.Builtin;
                 googleClassPathDependencies.locationParam = "BUILD_SCRIPT_DEPS";

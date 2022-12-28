@@ -2,7 +2,6 @@
 using System.IO;
 using UnityEditor.Android;
 using UnityEngine;
-using XD.SDK.Common.Editor;
 
 public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
     void IPostGenerateGradleAndroidProject.OnPostGenerateGradleAndroidProject(string path){
@@ -16,32 +15,36 @@ public class XDGAndroidCommonProcessor : IPostGenerateGradleAndroidProject{
         //拷贝 SDK json 文件，必须的
         var configJson = parentFolder + "/Assets/Plugins/Resources/XDConfig.json";
         if (File.Exists(configJson)){
-        #if UNITY_2019_3_OR_NEWER
+#if UNITY_2019_3_OR_NEWER
             File.Copy(configJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json", true);
-        #else
+#else
             File.Copy(configJson, projectPath + "/src/main/assets/XDConfig.json", true);
-        #endif
+#endif
         } else{
             Debug.LogWarning("打包警告 ---  拷贝的json配置文件不存在");
         }
         
 #if !UNITY_2019_3_OR_NEWER
-        //配置路径
+        Debug.Log("修改 gradlePropertiesFile");
+        // Creating a file
         var gradlePropertiesFile = projectPath + "/gradle.properties";
-        
-        //需要
-        if (File.Exists(gradlePropertiesFile))
+        bool containsAndroidX = false;
+        // Opening the file for reading
+        using(StreamReader sr = File.OpenText(gradlePropertiesFile))
         {
-            File.Delete(gradlePropertiesFile);
+            string s = "";
+            s = sr.ReadToEnd();
+            containsAndroidX = s.Contains("android.useAndroidX=true") && s.Contains("android.enableJetifier=true");
         }
-        Debug.Log("创建 gradlePropertiesFile");
-        StreamWriter writer = File.CreateText(gradlePropertiesFile);
-        writer.WriteLine("org.gradle.jvmargs=-Xmx4096M");
-        writer.WriteLine("android.useAndroidX=true");
-        writer.WriteLine("android.enableJetifier=true");
-        writer.WriteLine("org.gradle.parallel=true");
-        writer.Flush();
-        writer.Close();
+
+        if (false == containsAndroidX)
+        {
+            using(StreamWriter sw = File.AppendText(gradlePropertiesFile))
+            {
+                sw.WriteLine("android.useAndroidX=true");
+                sw.WriteLine("android.enableJetifier=true");
+            }
+        }
 #endif
     }
 
