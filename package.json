@@ -1,10 +1,10 @@
 {
   "name": "com.xd.sdk.common",
-  "version": "6.0.1",
+  "version": "6.8.2",
   "description": "XD Common",
-  "unity": "2019.4",
+  "unity": "2018.3",
   "license": "MIT",
   "dependencies": {
-//    "com.tapsdk.androiddependencyresolver": "https://nexus.tapsvc.com/repository/npm-registry/com.tapsdk.androiddependencyresolver#1.0.1"
+
   }
 }
