@@ -5,6 +5,6 @@
   "unity": "2019.4",
   "license": "MIT",
   "dependencies": {
-
+//    "com.tapsdk.androiddependencyresolver": "https://nexus.tapsvc.com/repository/npm-registry/com.tapsdk.androiddependencyresolver#1.0.1"
   }
 }

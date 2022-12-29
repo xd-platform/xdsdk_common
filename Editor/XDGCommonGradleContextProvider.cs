@@ -1,61 +1,61 @@
 #if UNITY_EDITOR && UNITY_ANDROID
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using LC.Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
+using TapTap.AndroidDependencyResolver.Editor;
 
 namespace XD.SDK.Common.Editor
 {
     public class XDGCommonGradleProvider : IPreprocessBuildWithReport
     {
-        public int callbackOrder => 1050;
+        public int callbackOrder => AndroidGradleProcessor.CALLBACK_ORDER - 50;
+        
         public void OnPreprocessBuild(BuildReport report)
         {
             var providers = AndroidUtils.Load();
             if (providers == null) return;
-            foreach (var provider in providers)
+            foreach (var provider in providers.Where(provider => provider.ModuleName.Contains("XD.Common")))
             {
-                if (provider.ModuleName.Contains("XD.Common"))
-                {
-                    FixProvider(provider);
-                    SaveProvider(provider);
-                    break;
-                }
+                FixProvider(provider);
+                SaveProvider(provider);
+                break;
             }
         }
 
-        [MenuItem("Android/Common Refresh")]
+        [MenuItem("XD/Common/Refresh Android Gradle")]
         public static void CommonRefresh()
         {
             var temp = new XDGCommonGradleProvider();
             temp.OnPreprocessBuild(null);
         }
 
-        private void FixProvider(BaseAndroidGradleContextProvider provider)
+        private void FixProvider(AndroidGradleContextProvider provider)
         {
             var tmp = GetGradleContext();
             Debug.LogFormat($"tmp count: {tmp.Count}");
             provider.AndroidGradleContext = tmp;
         }
 
-        private void SaveProvider(BaseAndroidGradleContextProvider provider)
+        private void SaveProvider(AndroidGradleContextProvider provider)
         {
             var path = Path.Combine(Application.dataPath, "XDSDK", "Mobile", "Common", "TapAndroidProvider.txt");
             AndroidUtils.SaveProvider(path, provider);
         }
 
-        public List<XDGAndroidGradleContext> GetGradleContext()
+        public List<AndroidGradleContext> GetGradleContext()
         {
-            var result = new List<XDGAndroidGradleContext>();
+            var result = new List<AndroidGradleContext>();
 
             var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
             var googleJsonPath = parentFolder + "/Assets/Plugins/Android/google-services.json";
             if (File.Exists(googleJsonPath) == false)
             {
-                var googleDeps = new XDGAndroidGradleContext();
+                var googleDeps = new AndroidGradleContext();
                 googleDeps.locationType = AndroidGradleLocationType.Builtin;
                 googleDeps.locationParam = "DEPS";
                 googleDeps.templateType = CustomTemplateType.UnityMainGradle;
@@ -67,7 +67,7 @@ namespace XD.SDK.Common.Editor
             }
             else
             {
-                var googleContext = new XDGAndroidGradleContext();
+                var googleContext = new AndroidGradleContext();
                 googleContext.locationType = AndroidGradleLocationType.Custom;
                 googleContext.locationParam = "apply plugin: ['\"]com.android.application['\"]";
                 googleContext.templateType = CustomTemplateType.LauncherGradle;
@@ -78,7 +78,7 @@ namespace XD.SDK.Common.Editor
                 };
                 result.Add(googleContext);
                 
-                var firebaseCoreDeps = new XDGAndroidGradleContext();
+                var firebaseCoreDeps = new AndroidGradleContext();
                 firebaseCoreDeps.locationType = AndroidGradleLocationType.Builtin;
                 firebaseCoreDeps.locationParam = "DEPS";
                 firebaseCoreDeps.templateType = CustomTemplateType.UnityMainGradle;
@@ -95,7 +95,7 @@ namespace XD.SDK.Common.Editor
                 };
                 result.Add(firebaseCoreDeps);
 
-                var googleClassPathDependencies = new XDGAndroidGradleContext();
+                var googleClassPathDependencies = new AndroidGradleContext();
                 googleClassPathDependencies.locationType = AndroidGradleLocationType.Builtin;
                 googleClassPathDependencies.locationParam = "BUILD_SCRIPT_DEPS";
                 googleClassPathDependencies.templateType = CustomTemplateType.BaseGradle;
@@ -108,7 +108,7 @@ namespace XD.SDK.Common.Editor
                 result.Add(googleClassPathDependencies);
                 
                 // Unity 2018 不支持自定义gradle.properties
-                var gradlePropertiesContext = new XDGAndroidGradleContext();
+                var gradlePropertiesContext = new AndroidGradleContext();
                 gradlePropertiesContext.locationType = AndroidGradleLocationType.Builtin;
                 gradlePropertiesContext.locationParam = "ADDITIONAL_PROPERTIES";
                 gradlePropertiesContext.templateType = CustomTemplateType.GradleProperties;
@@ -120,7 +120,7 @@ namespace XD.SDK.Common.Editor
                 };
                 result.Add(gradlePropertiesContext);
                 
-                var androidPluginContext = new XDGAndroidGradleContext();
+                var androidPluginContext = new AndroidGradleContext();
                 androidPluginContext.locationType = AndroidGradleLocationType.Custom;
                 androidPluginContext.locationParam =
                     "classpath 'com.android.tools.build:gradle:\\d{1}.\\d{1}.\\d{1}'";
@@ -139,9 +139,9 @@ namespace XD.SDK.Common.Editor
             
         }
 
-        private List<XDGAndroidGradleContext> GetGradleContextByXDConfig()
+        private List<AndroidGradleContext> GetGradleContextByXDConfig()
         {
-            var result = new List<XDGAndroidGradleContext>();
+            var result = new List<AndroidGradleContext>();
             
             var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
             var jsonPath = parentFolder + "/Assets/Plugins/Resources/XDConfig.json";
@@ -158,7 +158,7 @@ namespace XD.SDK.Common.Editor
                 return result;
             }
 
-            XDGAndroidGradleContext thirdPartyDeps = null;
+            AndroidGradleContext thirdPartyDeps = null;
             
             //配置第三方库
             if (configMd.facebook != null && !string.IsNullOrEmpty(configMd.facebook.app_id))
@@ -202,11 +202,11 @@ namespace XD.SDK.Common.Editor
             return result;
         }
 
-        private void InitThirdPartyDeps(ref XDGAndroidGradleContext thirdPartyDeps)
+        private void InitThirdPartyDeps(ref AndroidGradleContext thirdPartyDeps)
         {
             if (thirdPartyDeps == null)
             {
-                thirdPartyDeps = new XDGAndroidGradleContext();
+                thirdPartyDeps = new AndroidGradleContext();
                 thirdPartyDeps.locationType = AndroidGradleLocationType.Builtin;
                 thirdPartyDeps.locationParam = "DEPS";
                 thirdPartyDeps.templateType = CustomTemplateType.UnityMainGradle;
