@@ -98,7 +98,7 @@ public static class XDGIOSCommonProcessor{
         //拷贝文件夹里的资源
         var tdsResourcePath = FilterFile(parentFolder + "/Library/PackageCache/", $"{npmModuleName}@");
         if (string.IsNullOrEmpty(tdsResourcePath)){ //优先使用npm的，否则用本地的
-            tdsResourcePath = parentFolder + "/Assets/XD/SDK/" + localModuleName;
+            tdsResourcePath = parentFolder + "/Assets/XDSDK/Mobile/" + localModuleName;
         }
         tdsResourcePath = tdsResourcePath + "/Plugins/iOS/Resource";
 
