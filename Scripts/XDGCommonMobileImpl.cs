@@ -5,27 +5,28 @@ using System.Text.RegularExpressions;
 using TapTap.Bootstrap;
 using TapTap.Common;
 using UnityEngine;
+using XD.SDK.Common.Internal;
 
 namespace XD.SDK.Common{
-    public class XDGCommonImpl{
+    public class XDGCommonMobileImpl{
         private static readonly string COMMON_MODULE_UNITY_BRIDGE_NAME = "XDGCoreService";
-        private static volatile XDGCommonImpl _instance;
+        private static volatile XDGCommonMobileImpl _instance;
         private static readonly object locker = new object();
 
         private static string Channel = "";
         private static string GameVersion = "";
 
-        private XDGCommonImpl(){
+        private XDGCommonMobileImpl(){
             XDGTool.Log("===> Init XDG Bridge Service");
             EngineBridge.GetInstance()
                 .Register(XDGUnityBridge.COMMON_SERVICE_NAME, XDGUnityBridge.COMMON_SERVICE_IMPL);
         }
 
-        public static XDGCommonImpl GetInstance(){
+        public static XDGCommonMobileImpl GetInstance(){
             if (_instance != null) return _instance;
             lock (locker){
                 if (_instance == null){
-                    _instance = new XDGCommonImpl();
+                    _instance = new XDGCommonMobileImpl();
                 }
             }
 
@@ -337,7 +338,7 @@ namespace XD.SDK.Common{
             XDGTool.Log("===> StoreReview");
         }
 
-        public void GetRegionInfo(Action<XDGRegionInfoWrapper> callback){
+        public void GetRegionInfo(Action<IXDGRegionInfoWrapper> callback){
             var command = new Command.Builder()
                 .Service(COMMON_MODULE_UNITY_BRIDGE_NAME)
                 .Method("getRegionInfo")
@@ -345,7 +346,8 @@ namespace XD.SDK.Common{
                 .CommandBuilder();
             EngineBridge.GetInstance().CallHandler(command, result => {
                 XDGTool.Log("GetRegionInfo result --> " + JsonUtility.ToJson(result));
-                callback(new XDGRegionInfoWrapper(result.content));
+                var tmp = new XDGRegionInfoWrapper(result.content) as IXDGRegionInfoWrapper;
+                callback(tmp);
             });
         }
 
@@ -461,7 +463,7 @@ namespace XD.SDK.Common{
             return result.code == Result.RESULT_SUCCESS && !string.IsNullOrEmpty(result.content);
         }
         
-        public void GetAgreementList(Action<List<XDGAgreement>> callback)
+        public void GetAgreementList(Action<List<IXDGAgreement>> callback)
         {
             try
             {
@@ -476,7 +478,9 @@ namespace XD.SDK.Common{
                         return;
                     }
                     var content = result.content;
-                    callback ?.Invoke(GetAgreementList(content));
+                    var list = GetAgreementList(content);
+                    var tmp = list.ConvertAll<IXDGAgreement>(input => input as IXDGAgreement);
+                    callback ?.Invoke(tmp);
                 });
             }
             catch (Exception e)

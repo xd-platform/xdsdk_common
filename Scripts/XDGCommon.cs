@@ -1,111 +1,139 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using XD.SDK.Common.Internal;
 
 namespace XD.SDK.Common{
     public class XDGCommon
     {
-        public static string UserId { get; set; }
+        public static IXDGCommon platformWrapper;
         
-        public static void InitSDK(Action<bool, string> callback){
-            XDGCommonImpl.GetInstance().InitSDK(callback);
+        static XDGCommon() 
+        {
+            var interfaceType = typeof(IXDGCommon);
+            var platformInterfaceType = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .FirstOrDefault(clazz => interfaceType.IsAssignableFrom(clazz));
+            if (platformInterfaceType != null) {
+                platformWrapper = Activator.CreateInstance(platformInterfaceType) as IXDGCommon;
+            }
+        }
+        
+        public static string UserId {
+            get
+            {
+                return platformWrapper?.UserId;
+            }
+            set
+            {
+                if (platformWrapper != null)
+                    platformWrapper.UserId = value;
+            }
+        }
+        
+        public static void InitSDK(Action<bool, string> callback)
+        {
+            platformWrapper.InitSDK(callback);
         }
 
         public static void IsInitialized(Action<bool> callback){
-            XDGCommonImpl.GetInstance().IsInitialized(callback);
+            Debug.LogFormat($"[XD] IsInitialized! platformWrapper Type FullName: {platformWrapper.GetType().FullName}");
+            platformWrapper.IsInitialized(callback);
         }
 
         public static void SetLanguage(LangType langType){
-            XDGCommonImpl.GetInstance().SetLanguage(langType);
+            platformWrapper.SetLanguage(langType);
         }
 
         public static void Share(ShareFlavors shareFlavors, string uri, XDGShareCallback callback){
-            XDGCommonImpl.GetInstance().Share(shareFlavors, uri, callback);
+            platformWrapper.Share(shareFlavors, uri, callback);
         }
 
         public static void Share(ShareFlavors shareFlavors, string uri, string message, XDGShareCallback callback){
-            XDGCommonImpl.GetInstance().Share(shareFlavors, uri, message, callback);
+            platformWrapper.Share(shareFlavors, uri, message, callback);
         }
 
         public static void Report(string serverId, string roleId, string roleName){
-            XDGCommonImpl.GetInstance().Report(serverId, roleId, roleName);
+            platformWrapper.Report(serverId, roleId, roleName);
         }
 
         public static void TrackRole(string serverId, string roleId, string roleName, int level){
-            XDGCommonImpl.GetInstance().TrackRole(serverId, roleId, roleName, level);
+            platformWrapper.TrackRole(serverId, roleId, roleName, level);
         }
 
         public static void TrackUser(string userId = null)
         {
             if (string.IsNullOrEmpty(userId))
             {
-                userId = UserId;
+                UserId = userId;
             }
-            XDGCommonImpl.GetInstance().TrackUser(userId);
+            platformWrapper.TrackUser(userId);
         }
 
         public static void TrackEvent(string eventName){
-            XDGCommonImpl.GetInstance().TrackEvent(eventName);
+            platformWrapper.TrackEvent(eventName);
         }
 
         public static void EventCompletedTutorial(){
-            XDGCommonImpl.GetInstance().EventCompletedTutorial();
+            platformWrapper.EventCompletedTutorial();
         }
 
         public static void EventCreateRole(){
-            XDGCommonImpl.GetInstance().EventCreateRole();
+            platformWrapper.EventCreateRole();
         }
 
         public static void GetVersionName(Action<string> callback){
-            XDGCommonImpl.GetInstance().GetVersionName(callback);
+            platformWrapper.GetVersionName(callback);
         }
 
         public static void TrackAchievement(){
-            XDGCommonImpl.GetInstance().TrackAchievement();
+            platformWrapper.TrackAchievement();
         }
 
         public static void SetCurrentUserPushServiceEnable(bool enable){
-            XDGCommonImpl.GetInstance().SetCurrentUserPushServiceEnable(enable);
+            platformWrapper.SetCurrentUserPushServiceEnable(enable);
         }
 
         public static void IsCurrentUserPushServiceEnable(Action<bool> callback){
-            XDGCommonImpl.GetInstance().IsCurrentUserPushServiceEnable(callback);
+            platformWrapper.IsCurrentUserPushServiceEnable(callback);
         }
 
         public static void StoreReview(){
-            XDGCommonImpl.GetInstance().StoreReview();
+            platformWrapper.StoreReview();
         }
 
         public static void ShowLoading(){
-            XDGCommonImpl.GetInstance().ShowLoading();
+            platformWrapper.ShowLoading();
         }
 
         public static void HideLoading(){
-            XDGCommonImpl.GetInstance().HideLoading();
+            platformWrapper.HideLoading();
         }
 
-        public static void GetRegionInfo(Action<XDGRegionInfoWrapper> callback){
-            XDGCommonImpl.GetInstance().GetRegionInfo(callback);
+        public static void GetRegionInfo(Action<IXDGRegionInfoWrapper> callback){
+            platformWrapper.GetRegionInfo(callback);
         }
         
         public static void DisableAgreementUI(){
-            XDGCommonImpl.GetInstance().disableAgreementUI();
+            platformWrapper.DisableAgreementUI();
         }
 
         public static void ReplaceChannelAndVersion(string channel, string gameVersion){
-            XDGCommonImpl.GetInstance().ReplaceChannelAndVersion(channel, gameVersion);
+            platformWrapper.ReplaceChannelAndVersion(channel, gameVersion);
         }
         
-        public static void GetAgreementList(Action<List<XDGAgreement>> callback){
-            XDGCommonImpl.GetInstance().GetAgreementList(callback);
+        public static void GetAgreementList(Action<List<IXDGAgreement>> callback){
+            platformWrapper.GetAgreementList(callback);
         }
         
         public static void ShowDetailAgreement(string agreementUrl){
-            XDGCommonImpl.GetInstance().ShowDetailAgreement(agreementUrl);
+            platformWrapper.ShowDetailAgreement(agreementUrl);
         }
 
         public static void SetExitHandler(Action onExitHandler)
         {
-            XDGCommonImpl.GetInstance().SetExitHandler(onExitHandler);
+            platformWrapper.SetExitHandler(onExitHandler);
         }
     }
 }

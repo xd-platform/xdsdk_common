@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TapTap.Common;
 using UnityEngine;
+using XD.SDK.Common.Internal;
 
 namespace XD.SDK.Common{
     public class XDGInitResultWrapper{
@@ -40,30 +41,35 @@ namespace XD.SDK.Common{
         }
     }
 
-    public class XDGRegionInfoWrapper{
-        public XDGRegionInfo info;
+    public class XDGRegionInfoWrapper : IXDGRegionInfoWrapper{
+        private XDGRegionInfo _info;
 
         public XDGRegionInfoWrapper(string json){
             var dic = Json.Deserialize(json) as Dictionary<string, object>;
             var infoDic = SafeDictionary.GetValue<Dictionary<string, object>>(dic, "info");
-            info = new XDGRegionInfo(infoDic);
+            _info = new XDGRegionInfo(infoDic);
         }
+
+        public IXDGRegionInfo info => _info;
     }
     
-    public class XDGAgreement
+    public class XDGAgreement : IXDGAgreement
     {
-        public string type;
-        public string url;
+        private string _type;
+        private string _url;
         
         public XDGAgreement(Dictionary<string, object> dic){
             if (dic == null) return;
-            type = SafeDictionary.GetValue<string>(dic, "type");
-            url = SafeDictionary.GetValue<string>(dic, "url");
+            _type = SafeDictionary.GetValue<string>(dic, "type");
+            _url = SafeDictionary.GetValue<string>(dic, "url");
         }
 
         public override string ToString()
         {
             return $"[type:{type};url:{url}]";
         }
+
+        public string type => _type;
+        public string url => _url;
     }
 }

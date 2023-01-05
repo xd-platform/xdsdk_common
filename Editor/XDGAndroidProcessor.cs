@@ -61,66 +61,66 @@ public class XDGCommonAndroidProcessor : IPostGenerateGradleAndroidProject{
         var unityLibraryGradle = baseProjectGradle;
 #endif
         
-#if UNITY_2019_3_OR_NEWER
-        //apply plugin 
-        if (File.Exists(launcherGradle)){
-            Debug.Log("编辑 launcherGradle");
-            var writerHelper = new XDGScriptHandlerProcessor(launcherGradle);
-            writerHelper.WriteBelow(@"apply plugin: 'com.android.application'", launchStr.ToString());
-        }
-#else
-        if (File.Exists(launcherGradle)){
-            Debug.Log("编辑 launcherGradle");
-            var writerHelper = new XDGScriptHandlerProcessor(launcherGradle);
-            writerHelper.WriteBelow(@"apply plugin: 'com.android.application'", launchStr.ToString());
-        }
-        else
-        {
-            Debug.LogWarning("打包警告 ---  launcherGradle 不存在");
-        }
-#endif
+// #if UNITY_2019_3_OR_NEWER
+//         //apply plugin 
+//         if (File.Exists(launcherGradle)){
+//             Debug.Log("编辑 launcherGradle");
+//             var writerHelper = new XDGScriptHandlerProcessor(launcherGradle);
+//             writerHelper.WriteBelow(@"apply plugin: 'com.android.application'", launchStr.ToString());
+//         }
+// #else
+//         if (File.Exists(launcherGradle)){
+//             Debug.Log("编辑 launcherGradle");
+//             var writerHelper = new XDGScriptHandlerProcessor(launcherGradle);
+//             writerHelper.WriteBelow(@"apply plugin: 'com.android.application'", launchStr.ToString());
+//         }
+//         else
+//         {
+//             Debug.LogWarning("打包警告 ---  launcherGradle 不存在");
+//         }
+// #endif
 
-#if UNITY_2019_3_OR_NEWER
-        //classpath 
-        if (File.Exists(baseProjectGradle)){
-            Debug.Log("编辑 baseProjectGradle");
-            var writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
-            writerHelper.WriteBelow(@"task clean(type: Delete) {
-    delete rootProject.buildDir
-}", baseStr.ToString());
-        }
-#else
-        //classpath 
-
-        if (File.Exists(baseProjectGradle)){
-            Debug.Log("编辑 baseProjectGradle");
-            var writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
-            writerHelper.WriteBelow(@"repositories {
-        mavenCentral()
-        google()
-        jcenter()
-    }
-
-    dependencies {", baseStr.ToString());
-
-        }
-#endif
-        else
-        {
-            Debug.LogWarning("打包警告 ---  baseProjectGradle 不存在");
-        }
+// #if UNITY_2019_3_OR_NEWER
+//         //classpath 
+//         if (File.Exists(baseProjectGradle)){
+//             Debug.Log("编辑 baseProjectGradle");
+//             var writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
+//             writerHelper.WriteBelow(@"task clean(type: Delete) {
+//     delete rootProject.buildDir
+// }", baseStr.ToString());
+//         }
+// #else
+//         //classpath 
+//
+//         if (File.Exists(baseProjectGradle)){
+//             Debug.Log("编辑 baseProjectGradle");
+//             var writerHelper = new XDGScriptHandlerProcessor(baseProjectGradle);
+//             writerHelper.WriteBelow(@"repositories {
+//         mavenCentral()
+//         google()
+//         jcenter()
+//     }
+//
+//     dependencies {", baseStr.ToString());
+//
+//         }
+// #endif
+        // else
+        // {
+        //     Debug.LogWarning("打包警告 ---  baseProjectGradle 不存在");
+        // }
 
         //implementation 
-        if (File.Exists(unityLibraryGradle))
-        {
-            Debug.Log("编辑 unityLibraryGradle");
-            var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(unityLibraryGradle);
-            writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])", implStr.ToString());
-        }
-        else
-        {
-            Debug.LogWarning("打包警告 ---  unityLibraryGradle 不存在");
-        }
+        // if (File.Exists(unityLibraryGradle))
+        // {
+        //     Debug.Log("编辑 unityLibraryGradle");
+        //     var writerHelper = new XD.SDK.Common.Editor.XDGScriptHandlerProcessor(unityLibraryGradle);
+        //     writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])", implStr.ToString());
+        // }
+        // else
+        // {
+        //     Debug.LogWarning("打包警告 ---  unityLibraryGradle 不存在");
+        // }
 
         // processUnityVersionChange(projectPath);
     }

@@ -16,7 +16,7 @@ namespace XD.SDK.Common{
         public static void LogError(string msg){
             if (string.IsNullOrEmpty(xdid)){
                 try{
-                    XDGCommonImpl.GetInstance().GetDid(did => {
+                    XDGCommonMobileImpl.GetInstance().GetDid(did => {
                         xdid = did;
                         Print($"userId:【{userId}】, did: 【{xdid}】, msg:{msg}");
                     });
