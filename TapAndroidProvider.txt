@@ -1,4 +1,6 @@
 {
+  "Version": 1,
+  "Use": true,
   "AndroidGradleContext": [
     {
       "locationType": 2,
