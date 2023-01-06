@@ -55,7 +55,17 @@
       "unityVersionCompatibleType": 0,
       "templateType": 5,
       "processType": 2,
-      "locationParam": "classpath 'com.android.tools.build:gradle:\\d{1}.\\d{1}.\\d{1}'",
+      "locationParam": "classpath 'com.android.tools.build:gradle:3.\\d{1}.\\d{1}'",
+      "processContent": [
+        "classpath 'com.android.tools.build:gradle:4.0.1'"
+      ]
+    },
+    {
+      "locationType": 2,
+      "unityVersionCompatibleType": 0,
+      "templateType": 5,
+      "processType": 2,
+      "locationParam": "classpath 'com.android.tools.build:gradle:4.0.0'",
       "processContent": [
         "classpath 'com.android.tools.build:gradle:4.0.1'"
       ]

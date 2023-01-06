@@ -123,7 +123,7 @@ namespace XD.SDK.Common.Editor
                 var androidPluginContext = new AndroidGradleContext();
                 androidPluginContext.locationType = AndroidGradleLocationType.Custom;
                 androidPluginContext.locationParam =
-                    "classpath 'com.android.tools.build:gradle:\\d{1}.\\d{1}.\\d{1}'";
+                    "classpath 'com.android.tools.build:gradle:3.\\d{1}.\\d{1}'";
                 androidPluginContext.templateType = CustomTemplateType.BaseGradle;
                 androidPluginContext.processType = AndroidGradleProcessType.Replace;
                 androidPluginContext.processContent = new List<string>()
@@ -131,6 +131,18 @@ namespace XD.SDK.Common.Editor
                     @"classpath 'com.android.tools.build:gradle:4.0.1'",
                 };
                 result.Add(androidPluginContext);
+                
+                var androidPluginContext1 = new AndroidGradleContext();
+                androidPluginContext1.locationType = AndroidGradleLocationType.Custom;
+                androidPluginContext1.locationParam =
+                    "classpath 'com.android.tools.build:gradle:4.0.0'";
+                androidPluginContext1.templateType = CustomTemplateType.BaseGradle;
+                androidPluginContext1.processType = AndroidGradleProcessType.Replace;
+                androidPluginContext1.processContent = new List<string>()
+                {
+                    @"classpath 'com.android.tools.build:gradle:4.0.1'",
+                };
+                result.Add(androidPluginContext1);
             }
 
             var contents = GetGradleContextByXDConfig();
