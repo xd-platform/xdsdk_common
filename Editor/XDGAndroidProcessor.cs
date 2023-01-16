@@ -58,6 +58,7 @@ apply plugin: 'com.google.firebase.crashlytics'
     implementation 'com.google.firebase:firebase-messaging:21.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-ads-identifier:15.0.1'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.10'
 
            ");
             
