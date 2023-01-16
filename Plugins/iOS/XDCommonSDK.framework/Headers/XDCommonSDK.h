@@ -27,7 +27,7 @@ FOUNDATION_EXPORT const unsigned char XDCommonSDKVersionString[];
 #import <XDCommonSDK/XDGTrackerManager.h>
 #import <XDCommonSDK/XDGReportManager.h>
 //#import <XDCommonSDK/XDGMessageManager.h>
-//#import <XDCommonSDK/XDGShare.h>
+#import <XDCommonSDK/XDGShare.h>
 #import <XDCommonSDK/XDGUser.h>
 #import <XDCommonSDK/XDGUserDataManager.h>
 #import <XDCommonSDK/XDGAccessToken.h>
@@ -54,7 +54,6 @@ FOUNDATION_EXPORT const unsigned char XDCommonSDKVersionString[];
 #import <XDCommonSDK/TDSGlobalNetStatusManager.h>
 #import <XDCommonSDK/TDSGlobalMultiLanguage.h>
 #import <XDCommonSDK/TDSGlobalWKCookieWebview.h>
-//#import <XDCommonSDK/TDSGlobalLabel.h>
 #import <XDCommonSDK/TDSGlobalWebController.h>
 #import <XDCommonSDK/TDSGlobalViewControllerBase.h>
 #import <XDCommonSDK/TDSGlobalPopWindowManager.h>

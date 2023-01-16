@@ -10,7 +10,7 @@ namespace XD.SDK.Common{
         private static string xdid = "";
 
         public static void Log(string msg){
-            Debug.Log("\n------------------ XDGSDK Log V682------------------\n" + msg + "\n\n");
+            Debug.Log("\n------------------ XDGSDK Log V683------------------\n" + msg + "\n\n");
         }
 
         public static void LogError(string msg){
@@ -29,7 +29,7 @@ namespace XD.SDK.Common{
         }
 
         private static void Print(string msg){
-            Debug.LogError("\n------------------ XDGSDK Error V682------------------\n" + msg + "\n\n");
+            Debug.LogError("\n------------------ XDGSDK Error V683------------------\n" + msg + "\n\n");
         }
 
         public static bool IsEmpty(string str){

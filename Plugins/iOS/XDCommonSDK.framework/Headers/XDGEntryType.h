@@ -29,6 +29,8 @@ FOUNDATION_EXPORT LoginEntryType const LoginEntryTypeSteam;
 
 + (LoginEntryType)entryTypeByString:(NSString *)entryTypeInString;
 
++ (LoginEntryType)entryTypeByInteger:(NSInteger )entryTypeInt;
+
 + (NSNumber *)numberByEntryType:(LoginEntryType)entryType;
 
 @end
