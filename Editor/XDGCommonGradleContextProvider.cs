@@ -92,6 +92,7 @@ namespace XD.SDK.Common.Editor
                     @"    implementation 'com.android.billingclient:billing:4.1.0'",
                     @"    implementation 'androidx.recyclerview:recyclerview:1.2.1'",
                     @"    implementation 'com.google.code.gson:gson:2.8.6'",
+                    @"    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.10'"
                 };
                 result.Add(firebaseCoreDeps);
 
