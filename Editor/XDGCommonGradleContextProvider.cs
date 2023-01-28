@@ -19,30 +19,41 @@ namespace XD.SDK.Common.Editor
         {
             var providers = AndroidUtils.Load();
             if (providers == null) return;
-            foreach (var provider in providers.Where(provider => provider.ModuleName.Contains("XD.Common")))
-            {
-                FixProvider(provider);
-                SaveProvider(provider);
-                break;
-            }
+            DeleteOldProvider();
+            var provider = FixProvider();
+            SaveProvider(provider);
         }
 
-        [MenuItem("XD/Common/Refresh Android Gradle")]
+        [MenuItem("XDSDK/Common/Refresh Android Gradle")]
         public static void CommonRefresh()
         {
             var temp = new XDGCommonGradleProvider();
             temp.OnPreprocessBuild(null);
         }
 
-        private void FixProvider(AndroidGradleContextProvider provider)
+        private AndroidGradleContextProvider FixProvider()
         {
+            AndroidGradleContextProvider result = new AndroidGradleContextProvider();
+            result.Version = 1;
+            result.Priority = 2;
+            result.Use = true;
+            result.ModuleName = "XD.Common";
             var tmp = GetGradleContext();
-            provider.AndroidGradleContext = tmp;
+            result.AndroidGradleContext = tmp;
+            return result;
         }
 
+        private void DeleteOldProvider()
+        {
+            var folderPath = Path.Combine(Application.dataPath, "XDSDK", "Gen", "Common");
+            if (!Directory.Exists(folderPath)) return;
+            var path = Path.Combine(folderPath, "TapAndroidProvider.txt");
+            if (File.Exists(path)) File.Delete(path);
+        }
+        
         private void SaveProvider(AndroidGradleContextProvider provider)
         {
-            var folderPath = Path.Combine(Application.dataPath, "XDSDK1", "Mobile", "Common");
+            var folderPath = Path.Combine(Application.dataPath, "XDSDK", "Gen", "Common");
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
@@ -50,6 +61,76 @@ namespace XD.SDK.Common.Editor
             }
             var path = Path.Combine(folderPath, "TapAndroidProvider.txt");
             AndroidUtils.SaveProvider(path, provider);
+        }
+
+        private void DeleteOldGoogleContent()
+        {
+            var pluginsFolder = Path.Combine(Application.dataPath, "Plugins", "Android");
+            DeleteLaucherOldGoogleContent(pluginsFolder);
+            DeleteMainOldGoogleContent(pluginsFolder);
+            DeleteBaseOldGoogleContent(pluginsFolder);
+        }
+
+        private void DeleteLaucherOldGoogleContent(string pluginsFolder)
+        {
+        #if UNITY_2019_3_OR_NEWER
+            var launcherGradle = Path.Combine(pluginsFolder, "launcherTemplate.gradle");
+            if (!File.Exists(launcherGradle))
+            {
+                launcherGradle = Path.Combine(pluginsFolder, "launcherTemplate.gradle.DISABLED");
+            }
+        #else
+            var launcherGradle = Path.Combine(pluginsFolder, "mainTemplate.gradle");
+            if (!File.Exists(launcherGradle))
+            {
+                launcherGradle = Path.Combine(pluginsFolder, "mainTemplate.gradle.DISABLED");
+            }
+        #endif
+            var writerHelper = new XDGScriptHandlerProcessor(launcherGradle);
+            writerHelper.Delete(@"apply plugin: 'com.google.gms.google-services'");
+            writerHelper.Delete(@"apply plugin: 'com.google.firebase.crashlytics'");
+            writerHelper.Dispose();
+        }
+        
+        private void DeleteMainOldGoogleContent(string pluginsFolder)
+        {
+            var gradleTemplate = Path.Combine(pluginsFolder, "mainTemplate.gradle");
+            if (!File.Exists(gradleTemplate))
+            {
+                gradleTemplate = Path.Combine(pluginsFolder, "mainTemplate.gradle.DISABLED");
+            }
+            var writerHelper = new XDGScriptHandlerProcessor(gradleTemplate);
+            writerHelper.Delete(@"    implementation 'com.google.firebase:firebase-core:18.0.0'");
+            writerHelper.Delete(@"    implementation 'com.google.firebase:firebase-messaging:21.1.0'");
+            writerHelper.Delete(@"    implementation 'com.google.android.gms:play-services-auth:16.0.1'");
+            writerHelper.Delete(@"    implementation 'com.google.android.gms:play-services-ads-identifier:15.0.1'");
+            writerHelper.Delete(@"    implementation 'com.android.installreferrer:installreferrer:2.2'");
+            writerHelper.Delete(@"    implementation 'com.android.billingclient:billing:4.1.0'");
+            writerHelper.Delete(@"    implementation 'androidx.recyclerview:recyclerview:1.2.1'");
+            writerHelper.Delete(@"    implementation 'com.google.code.gson:gson:2.8.6'");
+            writerHelper.Delete(@"    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.10'");
+            writerHelper.Dispose();
+        }
+        
+        private void DeleteBaseOldGoogleContent(string pluginsFolder)
+        {
+        #if UNITY_2019_3_OR_NEWER
+            var gradleTemplate = Path.Combine(pluginsFolder, "baseProjectTemplate.gradle");
+            if (!File.Exists(gradleTemplate))
+            {
+                gradleTemplate = Path.Combine(pluginsFolder, "baseProjectTemplate.gradle.DISABLED");
+            }
+        #else
+            var gradleTemplate = Path.Combine(pluginsFolder, "mainTemplate.gradle");
+            if (!File.Exists(gradleTemplate))
+            {
+                gradleTemplate = Path.Combine(pluginsFolder, "mainTemplate.gradle.DISABLED");
+            }
+        #endif
+            var writerHelper = new XDGScriptHandlerProcessor(gradleTemplate);
+            writerHelper.Delete(@"        classpath 'com.google.gms:google-services:4.0.2'");
+            writerHelper.Delete(@"        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'");
+            writerHelper.Dispose();
         }
 
         public List<AndroidGradleContext> GetGradleContext()
@@ -60,6 +141,7 @@ namespace XD.SDK.Common.Editor
             var googleJsonPath = parentFolder + "/Assets/Plugins/Android/google-services.json";
             if (File.Exists(googleJsonPath) == false)
             {
+                DeleteOldGoogleContent();
                 var googleDeps = new AndroidGradleContext();
                 googleDeps.locationType = AndroidGradleLocationType.Builtin;
                 googleDeps.locationParam = "DEPS";

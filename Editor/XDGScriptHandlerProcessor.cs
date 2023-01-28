@@ -70,6 +70,30 @@ namespace XD.SDK.Common.Editor
             streamWriter.Write(all);
             streamWriter.Close();
         }
+        
+        public void Delete(string content)
+        {
+            StreamReader streamReader = new StreamReader(filePath);
+            string all = streamReader.ReadToEnd();
+            if (string.IsNullOrEmpty(all))
+            {
+                Debug.LogError("读取文件失败 ---  文件路径 : " + filePath);
+            }
+            // 兼容不同 OS 的 Line Separators
+            content = Regex.Replace(content, "\r\n", "\n", RegexOptions.IgnoreCase);
+            streamReader.Close();
+            int beginIndex = all.IndexOf(content, StringComparison.Ordinal);
+            if (beginIndex == -1)
+            {
+                Debug.LogWarning(filePath + "中没有找到字符串" + content);
+                return;
+            }
+
+            all = all.Replace(content, "");
+            StreamWriter streamWriter = new StreamWriter(filePath);
+            streamWriter.Write(all);
+            streamWriter.Close();
+        }
 
         public void Dispose()
         {
