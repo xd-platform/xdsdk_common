@@ -86,6 +86,7 @@ namespace XD.SDK.Common.Editor
                 launcherGradle = Path.Combine(pluginsFolder, "mainTemplate.gradle.DISABLED");
             }
         #endif
+            if (!File.Exists(launcherGradle)) return;
             var writerHelper = new XDGScriptHandlerProcessor(launcherGradle);
             writerHelper.Delete(@"apply plugin: 'com.google.gms.google-services'");
             writerHelper.Delete(@"apply plugin: 'com.google.firebase.crashlytics'");
@@ -99,6 +100,7 @@ namespace XD.SDK.Common.Editor
             {
                 gradleTemplate = Path.Combine(pluginsFolder, "mainTemplate.gradle.DISABLED");
             }
+            if (!File.Exists(gradleTemplate)) return;
             var writerHelper = new XDGScriptHandlerProcessor(gradleTemplate);
             writerHelper.Delete(@"    implementation 'com.google.firebase:firebase-core:18.0.0'");
             writerHelper.Delete(@"    implementation 'com.google.firebase:firebase-messaging:21.1.0'");
@@ -127,6 +129,7 @@ namespace XD.SDK.Common.Editor
                 gradleTemplate = Path.Combine(pluginsFolder, "mainTemplate.gradle.DISABLED");
             }
         #endif
+            if (!File.Exists(gradleTemplate)) return;
             var writerHelper = new XDGScriptHandlerProcessor(gradleTemplate);
             writerHelper.Delete(@"        classpath 'com.google.gms:google-services:4.0.2'");
             writerHelper.Delete(@"        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'");
