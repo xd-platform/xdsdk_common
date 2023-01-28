@@ -153,9 +153,9 @@ namespace XD.SDK.Common.Editor
 
             AndroidGradleContext thirdPartyDeps = null;
 
-            bool needGoogleServices = configMd.google == null || (string.IsNullOrEmpty(configMd.google.CLIENT_ID) &&
+            bool noGoogleServices = configMd.google == null || (string.IsNullOrEmpty(configMd.google.CLIENT_ID) &&
                                                                   string.IsNullOrEmpty(configMd.google.CLIENT_ID_FOR_ANDROID));
-            if (needGoogleServices == false)
+            if (noGoogleServices)
             {
                 DeleteOldGoogleContent();
                 var googleDeps = new AndroidGradleContext();
