@@ -37,13 +37,18 @@ namespace XD.SDK.Common.Editor
         private void FixProvider(AndroidGradleContextProvider provider)
         {
             var tmp = GetGradleContext();
-            Debug.LogFormat($"tmp count: {tmp.Count}");
             provider.AndroidGradleContext = tmp;
         }
 
         private void SaveProvider(AndroidGradleContextProvider provider)
         {
-            var path = Path.Combine(Application.dataPath, "XDSDK", "Mobile", "Common", "TapAndroidProvider.txt");
+            var folderPath = Path.Combine(Application.dataPath, "XDSDK1", "Mobile", "Common");
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+                AssetDatabase.Refresh();
+            }
+            var path = Path.Combine(folderPath, "TapAndroidProvider.txt");
             AndroidUtils.SaveProvider(path, provider);
         }
 
@@ -157,17 +162,17 @@ namespace XD.SDK.Common.Editor
             var result = new List<AndroidGradleContext>();
             
             var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
-            var jsonPath = parentFolder + "/Assets/Plugins/Resources/XDConfig.json";
+            var jsonPath = parentFolder + "/Assets/XDConfig.json";
             if (!File.Exists(jsonPath))
             {
-                Debug.LogError("/Assets/Plugins/Resources/XDConfig.json 配置文件不存在！");
+                Debug.LogError("/Assets/XDConfig.json 配置文件不存在！");
                 return result;
             }
 
             var configMd = JsonConvert.DeserializeObject<XDConfigModel>(File.ReadAllText(jsonPath));
             if (configMd == null)
             {
-                Debug.LogError("/Assets/Plugins/Resources/XDConfig.json 解析失败！");
+                Debug.LogError("/Assets/XDConfig.json 解析失败！");
                 return result;
             }
 
