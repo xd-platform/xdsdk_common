@@ -45,9 +45,6 @@ namespace XD.SDK.Common.Editor
             {
                 PrepareStreamingAssets();
                 Copy2StreamingAssets(Application.dataPath, "XDConfig.json");
-                Copy2StreamingAssets(Application.dataPath, "XDConfig-cn.json");
-                Copy2StreamingAssets(Application.dataPath, "XDConfig-cn-release.json");
-                Copy2StreamingAssets(Application.dataPath, "XDConfig-release.json");
                 AssetDatabase.Refresh();
             }
         }
