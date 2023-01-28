@@ -138,8 +138,24 @@ namespace XD.SDK.Common.Editor
             var result = new List<AndroidGradleContext>();
 
             var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
-            var googleJsonPath = parentFolder + "/Assets/Plugins/Android/google-services.json";
-            if (File.Exists(googleJsonPath) == false)
+            var jsonPath = parentFolder + "/Assets/XDConfig.json";
+            if (!File.Exists(jsonPath))
+            {
+                Debug.LogError("/Assets/XDConfig.json 配置文件不存在！");
+                return result;
+            }
+            var configMd = JsonConvert.DeserializeObject<XDConfigModel>(File.ReadAllText(jsonPath));
+            if (configMd == null)
+            {
+                Debug.LogError("/Assets/XDConfig.json 解析失败！");
+                return result;
+            }
+
+            AndroidGradleContext thirdPartyDeps = null;
+
+            bool needGoogleServices = configMd.google == null || (string.IsNullOrEmpty(configMd.google.CLIENT_ID) &&
+                                                                  string.IsNullOrEmpty(configMd.google.CLIENT_ID_FOR_ANDROID));
+            if (needGoogleServices == false)
             {
                 DeleteOldGoogleContent();
                 var googleDeps = new AndroidGradleContext();
