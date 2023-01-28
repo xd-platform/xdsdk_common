@@ -30,9 +30,6 @@ namespace XD.SDK.Common.Editor
                 platform == BuildTarget.StandaloneLinux64 || platform == BuildTarget.StandaloneOSX)
             {
                 DeleteStreamingAssetsFile("XDConfig.json");
-                DeleteStreamingAssetsFile("XDConfig-cn.json");
-                DeleteStreamingAssetsFile("XDConfig-cn-release.json");
-                DeleteStreamingAssetsFile("XDConfig-release.json");
                 AssetDatabase.Refresh();
             }
         }
