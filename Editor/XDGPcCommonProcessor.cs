@@ -1,16 +1,8 @@
 #if UNITY_EDITOR && (!UNITY_IOS && !UNITY_ANDROID)
-using System;
-using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
-using UnityEditor.Callbacks;
-using UnityEditor.iOS.Xcode;
-using UnityEngine;
-using LC.Newtonsoft.Json;
-using System.Linq;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
-using UnityEngine.WSA;
 using Application = UnityEngine.Application;
 
 namespace XD.SDK.Common.Editor
