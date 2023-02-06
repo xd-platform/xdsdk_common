@@ -161,15 +161,33 @@ namespace XD.SDK.Common.Editor
             if (noGoogleServices)
             {
                 DeleteOldGoogleContent();
-                var googleDeps = new AndroidGradleContext();
-                googleDeps.locationType = AndroidGradleLocationType.Builtin;
-                googleDeps.locationParam = "DEPS";
-                googleDeps.templateType = CustomTemplateType.UnityMainGradle;
-                googleDeps.processContent = new List<string>()
+                var noGoogleDeps = new AndroidGradleContext();
+                noGoogleDeps.locationType = AndroidGradleLocationType.Builtin;
+                noGoogleDeps.locationParam = "DEPS";
+                noGoogleDeps.templateType = CustomTemplateType.UnityMainGradle;
+                noGoogleDeps.processContent = new List<string>()
                 {
-                    @"    implementation 'com.google.android.gms:play-services-auth:16.0.1'"
+                    @"    implementation 'com.google.android.gms:play-services-auth:16.0.1'",
+                    @"    implementation 'com.android.installreferrer:installreferrer:2.2'",
+                    @"    implementation 'com.android.billingclient:billing:4.1.0'",
+                    @"    implementation 'androidx.recyclerview:recyclerview:1.2.1'",
+                    @"    implementation 'com.google.code.gson:gson:2.8.6'",
+                    @"    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.10'"
                 };
-                result.Add(googleDeps);
+                result.Add(noGoogleDeps);
+                
+                // Unity 2018 不支持自定义gradle.properties
+                var gradlePropertiesContext = new AndroidGradleContext();
+                gradlePropertiesContext.locationType = AndroidGradleLocationType.Builtin;
+                gradlePropertiesContext.locationParam = "ADDITIONAL_PROPERTIES";
+                gradlePropertiesContext.templateType = CustomTemplateType.GradleProperties;
+                gradlePropertiesContext.unityVersionCompatibleType = UnityVersionCompatibleType.Unity_2019_3_Above;
+                gradlePropertiesContext.processContent = new List<string>()
+                {
+                    @"android.useAndroidX=true",
+                    @"android.enableJetifier=true",
+                };
+                result.Add(gradlePropertiesContext);
             }
             else
             {
