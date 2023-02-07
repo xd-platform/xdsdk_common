@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace XD.SDK.Common.Internal
+namespace XD.SDK.Common
 {
     public interface XDGError
     {
