@@ -85,7 +85,7 @@ namespace XD.SDK.Common{
             XDGCommonMobileImpl.GetInstance().HideLoading();
         }
 
-        public void GetRegionInfo(Action<IXDGRegionInfoWrapper> callback){
+        public void GetRegionInfo(Action<XDGRegionInfoWrapper> callback){
             XDGCommonMobileImpl.GetInstance().GetRegionInfo(callback);
         }
         
@@ -97,7 +97,7 @@ namespace XD.SDK.Common{
             XDGCommonMobileImpl.GetInstance().ReplaceChannelAndVersion(channel, gameVersion);
         }
         
-        public void GetAgreementList(Action<List<IXDGAgreement>> callback){
+        public void GetAgreementList(Action<List<XDGAgreement>> callback){
             XDGCommonMobileImpl.GetInstance().GetAgreementList(callback);
         }
         

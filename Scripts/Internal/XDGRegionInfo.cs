@@ -1,6 +1,6 @@
 namespace XD.SDK.Common.Internal
 {
-    public interface IXDGRegionInfo
+    public interface XDGRegionInfo
     {
         string city { get; }
         string countryCode { get; }

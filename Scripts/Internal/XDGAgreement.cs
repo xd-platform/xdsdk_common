@@ -1,6 +1,6 @@
 namespace XD.SDK.Common.Internal
 {
-    public interface IXDGAgreement
+    public interface XDGAgreement
     {
         string type { get; }
         string url { get; }

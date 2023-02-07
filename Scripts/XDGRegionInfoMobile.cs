@@ -4,14 +4,14 @@ using XD.SDK.Common.Internal;
 
 namespace XD.SDK.Common
 {
-    public class XDGRegionInfo : IXDGRegionInfo
+    public class XDGRegionInfoMobile : XDGRegionInfo
     {
-        public string _city;
-        public string _countryCode;
-        public string _timeZone;
-        public string _locationInfoType;
+        private string _city;
+        private string _countryCode;
+        private string _timeZone;
+        private string _locationInfoType;
 
-        public XDGRegionInfo(Dictionary<string, object> dic)
+        public XDGRegionInfoMobile(Dictionary<string, object> dic)
         {
             if (dic == null) return;
             _city = SafeDictionary.GetValue<string>(dic, "city");

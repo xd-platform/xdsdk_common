@@ -68,7 +68,7 @@ namespace XD.SDK.Common{
         {
             if (string.IsNullOrEmpty(userId))
             {
-                UserId = userId;
+                userId = UserId;
             }
             platformWrapper.TrackUser(userId);
         }
@@ -113,7 +113,7 @@ namespace XD.SDK.Common{
             platformWrapper.HideLoading();
         }
 
-        public static void GetRegionInfo(Action<IXDGRegionInfoWrapper> callback){
+        public static void GetRegionInfo(Action<XDGRegionInfoWrapper> callback){
             platformWrapper.GetRegionInfo(callback);
         }
         
@@ -125,7 +125,7 @@ namespace XD.SDK.Common{
             platformWrapper.ReplaceChannelAndVersion(channel, gameVersion);
         }
         
-        public static void GetAgreementList(Action<List<IXDGAgreement>> callback){
+        public static void GetAgreementList(Action<List<XDGAgreement>> callback){
             platformWrapper.GetAgreementList(callback);
         }
         

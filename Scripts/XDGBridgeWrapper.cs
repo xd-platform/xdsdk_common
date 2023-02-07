@@ -32,7 +32,7 @@ namespace XD.SDK.Common{
             cancel = SafeDictionary.GetValue<bool>(dic, "cancel");
             Dictionary<string, object> errorDic = SafeDictionary.GetValue<Dictionary<string, object>>(dic, "error");
             if (errorDic != null){
-                error = new XDGError(errorDic);
+                error = new XDGErrorMobile(errorDic);
             }
         }
 
@@ -41,24 +41,24 @@ namespace XD.SDK.Common{
         }
     }
 
-    public class XDGRegionInfoWrapper : IXDGRegionInfoWrapper{
+    public class XDGRegionInfoWrapperMobile : XDGRegionInfoWrapper{
         private XDGRegionInfo _info;
 
-        public XDGRegionInfoWrapper(string json){
+        public XDGRegionInfoWrapperMobile(string json){
             var dic = Json.Deserialize(json) as Dictionary<string, object>;
             var infoDic = SafeDictionary.GetValue<Dictionary<string, object>>(dic, "info");
-            _info = new XDGRegionInfo(infoDic);
+            _info = new XDGRegionInfoMobile(infoDic);
         }
 
-        public IXDGRegionInfo info => _info;
+        public XDGRegionInfo info => _info;
     }
     
-    public class XDGAgreement : IXDGAgreement
+    public class XDGAgreementMobile : XDGAgreement
     {
         private string _type;
         private string _url;
         
-        public XDGAgreement(Dictionary<string, object> dic){
+        public XDGAgreementMobile(Dictionary<string, object> dic){
             if (dic == null) return;
             _type = SafeDictionary.GetValue<string>(dic, "type");
             _url = SafeDictionary.GetValue<string>(dic, "url");

@@ -43,13 +43,13 @@ namespace XD.SDK.Common.Internal
 
         void HideLoading();
 
-        void GetRegionInfo(Action<IXDGRegionInfoWrapper> callback);
+        void GetRegionInfo(Action<XDGRegionInfoWrapper> callback);
 
         void DisableAgreementUI();
 
         void ReplaceChannelAndVersion(string channel, string gameVersion);
 
-        void GetAgreementList(Action<List<IXDGAgreement>> callback);
+        void GetAgreementList(Action<List<XDGAgreement>> callback);
 
         void ShowDetailAgreement(string agreementUrl);
 
