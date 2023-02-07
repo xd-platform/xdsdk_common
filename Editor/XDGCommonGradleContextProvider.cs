@@ -68,6 +68,7 @@ namespace XD.SDK.Common.Editor
             var pluginsFolder = Path.Combine(Application.dataPath, "Plugins", "Android");
             DeleteLaucherOldGoogleContent(pluginsFolder);
             DeleteMainOldGoogleContent(pluginsFolder);
+            DeleteThirdPartyContent(pluginsFolder);
             DeleteBaseOldGoogleContent(pluginsFolder);
         }
 
@@ -111,6 +112,26 @@ namespace XD.SDK.Common.Editor
             writerHelper.Delete(@"    implementation 'androidx.recyclerview:recyclerview:1.2.1'");
             writerHelper.Delete(@"    implementation 'com.google.code.gson:gson:2.8.6'");
             writerHelper.Delete(@"    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.10'");
+            writerHelper.Dispose();
+        }
+
+        private void DeleteThirdPartyContent(string pluginsFolder)
+        {
+            var gradleTemplate = Path.Combine(pluginsFolder, "mainTemplate.gradle");
+            if (!File.Exists(gradleTemplate))
+            {
+                gradleTemplate = Path.Combine(pluginsFolder, "mainTemplate.gradle.DISABLED");
+            }
+            if (!File.Exists(gradleTemplate)) return;
+            var writerHelper = new XDGScriptHandlerProcessor(gradleTemplate);
+            writerHelper.Delete(@"    implementation 'com.facebook.android:facebook-login:12.0.0'");
+            writerHelper.Delete(@"    implementation 'com.facebook.android:facebook-share:12.0.0'");
+            writerHelper.Delete(@"    implementation 'com.twitter.sdk.android:twitter:3.3.0'");
+            writerHelper.Delete(@"    implementation 'com.twitter.sdk.android:tweet-composer:3.3.0'");
+            writerHelper.Delete(@"    implementation 'com.appsflyer:af-android-sdk:6.5.2'");
+            writerHelper.Delete(@"    implementation 'com.appsflyer:unity-wrapper:6.5.2'");
+            writerHelper.Delete(@"    implementation 'com.adjust.sdk:adjust-android:4.24.1'");
+            writerHelper.Delete(@"    implementation 'com.linecorp:linesdk:5.0.1'");
             writerHelper.Dispose();
         }
         

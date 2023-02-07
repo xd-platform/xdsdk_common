@@ -85,10 +85,9 @@ namespace XD.SDK.Common.Editor
             int beginIndex = all.IndexOf(content, StringComparison.Ordinal);
             if (beginIndex == -1)
             {
-                Debug.LogWarning(filePath + "中没有找到字符串" + content);
+                Debug.Log(filePath + "中没有找到字符串" + content);
                 return;
             }
-
             all = all.Replace(content, "");
             StreamWriter streamWriter = new StreamWriter(filePath);
             streamWriter.Write(all);
