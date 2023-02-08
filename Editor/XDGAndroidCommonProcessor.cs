@@ -51,32 +51,45 @@ namespace XD.SDK.Common.Editor{
 
         private string GetXDConfigPath()
         {
-            int xdconfigFileCount = 0;
-            var xdconfigGuids = AssetDatabase.FindAssets("XDConfig");
             string xdconfigPath = null;
+            
+            var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
+            xdconfigPath = Path.Combine(parentFolder, "Assets/XDConfig.json");
+
+            if (File.Exists(xdconfigPath))
+            {
+                return xdconfigPath;
+            }
+            
+            Debug.LogWarningFormat($"[XDSDK.Common] Can't find XDConfig.json on Assets folder");
+            xdconfigPath = Path.Combine(parentFolder, "Assets/Plugins/XDConfig.json");
+            
+            if (File.Exists(xdconfigPath))
+            {
+                return xdconfigPath;
+            }
+            
+            Debug.LogWarningFormat($"[XDSDK.Common] Can't find XDConfig.json on Assets folder or Assets/Plugins folder");
+
+            bool find = false;
+            var xdconfigGuids = AssetDatabase.FindAssets("XDConfig");
             foreach (var guid in xdconfigGuids)
             {
                 var xdPath = AssetDatabase.GUIDToAssetPath(guid);
                 var fileInfo = new FileInfo(xdPath);
-                var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
-                var fullPath = Path.Combine(parentFolder, xdPath);
                 if (fileInfo.Name != "XDConfig.json") continue;
-                xdconfigFileCount++;
-                xdconfigPath = fullPath;
+                xdconfigPath = Path.Combine(parentFolder, xdPath);
+                find = true;
+                break;
             }
 
-            if (xdconfigFileCount > 1)
-            {
-                Debug.LogError("[XD.Common] XDConfig.json 配置文件多余一个同时存在！");
+            if (find)
+            { 
+                Debug.LogFormat($"[XDSDK.Common] Can find XDConfig.json at: {xdconfigPath}");
+                return xdconfigPath;
             }
-            
-            if (xdconfigFileCount <= 0)
-            {
-                Debug.LogError("[XD.Common] XDConfig.json 配置文件不存在！");
-                return null;
-            }
-            
-            return xdconfigPath;
+            Debug.LogFormat($"[XDSDK.Common] CAN NOT find XDConfig.json!!");
+            return "";
         }
 
         public int callbackOrder{
