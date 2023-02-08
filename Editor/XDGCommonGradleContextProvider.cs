@@ -166,7 +166,6 @@ namespace XD.SDK.Common.Editor
             {
                 var xdPath = AssetDatabase.GUIDToAssetPath(guid);
                 var fileInfo = new FileInfo(xdPath);
-                Debug.LogFormat($"XDconfig FileName: {fileInfo.Name}");
                 if (fileInfo.Name != "XDConfig.json") continue;
                 xdconfigFileCount++;
                 xdconfigPath = xdPath;

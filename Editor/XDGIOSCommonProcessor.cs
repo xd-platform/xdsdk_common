@@ -53,7 +53,7 @@ namespace XD.SDK.Common.Editor{
                 CopyThirdResource(target, projPath, proj, parentFolder, resourcePath);
                 
                 //拷贝 XDConfig.json
-                var jsonPath = parentFolder + "/Assets/XDConfig.json";
+                var jsonPath = GetXDConfigPath();
                 if (!File.Exists(jsonPath)){
                     Debug.LogError("XDConfig.json 配置文件不存在，这个是必须的");
                     return;
@@ -346,6 +346,36 @@ namespace XD.SDK.Common.Editor{
             }
 
             return null;
+        }
+        
+        private string GetXDConfigPath()
+        {
+            int xdconfigFileCount = 0;
+            var xdconfigGuids = AssetDatabase.FindAssets("XDConfig");
+            string xdconfigPath = null;
+            foreach (var guid in xdconfigGuids)
+            {
+                var xdPath = AssetDatabase.GUIDToAssetPath(guid);
+                var fileInfo = new FileInfo(xdPath);
+                var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
+                var fullPath = Path.Combine(parentFolder, xdPath);
+                if (fileInfo.Name != "XDConfig.json") continue;
+                xdconfigFileCount++;
+                xdconfigPath = fullPath;
+            }
+
+            if (xdconfigFileCount > 1)
+            {
+                Debug.LogError("[XD.Common] XDConfig.json 配置文件多余一个同时存在！");
+            }
+            
+            if (xdconfigFileCount <= 0)
+            {
+                Debug.LogError("[XD.Common] XDConfig.json 配置文件不存在！");
+                return null;
+            }
+            
+            return xdconfigPath;
         }
     }
 }

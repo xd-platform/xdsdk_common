@@ -1,5 +1,6 @@
 #if UNITY_EDITOR && UNITY_ANDROID
 using System.IO;
+using UnityEditor;
 using UnityEditor.Android;
 using UnityEngine;
 
@@ -13,8 +14,9 @@ namespace XD.SDK.Common.Editor{
 
             var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
 
+            
             //拷贝 SDK json 文件，必须的
-            var configJson = parentFolder + "/Assets/XDConfig.json";
+            var configJson = GetXDConfigPath();
             if (File.Exists(configJson)){
     #if UNITY_2019_3_OR_NEWER
                 File.Copy(configJson, projectPath + "/unityLibrary/src/main/assets/XDConfig.json", true);
@@ -45,6 +47,36 @@ namespace XD.SDK.Common.Editor{
                 }
             }
     #endif
+        }
+
+        private string GetXDConfigPath()
+        {
+            int xdconfigFileCount = 0;
+            var xdconfigGuids = AssetDatabase.FindAssets("XDConfig");
+            string xdconfigPath = null;
+            foreach (var guid in xdconfigGuids)
+            {
+                var xdPath = AssetDatabase.GUIDToAssetPath(guid);
+                var fileInfo = new FileInfo(xdPath);
+                var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
+                var fullPath = Path.Combine(parentFolder, xdPath);
+                if (fileInfo.Name != "XDConfig.json") continue;
+                xdconfigFileCount++;
+                xdconfigPath = fullPath;
+            }
+
+            if (xdconfigFileCount > 1)
+            {
+                Debug.LogError("[XD.Common] XDConfig.json 配置文件多余一个同时存在！");
+            }
+            
+            if (xdconfigFileCount <= 0)
+            {
+                Debug.LogError("[XD.Common] XDConfig.json 配置文件不存在！");
+                return null;
+            }
+            
+            return xdconfigPath;
         }
 
         public int callbackOrder{
