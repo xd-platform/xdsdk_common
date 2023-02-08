@@ -159,14 +159,37 @@ namespace XD.SDK.Common.Editor
         {
             var result = new List<AndroidGradleContext>();
 
-            var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
-            var jsonPath = parentFolder + "/Assets/XDConfig.json";
-            if (!File.Exists(jsonPath))
+            int xdconfigFileCount = 0;
+            var xdconfigGuids = AssetDatabase.FindAssets("XDConfig");
+            string xdconfigPath = null;
+            foreach (var guid in xdconfigGuids)
+            {
+                var xdPath = AssetDatabase.GUIDToAssetPath(guid);
+                var fileInfo = new FileInfo(xdPath);
+                Debug.LogFormat($"XDconfig FileName: {fileInfo.Name}");
+                if (fileInfo.Name != "XDConfig.json") continue;
+                xdconfigFileCount++;
+                xdconfigPath = xdPath;
+            }
+
+            if (xdconfigFileCount > 1)
+            {
+                Debug.LogError("[XD.Common] XDConfig.json 配置文件多余一个同时存在！");
+                return result;
+            }
+            
+            if (xdconfigFileCount <= 0)
+            {
+                Debug.LogError("[XD.Common] XDConfig.json 配置文件不存在！");
+                return result;
+            }
+            
+            if (!File.Exists(xdconfigPath))
             {
                 Debug.LogError("/Assets/XDConfig.json 配置文件不存在！");
                 return result;
             }
-            var configMd = JsonConvert.DeserializeObject<XDConfigModel>(File.ReadAllText(jsonPath));
+            var configMd = JsonConvert.DeserializeObject<XDConfigModel>(File.ReadAllText(xdconfigPath));
             if (configMd == null)
             {
                 Debug.LogError("/Assets/XDConfig.json 解析失败！");
