@@ -17,8 +17,6 @@ namespace XD.SDK.Common.Editor
         
         public void OnPreprocessBuild(BuildReport report)
         {
-            var providers = AndroidUtils.Load();
-            if (providers == null) return;
             DeleteOldProvider();
             var provider = FixProvider();
             SaveProvider(provider);
