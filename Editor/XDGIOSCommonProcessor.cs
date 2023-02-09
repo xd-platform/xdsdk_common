@@ -348,7 +348,7 @@ namespace XD.SDK.Common.Editor{
             return null;
         }
         
-         private string GetXDConfigPath()
+         private static string GetXDConfigPath()
         {
             string xdconfigPath = null;
             

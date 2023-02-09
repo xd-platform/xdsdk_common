@@ -22,7 +22,7 @@ namespace XD.SDK.Common.Editor
             SaveProvider(provider);
         }
 
-        [MenuItem("XDSDK/Common/Refresh Android Gradle")]
+        [MenuItem("XD/Common/Refresh Android Gradle")]
         public static void CommonRefresh()
         {
             var temp = new XDGCommonGradleProvider();
