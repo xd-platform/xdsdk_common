@@ -154,64 +154,21 @@ namespace XD.SDK.Common.Editor
             writerHelper.Delete(@"        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'");
             writerHelper.Dispose();
         }
-        
-        private string GetXDConfigPath()
-        {
-            string xdconfigPath = null;
-            
-            var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
-            xdconfigPath = Path.Combine(parentFolder, "Assets/XDConfig.json");
-
-            if (File.Exists(xdconfigPath))
-            {
-                return xdconfigPath;
-            }
-            
-            Debug.LogWarningFormat($"[XDSDK.Common] Can't find XDConfig.json on Assets folder");
-            xdconfigPath = Path.Combine(parentFolder, "Assets/Plugins/XDConfig.json");
-            
-            if (File.Exists(xdconfigPath))
-            {
-                return xdconfigPath;
-            }
-            
-            Debug.LogWarningFormat($"[XDSDK.Common] Can't find XDConfig.json on Assets folder or Assets/Plugins folder");
-
-            bool find = false;
-            var xdconfigGuids = AssetDatabase.FindAssets("XDConfig");
-            foreach (var guid in xdconfigGuids)
-            {
-                var xdPath = AssetDatabase.GUIDToAssetPath(guid);
-                var fileInfo = new FileInfo(xdPath);
-                if (fileInfo.Name != "XDConfig.json") continue;
-                xdconfigPath = Path.Combine(parentFolder, xdPath);
-                find = true;
-                break;
-            }
-
-            if (find)
-            { 
-                Debug.LogFormat($"[XDSDK.Common] Can find XDConfig.json at: {xdconfigPath}");
-                return xdconfigPath;
-            }
-            Debug.LogFormat($"[XDSDK.Common] CAN NOT find XDConfig.json!!");
-            return "";
-        }
 
         public List<AndroidGradleContext> GetGradleContext()
         {
             var result = new List<AndroidGradleContext>();
             
-            var xdconfigPath = GetXDConfigPath();
+            var xdconfigPath = XDGCommonEditorUtils.GetXDConfigPath();
             if (!File.Exists(xdconfigPath))
             {
-                Debug.LogError("/Assets/XDConfig.json 配置文件不存在！");
+                Debug.LogError("XDConfig.json 配置文件不存在！");
                 return result;
             }
             var configMd = JsonConvert.DeserializeObject<XDConfigModel>(File.ReadAllText(xdconfigPath));
             if (configMd == null)
             {
-                Debug.LogError("/Assets/XDConfig.json 解析失败！");
+                Debug.LogError("XDConfig.json 解析失败！");
                 return result;
             }
 
@@ -339,17 +296,17 @@ namespace XD.SDK.Common.Editor
         {
             var result = new List<AndroidGradleContext>();
             
-            var jsonPath = GetXDConfigPath();
+            var jsonPath = XDGCommonEditorUtils.GetXDConfigPath();
             if (!File.Exists(jsonPath))
             {
-                Debug.LogError("/Assets/XDConfig.json 配置文件不存在！");
+                Debug.LogError("XDConfig.json 配置文件不存在！");
                 return result;
             }
 
             var configMd = JsonConvert.DeserializeObject<XDConfigModel>(File.ReadAllText(jsonPath));
             if (configMd == null)
             {
-                Debug.LogError("/Assets/XDConfig.json 解析失败！");
+                Debug.LogError("XDConfig.json 解析失败！");
                 return result;
             }
 

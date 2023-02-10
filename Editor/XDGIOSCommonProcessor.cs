@@ -6,7 +6,6 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
 using UnityEngine;
-using XD.SDK.Common.Editor;
 using LC.Newtonsoft.Json;
 using System.Linq;
 
@@ -53,7 +52,7 @@ namespace XD.SDK.Common.Editor{
                 CopyThirdResource(target, projPath, proj, parentFolder, resourcePath);
                 
                 //拷贝 XDConfig.json
-                var jsonPath = GetXDConfigPath();
+                var jsonPath = Editor.XDGCommonEditorUtils.GetXDConfigPath();
                 if (!File.Exists(jsonPath)){
                     Debug.LogError("XDConfig.json 配置文件不存在，这个是必须的");
                     return;
@@ -333,62 +332,23 @@ namespace XD.SDK.Common.Editor{
             return beginIndex != -1;
         }
 
-        private static string GetValueFromPlist(string infoPlistPath, string key){
-            if (infoPlistPath == null){
+        private static string GetValueFromPlist(string infoPlistPath, string key)
+        {
+            if (infoPlistPath == null)
+            {
                 return null;
             }
 
-            var dic = (Dictionary<string, object>) Plist.readPlist(infoPlistPath);
-            foreach (var item in dic){
-                if (item.Key.Equals(key)){
-                    return (string) item.Value;
+            var dic = (Dictionary<string, object>)Plist.readPlist(infoPlistPath);
+            foreach (var item in dic)
+            {
+                if (item.Key.Equals(key))
+                {
+                    return (string)item.Value;
                 }
             }
 
             return null;
-        }
-        
-         private static string GetXDConfigPath()
-        {
-            string xdconfigPath = null;
-            
-            var parentFolder = Directory.GetParent(Application.dataPath)?.FullName;
-            xdconfigPath = Path.Combine(parentFolder, "Assets/XDConfig.json");
-
-            if (File.Exists(xdconfigPath))
-            {
-                return xdconfigPath;
-            }
-            
-            Debug.LogWarningFormat($"[XDSDK.Common] Can't find XDConfig.json on Assets folder");
-            xdconfigPath = Path.Combine(parentFolder, "Assets/Plugins/XDConfig.json");
-            
-            if (File.Exists(xdconfigPath))
-            {
-                return xdconfigPath;
-            }
-            
-            Debug.LogWarningFormat($"[XDSDK.Common] Can't find XDConfig.json on Assets folder or Assets/Plugins folder");
-
-            bool find = false;
-            var xdconfigGuids = AssetDatabase.FindAssets("XDConfig");
-            foreach (var guid in xdconfigGuids)
-            {
-                var xdPath = AssetDatabase.GUIDToAssetPath(guid);
-                var fileInfo = new FileInfo(xdPath);
-                if (fileInfo.Name != "XDConfig.json") continue;
-                xdconfigPath = Path.Combine(parentFolder, xdPath);
-                find = true;
-                break;
-            }
-
-            if (find)
-            { 
-                Debug.LogFormat($"[XDSDK.Common] Can find XDConfig.json at: {xdconfigPath}");
-                return xdconfigPath;
-            }
-            Debug.LogFormat($"[XDSDK.Common] CAN NOT find XDConfig.json!!");
-            return "";
         }
     }
 }

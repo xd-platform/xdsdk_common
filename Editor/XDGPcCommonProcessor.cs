@@ -33,7 +33,7 @@ namespace XD.SDK.Common.Editor
                 platform == BuildTarget.StandaloneLinux64 || platform == BuildTarget.StandaloneOSX)
             {
                 PrepareStreamingAssets();
-                Copy2StreamingAssets(Application.dataPath, "XDConfig.json");
+                Copy2StreamingAssets("XDConfig.json");
                 AssetDatabase.Refresh();
             }
         }
@@ -46,7 +46,7 @@ namespace XD.SDK.Common.Editor
             AssetDatabase.Refresh();
         }
         
-        private void Copy2StreamingAssets(string folderPath, string fileName)
+        private void Copy2StreamingAssets(string fileName)
         {
             var streamingAssetsFolder = Application.streamingAssetsPath;
             if (false == Directory.Exists(streamingAssetsFolder))
@@ -57,9 +57,11 @@ namespace XD.SDK.Common.Editor
             if (File.Exists(path))
             {
                 File.Delete(path);
-                AssetDatabase.Refresh();
             }
-            File.Copy(Path.Combine(folderPath, fileName), path);
+
+            var xdconfigPath = XDGCommonEditorUtils.GetXDConfigPath();
+            if (File.Exists(xdconfigPath) == false) return;
+            File.Copy(xdconfigPath, path);
         }
         
         private void DeleteStreamingAssetsFile(string fileName)
