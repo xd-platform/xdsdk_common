@@ -10,15 +10,10 @@ using LC.Newtonsoft.Json;
 using System.Linq;
 
 namespace XD.SDK.Common.Editor{
-    public static class XDGIOSCommonProcessor
-    {
-
-        private static string rootPath;
+    public static class XDGIOSCommonProcessor{
         [PostProcessBuild(199)]
         public static void OnPostprocessBuild(BuildTarget BuildTarget, string path){
-            if (BuildTarget == BuildTarget.iOS)
-            {
-                rootPath = path;
+            if (BuildTarget == BuildTarget.iOS){
                 var projPath = PBXProject.GetPBXProjectPath(path);
                 var proj = new PBXProject();
                 proj.ReadFromString(File.ReadAllText(projPath));
@@ -101,18 +96,18 @@ namespace XD.SDK.Common.Editor{
             return null;
         }
 
-        private static void CopyResource(string mainTargetGuid, string projPath, PBXProject proj, string dataPath,
+        private static void CopyResource(string target, string projPath, PBXProject proj, string parentFolder,
             string npmModuleName, string localModuleName, string xcodeResourceFolder){
             //拷贝文件夹里的资源
-            var moduleIOSResourcesFolder = FilterFile(dataPath + "/Library/PackageCache/", $"{npmModuleName}@");
-            if (string.IsNullOrEmpty(moduleIOSResourcesFolder)){ //优先使用npm的，否则用本地的
-                moduleIOSResourcesFolder = dataPath + "/Assets/XDSDK/Mobile/" + localModuleName;
+            var tdsResourcePath = FilterFile(parentFolder + "/Library/PackageCache/", $"{npmModuleName}@");
+            if (string.IsNullOrEmpty(tdsResourcePath)){ //优先使用npm的，否则用本地的
+                tdsResourcePath = parentFolder + "/Assets/XDSDK/Mobile/" + localModuleName;
             }
-            moduleIOSResourcesFolder = moduleIOSResourcesFolder + "/Plugins/iOS/Resource";
+            tdsResourcePath = tdsResourcePath + "/Plugins/iOS/Resource";
 
-            if (Directory.Exists(moduleIOSResourcesFolder) && moduleIOSResourcesFolder != ""){
-                Debug.Log("拷贝资源路径: " + moduleIOSResourcesFolder);
-                CopyAndReplaceDirectory(moduleIOSResourcesFolder, xcodeResourceFolder, mainTargetGuid, proj);
+            if (Directory.Exists(tdsResourcePath) && tdsResourcePath != ""){
+                Debug.Log("拷贝资源路径: " + tdsResourcePath);
+                CopyAndReplaceDirectory(tdsResourcePath, xcodeResourceFolder, target, proj);
                 File.WriteAllText(projPath, proj.WriteToString()); //保存  
             }
         }
@@ -123,9 +118,8 @@ namespace XD.SDK.Common.Editor{
             }
         }
 
-        private static void CopyAndReplaceDirectory(string srcPath, string dstPath, string mainTargetGuid, PBXProject proj){
+        private static void CopyAndReplaceDirectory(string srcPath, string dstPath, string target, PBXProject proj){
             if (!File.Exists(dstPath)){
-                Debug.LogFormat($"Create Directory! dstPath: {dstPath}");
                 Directory.CreateDirectory(dstPath);
             }
 
@@ -133,15 +127,14 @@ namespace XD.SDK.Common.Editor{
             foreach (var file in Directory.GetFiles(srcPath)){
                 var name = Path.GetFileName(file);
                 var filePath = Path.Combine(dstPath, name);
-                
+
                 if (!name.EndsWith(".meta") && !File.Exists(filePath)){
-                    Debug.LogFormat($"Copyed File! name: {name} path: {filePath}");
                     File.Copy(file, filePath);
                 }
 
                 //添加到 xcode 配置
-                if (filePath.EndsWith(".plist") || filePath.EndsWith(".json") || filePath.EndsWith("InfoPlist.strings")){
-                    AddXcodeConfig(mainTargetGuid, proj, filePath);
+                if (filePath.EndsWith(".bundle") || filePath.EndsWith(".plist") || filePath.EndsWith(".json") || filePath.EndsWith("InfoPlist.strings")){
+                    AddXcodeConfig(target, proj, filePath);
                 }
             }
 
@@ -149,72 +142,15 @@ namespace XD.SDK.Common.Editor{
                 var name = Path.GetFileName(dir);
                 var dirPath = Path.Combine(dstPath, name);
                 if (!name.EndsWith(".framework") && !name.EndsWith(".xcframework")){
-                    CopyAndReplaceDirectory(dir, dirPath, mainTargetGuid, proj);
+                    CopyAndReplaceDirectory(dir, dirPath, target, proj);
                 }
 
                 if (dirPath.EndsWith(".bundle")){
-                    AddXcodeConfig(mainTargetGuid, proj, dirPath);
-                    string[] directories = Directory.GetDirectories(rootPath, "*", SearchOption.AllDirectories);
-                    DirectoryInfo copyedDi = new DirectoryInfo(dirPath);
-                    List<string> deletingFolders = new List<string>();
-                    DirectoryInfo oldBundleDi = null;
-                    foreach (string directory in directories)
-                    {
-                        oldBundleDi = new DirectoryInfo(directory);
-                        if (oldBundleDi.Name == copyedDi.Name && oldBundleDi.FullName != copyedDi.FullName)
-                        {
-                            Debug.LogFormat($"找到相同文件夹! di: {oldBundleDi.FullName} copyed: {copyedDi.FullName}");
-                            deletingFolders.Add(oldBundleDi.FullName);
-                        }
-                    }
-                    var frameTarget = proj.GetUnityFrameworkTargetGuid();
-                    foreach (var deletingFolder in deletingFolders)
-                    {
-#if UNITY_2019_3_OR_NEWER
-                        var p2 = MakeRelativePath(rootPath + Path.DirectorySeparatorChar.ToString(), deletingFolder);
-                        Debug.LogErrorFormat($"p2: {p2}");
-                        var fileGuid = proj.GetResourcesBuildPhaseByTarget(p2);
-                        // fileRef: DC2D4A8BAD2C71BDAF1E7B1B
-                        // buildFile: EBB948E1ACA824DA11506EDF
-                        var resGuid = proj.GetCompileFlagsForFile(frameTarget, fileGuid);
-                        proj.RemoveFileFromBuild(frameTarget, resGuid[0]);
-#endif
-                        Directory.Delete(deletingFolder, true);
-                    }
-                    
+                    AddXcodeConfig(target, proj, dirPath);
                 }
             }
         }
-        
-        /// <summary>
-        /// Creates a relative path from one file or folder to another.
-        /// </summary>
-        /// <param name="fromPath">Contains the directory that defines the start of the relative path.</param>
-        /// <param name="toPath">Contains the path that defines the endpoint of the relative path.</param>
-        /// <returns>The relative path from the start directory to the end path or <c>toPath</c> if the paths are not related.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="UriFormatException"></exception>
-        /// <exception cref="InvalidOperationException"></exception>
-        private static String MakeRelativePath(String fromPath, String toPath)
-        {
-            if (String.IsNullOrEmpty(fromPath)) throw new ArgumentNullException("fromPath");
-            if (String.IsNullOrEmpty(toPath))   throw new ArgumentNullException("toPath");
 
-            Uri fromUri = new Uri(fromPath);
-            Uri toUri = new Uri(toPath);
-
-            if (fromUri.Scheme != toUri.Scheme) { return toPath; } // path can't be made relative.
-
-            Uri relativeUri = fromUri.MakeRelativeUri(toUri);
-            String relativePath = Uri.UnescapeDataString(relativeUri.ToString());
-
-            if (toUri.Scheme.Equals("file", StringComparison.InvariantCultureIgnoreCase))
-            {
-                relativePath = relativePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
-            }
-
-            return relativePath;
-        }
 
         private static void SetPlist(string pathToBuildProject){
             var _plistPath = pathToBuildProject + "/Info.plist"; //Xcode工程的plist
