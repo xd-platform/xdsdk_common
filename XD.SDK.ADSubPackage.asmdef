@@ -1,0 +1,19 @@
+{
+    "name": "XD.SDK.ADSubPackage",
+    "references": [
+        "XD.SDK.Common"
+    ],
+    "includePlatforms": [
+        "Android",
+        "CloudRendering",
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
