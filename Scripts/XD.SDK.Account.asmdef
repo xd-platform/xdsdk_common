@@ -1,0 +1,16 @@
+{
+  "name": "XD.SDK.Account",
+  "references": [
+      "GUID:d2c60bf9347574ed480e55a6682a81f4",
+      "GUID:0ab0f87386c0640798a09051c047d4ab"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
