@@ -1,0 +1,6 @@
+framework module XDThirdTrackSDK {
+  umbrella header "XDThirdTrackSDK.h"
+
+  export *
+  module * { export * }
+}
