@@ -1,0 +1,15 @@
+{
+    "name": "XD.SDK.Share",
+    "references": [
+        "GUID:d2c60bf9347574ed480e55a6682a81f4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
