@@ -1,0 +1,6 @@
+framework module XDThirdLoginSDK {
+  umbrella header "XDThirdLoginSDK.h"
+
+  export *
+  module * { export * }
+}
