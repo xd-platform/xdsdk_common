@@ -1,0 +1,11 @@
+framework module TDSGTwitterLoginKit {
+  umbrella header "TDSGTwitterLoginKit.h"
+
+  export *
+  module * { export * }
+}
+
+module TDSGTwitterLoginKit.Swift {
+    header "TDSGTwitterLoginKit-Swift.h"
+    requires objc
+}
