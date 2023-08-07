@@ -1,0 +1,20 @@
+{
+    "name": "XD.SDK.Share.Mobile.Editor",
+    "references": [
+        "GUID:616cea76def2d4f059b94440fc8cc03d",
+        "GUID:747e53b1749584bae9386571797e5eb5",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:27619889b8ba8c24980f49ee34dbb44a"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
