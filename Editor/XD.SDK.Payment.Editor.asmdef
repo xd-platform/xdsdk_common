@@ -1,0 +1,16 @@
+{
+    "name": "XD.SDK.Payment.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fb5c2052471f74af7b30f6ed8f8090a4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
