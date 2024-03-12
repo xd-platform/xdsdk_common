@@ -1,0 +1,16 @@
+{
+    "name": "XD.SDK.Payment",
+    "references": [
+        "GUID:271a06ab0780d4a5ea46c9c3be2ab5dc",
+        "GUID:0b3f64ec33f5b4da98a17367a35b82f2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
