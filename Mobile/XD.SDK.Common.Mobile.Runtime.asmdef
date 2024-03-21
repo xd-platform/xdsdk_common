@@ -1,0 +1,22 @@
+{
+    "name": "XD.SDK.Common.Mobile.Runtime",
+    "references": [
+        "GUID:271a06ab0780d4a5ea46c9c3be2ab5dc",
+        "GUID:0b3f64ec33f5b4da98a17367a35b82f2",
+        "GUID:43c632eee0a6f42cdaf21080b154f3a1",
+        "GUID:d9a5d47c553a04a28a7d21a3f3fc8dc3",
+        "GUID:0ab0f87386c0640798a09051c047d4ab"
+    ],
+    "includePlatforms": [
+        "Android",
+        "iOS"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
