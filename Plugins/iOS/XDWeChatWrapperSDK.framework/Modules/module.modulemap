@@ -1,0 +1,6 @@
+framework module XDWeChatWrapperSDK {
+  umbrella header "XDWeChatWrapperSDK.h"
+
+  export *
+  module * { export * }
+}
