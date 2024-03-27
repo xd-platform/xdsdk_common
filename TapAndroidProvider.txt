@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "Use": true,
+  "Priority": 1,
+  "ModuleName": "XD.Payment",
+  "AndroidGradleContext": [
+    {
+      "locationType": 1,
+      "unityVersionCompatibleType": 0,
+      "templateType": 3,
+      "processType": 1,
+      "locationParam": "DEPS",
+      "processContent": [
+        "    implementation 'androidx.browser:browser:1.4.0'",
+        "    implementation 'com.android.billingclient:billing:5.2.0'",
+        "    implementation 'com.alipay.sdk:alipaysdk-android:15.8.11@aar'",
+        "    implementation 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'",
+      ]
+    }
+  ]
+}
