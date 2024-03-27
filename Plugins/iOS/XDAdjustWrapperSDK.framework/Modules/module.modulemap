@@ -1,0 +1,6 @@
+framework module XDAdjustWrapperSDK {
+  umbrella header "XDAdjustWrapperSDK.h"
+
+  export *
+  module * { export * }
+}
