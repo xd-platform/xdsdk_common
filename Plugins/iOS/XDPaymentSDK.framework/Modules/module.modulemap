@@ -1,0 +1,6 @@
+framework module XDPaymentSDK {
+  umbrella header "XDPaymentSDK.h"
+
+  export *
+  module * { export * }
+}
