@@ -1,0 +1,6 @@
+framework module XDWeiboWrapperSDK {
+  umbrella header "XDWeiboWrapperSDK.h"
+
+  export *
+  module * { export * }
+}

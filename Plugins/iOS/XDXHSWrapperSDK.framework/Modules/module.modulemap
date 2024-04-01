@@ -1,0 +1,6 @@
+framework module XDXHSWrapperSDK {
+  umbrella header "XDXHSWrapperSDK.h"
+
+  export *
+  module * { export * }
+}
