@@ -1,0 +1,6 @@
+framework module XDFacebookWrapperSDK {
+  umbrella header "XDFacebookWrapperSDK.h"
+
+  export *
+  module * { export * }
+}
