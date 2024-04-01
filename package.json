@@ -1,0 +1,8 @@
+{
+  "name": "com.xd.sdk.announcement",
+  "version": "6.18.0-qa6180.4",
+  "description": "XD Announcement",
+  "unity": "2018.3",
+  "license": "MIT",
+  "dependencies": {}
+}
