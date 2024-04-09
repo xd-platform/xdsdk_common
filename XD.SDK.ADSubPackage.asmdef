@@ -1,0 +1,21 @@
+{
+    "name": "XD.SDK.ADSubPackage",
+    "references": [
+        "GUID:271a06ab0780d4a5ea46c9c3be2ab5dc",
+        "GUID:0b3f64ec33f5b4da98a17367a35b82f2",
+        "GUID:43c632eee0a6f42cdaf21080b154f3a1",
+        "GUID:d2c60bf9347574ed480e55a6682a81f4"
+    ],
+    "includePlatforms": [
+        "Android",
+        "iOS"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

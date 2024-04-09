@@ -1,0 +1,8 @@
+{
+  "name": "com.xd.sdk.ads.subpkg",
+  "version": "3.3.0",
+  "description": "XD-SDK ADs Sub Pkg",
+  "unity": "2018.3",
+  "license": "MIT",
+  "dependencies": {}
+}
