@@ -1,0 +1,6 @@
+framework module XDFirebaseWrapperSDK {
+  umbrella header "XDFirebaseWrapperSDK.h"
+
+  export *
+  module * { export * }
+}
