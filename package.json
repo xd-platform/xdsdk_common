@@ -1,0 +1,8 @@
+{
+  "name": "com.xd.sdk.share",
+  "version": "6.17.2",
+  "description": "XD Payment",
+  "unity": "2018.3",
+  "license": "MIT",
+  "dependencies": {}
+}
