@@ -1,0 +1,18 @@
+{
+    "name": "XD.SDK.Report",
+    "rootNamespace": "",
+    "references": [
+        "GUID:271a06ab0780d4a5ea46c9c3be2ab5dc",
+        "GUID:8b2e8a99ce9ab457da469f8744959bc2",
+        "GUID:c72576b1c89c54ea0a0d748ee92b35c2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
