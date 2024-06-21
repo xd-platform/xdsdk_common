@@ -1,0 +1,6 @@
+framework module XDFirebaseCrashlyticsWrapperSDK {
+  umbrella header "XDFirebaseCrashlyticsWrapperSDK.h"
+
+  export *
+  module * { export * }
+}

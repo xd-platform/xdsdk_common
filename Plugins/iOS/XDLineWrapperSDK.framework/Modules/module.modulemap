@@ -1,0 +1,6 @@
+framework module XDLineWrapperSDK {
+  umbrella header "XDLineWrapperSDK.h"
+
+  export *
+  module * { export * }
+}
