@@ -1,0 +1,19 @@
+{
+    "name": "XD.SDK.ADSubPackage.Editor",
+    "references": [
+        "GUID:6b582ca93ca0f48c5a5c18e8cdd7b752",
+        "GUID:fb5c2052471f74af7b30f6ed8f8090a4",
+        "GUID:616cea76def2d4f059b94440fc8cc03d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
