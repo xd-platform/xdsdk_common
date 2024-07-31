@@ -1,0 +1,6 @@
+framework module XDDouyinWrapperSDK {
+  umbrella header "XDDouyinWrapperSDK.h"
+  export *
+
+  module * { export * }
+}

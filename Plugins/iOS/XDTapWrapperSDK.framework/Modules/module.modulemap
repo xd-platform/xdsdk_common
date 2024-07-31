@@ -1,0 +1,6 @@
+framework module XDTapWrapperSDK {
+  umbrella header "XDTapWrapperSDK.h"
+  export *
+
+  module * { export * }
+}

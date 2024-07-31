@@ -1,0 +1,6 @@
+framework module XDAliYunWrapperSDK {
+  umbrella header "XDAliYunWrapperSDK.h"
+  export *
+
+  module * { export * }
+}
