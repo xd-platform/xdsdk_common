@@ -1,0 +1,6 @@
+framework module XDCommonSDK {
+  umbrella header "XDCommonSDK.h"
+  export *
+
+  module * { export * }
+}

@@ -1,0 +1,223 @@
+{
+    "zh_CN": {
+        "titleFirst": "用户协议及隐私政策提示",
+        "summaryFirst": "欢迎使用本游戏，我们将依据下方显示的 用户协议 、 隐私政策 来帮助您了解我们在收集、使用、存储和共享您个人信息的情况以及您享有的相关权利。请您点击下方链接查看并仔细阅读以了解详细信息。",
+        "promptFirst": "点击同意或注册、使用本游戏均视为您已仔细阅读并同意游戏的 <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">用户协议</a> 、 <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">隐私政策</a> ",
+        "title": "用户协议及隐私政策更新",
+        "summary": "我们对用户协议 、 隐私政策 进行了更新，本次更新的内容详见协议页面首部说明，请点击协议链接查看。",
+        "prompt": "点击同意或注册、使用本游戏均视为您已仔细阅读并同意游戏的 <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">用户协议</a> 、 <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">隐私政策</a> ",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "我已满16周岁"
+            }
+        ]
+    },
+    "zh_TW": {
+        "titleFirst": "服務條款及隱私權保護政策提示",
+        "summaryFirst": "歡迎使用本遊戲，我們將依據下方顯示的 服務條款 、 隱私權保護政策 來説明您瞭解我們在收集、使用、儲存和分享您個人資訊的情況以及您享有的相關權利。請您點擊下方連結查看並仔細閱讀以瞭解詳細資訊。",
+        "promptFirst": "點擊同意或註冊、使用本遊戲均視為您已仔細閱讀並同意遊戲的 <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">服務條款</a> 、 <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">隱私權保護政策</a>",
+        "title": "服務條款及隱私權保護政策更新",
+        "summary": "我們對服務條款 、 隱私權保護政策 進行了更新，本次更新的內容詳見協議頁面首部說明，請點擊協議連結查看。",
+        "prompt": "點擊同意或註冊、使用本遊戲均視為您已仔細閱讀並同意遊戲的 <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">服務條款</a> 、 <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">隱私權保護政策</a>",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "我已滿16歲"
+            }
+        ]
+    },
+    "th_TH": {
+        "titleFirst": "ข้อตกลงผู้ใช้และเคล็ดลับนโยบายความเป็นส่วนตัว",
+        "summaryFirst": "ยินดีต้อนรับเข้าใช้เกม! ทางเราจะอิงตามข้อตกลงสิทธิ์การใช้งานสําหรับผู้ใช้ปลายทางและนโยบายความเป็นส่วนตัวที่แสดงดังต่อไปนี้ เพื่อช่วยให้คุณเข้าใจการรวบรวม การใช้ การจัดเก็บและการแบ่งปันข้อมูลส่วนบุคคลของคุณและสิทธิ์ของคุณ โปรดคลิกที่ลิงค์ด้านล่างเพื่อดูและอ่านรายละเอียดอย่างละเอียด",
+        "promptFirst": "แล้วคลิกเพื่อตกลงหรือลงทะเบียน สำหรับเข้าใช้เกมนี้ จะถือว่าคุณได้อ่านและยอมรับ<a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">ข้อตกลงสิทธิ์การใช้งานสําหรับผู้ใช้ปลายทาง</a>และ<a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">นโยบายความเป็นส่วนตัว</a>ของเกมอย่างละเอียดถี่ถ้วนแล้ว",
+        "title": "การปรับปรุงข้อตกลงของผู้ใช้และนโยบายความเป็นส่วนตัว",
+        "summary": "ทางเราได้ดำเนินการอัปเดต ข้อตกลงสิทธิ์การใช้งานสําหรับผู้ใช้ปลายทาง 、 นโยบายความเป็นส่วนตัว แล้ว  สำหรับรายละเอียดของการอัปเดตนี้สามารถดูได้ในส่วนแรกของหน้าข้อตกลง โปรดคลิกที่ลิงค์ข้อตกลงเพื่อดู",
+        "prompt": "โแล้วคลิกเพื่อตกลงหรือลงทะเบียน สำหรับเข้าใช้เกมนี้ จะถือว่าคุณได้อ่านและยอมรับ<a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">ข้อตกลงสิทธิ์การใช้งานสําหรับผู้ใช้ปลายทาง</a>และ<a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">นโยบายความเป็นส่วนตัว</a>ของเกมอย่างละเอียดถี่ถ้วนแล้ว",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "ฉันอายุ 16 ปีขึ้นไป"
+            }
+        ]
+    },
+    "in_ID": {
+        "titleFirst": "Pemberitahuan Perjanjian Lisensi Pengguna Akhir dan Kebijakan Privasi",
+        "summaryFirst": "selamat menggunakan game ini! Kami akan membantu Anda memahami bagaimana kami mengumpulkan, menggunakan, menyimpan dan berbagi informasi pribadi Anda, juga hak Anda yang berkaitan dalam Acuerdo de Licencia de Usuario Final dan  Kebijakan Privasi  yang terlampir di bawah ini. Silakan klik tautan di bawah ini untuk membaca dengan cermat dan memahami informasi secara rinci. ",
+        "promptFirst": "Klik setuju atau daftar, untuk menggunakan game ini, Anda dianggap telah membaca dengan cermat dan menyetujui <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Acuerdo de Licencia de Usuario Final</a> dan  <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Kebijakan Privasi</a>  game ini",
+        "title": "Pembaruan Perjanjian Lisensi Pengguna Akhir dan Kebijakan Privasi",
+        "summary": "Kami telah memperbarui  Acuerdo de Licencia de Usuario Final 、 Kebijakan Privasi ,  detail isi pembaruan ini dapat dilihat di halaman pertama penjelasan perjanjian, silakan tap link perjanjian untuk melihat.",
+        "prompt": "Klik setuju atau daftar, untuk menggunakan game ini, Anda dianggap telah membaca dengan cermat dan menyetujui <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Acuerdo de Licencia de Usuario Final</a> dan  <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Kebijakan Privasi</a>  game ini",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "Saya sudah 16 tahun"
+            }
+        ]
+    },
+    "ko_KR": {
+        "titleFirst": "서비스 이용약관 및 개인정보 처리방침",
+        "summaryFirst": "본사는 아래의 서비스 이용약관 및 개인정보 처리방침에 따라 이용자의 개인정보 및 관련 권한을 수집, 사용, 저장 및 공유할 수 있습니다. 아래 링크를 통해 자세한 정보를 확인하실 수 있습니다.",
+        "promptFirst": "동의 혹은 가입을 클릭하시고 게임 이용시 <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">서비스 이용약관</a> 및 <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">개인정보 처리방침</a>의 자세한 내용을 확인하셨고 이에 동의하신 것으로 간주됩니다.",
+        "title": "서비스 이용약관 및 개인정보 처리방침",
+        "summary": "서비스 이용약관 및 개인정보 처리방침이 업데이트되었습니다. 이번 업데이트 내용은 약관 페이지의 상단에 설명되어 있으며, 약관 링크를 눌러 확인하시기 바랍니다.",
+        "prompt": "동의 혹은 가입을 클릭하시고 게임 이용시 <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">서비스 이용약관</a> 및 <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">개인정보 처리방침</a>의 자세한 내용을 확인하였으며 이에 동의하신 것으로 간주됩니다.",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "만 16세 이상입니다."
+            }
+        ]
+    },
+    "ja_JP": {
+        "titleFirst": "利用規約及プライバシーポリシーの提示",
+        "summaryFirst": "弊社のゲームをご利用いただきありがとうございます。弊社は利用契約 、 プライバシープロトコルによって、弊社がユーザーの個人情報を収集、使用、保存および共有する行為、またユーザーの有する権利についてご説明しております。下のリンクをタップして詳細をご確認ください。",
+        "promptFirst": "「同意する」をタップ、または登録・使用することにより、本ゲームの<a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">利用契約</a>および <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">プライバシープロトコル</a> を注意深く読み、同意したものとみなされます",
+        "title": "利用規約及びプライバシーポリシーの更新",
+        "summary": "弊社は 利用契約 、 プライバシープロトコル について更新を行いました。今回の更新内容の詳細は、規約ページのトップに表示されています。規約のリンクをタップしてご確認ください。",
+        "prompt": "「同意する」をタップ、または登録・使用することにより、本ゲームの<a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">利用契約</a>および <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">プライバシープロトコル</a> を注意深く読み、同意したものとみなされます",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "16歳以上"
+            }
+        ]
+    },
+    "de_DE": {
+        "titleFirst": "Lizenzvereinbarung für Endbenutzer und Datenschutzrichtlinie",
+        "summaryFirst": "Willkommen zum Spiel! Mithilfe der folgenden Lizenzvereinbarung für Endbenutzer  und Datenschutzrichtlinie möchten wir dir zeigen, wie wir persönliche Daten sammeln, nutzen, speichern und weiterleiten und was deine Rechte in diesem Zusammenhang sind. Tippe bitte auf den folgenden Link und lese ihn aufmerksam durch, um mehr Informationen zu bekommen.",
+        "promptFirst": "Wenn du auf Einverstanden tippst und dich für die Nutzung des Spiels registrierst, wird davon ausgegangen, dass du die <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Lizenzvereinbarung für Endbenutzer</a> und die <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Datenschutzrichtlinie</a> für das Spiel aufmerksam gelesen und angenommen hast",
+        "title": "Lizenzvereinbarung für Endbenutzer und Datenschutzrichtlinie aktualisieren",
+        "summary": "Sie haben die Lizenzvereinbarung für Endbenutzer 、 Datenschutzrichtlinie aktualisiert. Einzelheiten zu den Aktualisierungen finden Sie oben auf der Vertragsseite, bitte klicken Sie auf den entsprechenden Link.",
+        "prompt": "Wenn du auf Einverstanden tippst und dich für die Nutzung des Spiels registrierst, wird davon ausgegangen, dass du die <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Lizenzvereinbarung für Endbenutzer</a> und die <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Datenschutzrichtlinie</a> für das Spiel aufmerksam gelesen und angenommen hast",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "Ich bin über 16 Jahre alt"
+            }
+        ]
+    },
+    "fr_FR": {
+        "titleFirst": "Rappels des Conditions d'utilisation et de la Politique de confidentialité",
+        "summaryFirst": "Nous nous appuierons sur les « Conditions d'utilisation » et la « Politique de confidentialité » affichées ci-dessous pour vous aider à mieux comprendre notre collecte, utilisation, stockage et partage de vos informations personnelles et vos droits connexes. Cliquez sur le lien ci-dessous pour plus de détails, et lisez-les attentivement.",
+        "promptFirst": " En cliquant sur Accepter, ou en vous inscrivant ou en utilisant ce jeu, il est considéré que vous avez lu attentivement et accepté les  <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Contrat de Licence Utilisateur Final</a>  et la  <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Politique de Confidentialité</a>  du jeu",
+        "title": "Contrat de Licence Utilisateur Final et Politique de Confidentialité",
+        "summary": "Nous avons mis à jour la  Contrat de Licence Utilisateur Final 、 Politique de Confidentialité , le contenu détaillé de cette mise à jour est sur la description supérieure de la page de condition, cliquez le lien pour le vérifier.",
+        "prompt": " En cliquant sur Accepter, ou en vous inscrivant ou en utilisant ce jeu, il est considéré que vous avez lu attentivement et accepté les  <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Contrat de Licence Utilisateur Final</a>  et la  <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Politique de Confidentialité</a>  du jeu",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "J'ai plus de 16 ans"
+            }
+        ]
+    },
+    "pt_PT": {
+        "titleFirst": "Acordo do usuário de XD e política de privacidade",
+        "summaryFirst": "Bem-vindo ao jogo! Nós vamos ajudar você a compreender seus direitos e a situação de coleta, uso e armazenamento dos seus dados pessoais, de acordo com o Contrato de Licença de Usuário Final e a Política de Privacidade exibidos abaixo. Clique no link abaixo para consultar e ler as informações relevantes. ",
+        "promptFirst": "Ao aceitar, registrar-se ou usar o jogo entende-se que você leu e concorda com o <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Contrato de Licença de Usuário Final</a> e a <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Política de Privacidade</a>",
+        "title": "Atualizações do acordo do usuário de XD e política de privacidade",
+        "summary": "Atualizamos  Contrato de Licença de Usuário Final 、 Política de Privacidade , para obter detalhes desta atualização, consulte a descrição na parte superior da página do acordo, por favor, clique no link do acordo para visualizar.",
+        "prompt": "Ao aceitar, registrar-se ou usar o jogo entende-se que você leu e concorda com o <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Contrato de Licença de Usuário Final</a> e a <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Política de Privacidade</a>",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "Eu tenho 16 anos."
+            }
+        ]
+    },
+    "es_ES": {
+        "titleFirst": "Acuerdo de Licencia de Usuario Final y Política de Privacidad",
+        "summaryFirst": "te da la bienvenida al juego! Utilizaremos Acuerdo de Licencia de Usuario Final y Política de Privacidad que se muestran a continuación para ayudarte a entender cómo recogemos, utilizamos, almacenamos y compartimos su información personal y cuáles son tus derechos en relación con ella. Pulsa en el siguiente enlace para ver y leerlos detenidamente para obtener más detalles.",
+        "promptFirst": "Al hacer clic en aceptar, registrarse o utilizar el Juegos de XD, se considera que ha leído cuidadosamente y ha aceptado el  <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Acuerdo de Licencia de Usuario Final</a> 、 <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Política de Privacidad</a> de XD.",
+        "title": "Acuerdo de Licencia de Usuario Final de Política de Privacidad",
+        "summary": "Hemos actualizado el  Acuerdo de Licencia de Usuario Final 、 Política de Privacidad . Los detalles de esta actualización se describen en la parte superior de la página del Acuerdo, haga clic en el enlace del Acuerdo para verlo.",
+        "prompt": "Al pulsar aceptar o registrarse, o jugar al juego, se considera que ha leído y aceptado el <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Acuerdo de Licencia de Usuario Final</a> y <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Política de Privacidad</a> juego.",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "Tengo 16 años"
+            }
+        ]
+    },
+    "tr_TR": {
+        "titleFirst": "Coşkun Kullanıcı anlaşması ve Gizlilik Politikası",
+        "summaryFirst": "Oyuna Hoşgeldiniz! Aşağıda gösterilen Kullanıcı sözleşmesi ve Gizlilik sözleşmesi sizlere daha iyi hizmet verebilmemiz adına, kişisel bilgilerinizin toplanması, kullanılması, saklanılması ve paylaşılması, ayrıca kişisel bilgileriniz, bilgilerinizin paylaşılması ve haklarınız hakkında sizlere bilgi vermek amacı taşımaktadır. Aşağıdaki linke tıklayarak bilgileri detaylı bir şekilde okuyup inceleyebilirsiniz.",
+        "promptFirst": "Kabul et ve Kayıt ol kısmına tıkladığınızda, <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Kullanıcı sözleşmesi</a> ve <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Gizlilik sözleşmesi</a> 'nı kabul etmiş olursunuz.",
+        "title": "Coşkun Kullanıcı anlaşması ve Gizlilik Politikası güncellemesi",
+        "summary": " Kullanıcı sözleşmesi 、 Gizlilik sözleşmesi  'yi güncelledik, Bu güncelleştirmenin içeriği için lütfen anlaşma sayfasının başındaki açıklamaya bakınız. Göz atmak için lütfen anlaşma bağlantısını tıklayın.",
+        "prompt": "Kabul et ve Kayıt ol kısmına tıkladığınızda, <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Kullanıcı sözleşmesi</a> ve <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Gizlilik sözleşmesi</a> 'nı kabul etmiş olursunuz.",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "16 yaşın üzerindeyim"
+            }
+        ]
+    },
+    "ru_RU": {
+        "titleFirst": "Уведомление о «Лицензионное соглашение с конечным пользователем» и «Политике конфиденциальности»",
+        "summaryFirst": "Приветствуем в игре! Мы поможем вам понять, как мы собираем, используем, храним и передаем вашу личную информацию и связанные с ней права в соответствии с Лицензионное соглашение с конечным пользователем и Политике конфиденциальности, приведенными ниже. Пожалуйста, нажмите на ссылку ниже, чтобы просмотреть и внимательно прочитать подробную информацию.",
+        "promptFirst": "Нажатие «Согласиться», регистрация или использование этой игры означают, что вы внимательно прочитали и согласились с <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Лицензионное соглашение с конечным пользователем</a> и <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Политике конфиденциальности</a> игры.",
+        "title": "Обновление «Лицензионное соглашение с конечным пользователем» и «Политике конфиденциальности» ",
+        "summary": "Мы обновили Лицензионное соглашение с конечным пользователем 、 Политике конфиденциальности . Подробную информацию об этом обновлении см. в описании в верхней части страницы соглашения. Пожалуйста, пройдите по ссылке.",
+        "prompt": "Нажатие «Согласиться», регистрация или использование этой игры означают, что вы внимательно прочитали и согласились с <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">Лицензионное соглашение с конечным пользователем</a> и <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Политике конфиденциальности</a> игры",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "Я старше 16 лет"
+            }
+        ]
+    },
+    "en_US": {
+        "titleFirst": "End User License Agreement & Privacy Policy",
+        "summaryFirst": "Thanks for using our product! We will help you understand how we collect, use, store and share your personal information and what your relevant rights are based on End User License Agreement , Privacy Policy . For details, please click the link below and check it.",
+        "promptFirst": "By tapping Accept or  using our product, you acknowledge that you have read and agree to the <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">End User License Agreement</a> , <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Privacy Policy</a> ",
+        "title": "End User License Agreement & Privacy Policy - Update",
+        "summary": "We updated our End User License Agreement , Privacy Policy . For the update details, see the top of our agreement page. Click the agreement link to check it.",
+        "prompt": "By tapping Accept or  using our product, you acknowledge that you have read and agree to the <a href=\"https://protocol.xd.com/sdk-agreement-1.0.0.html\">End User License Agreement</a> , <a href=\"https://protocol.xd.com/sdk-privacy-1.0.0.html\">Privacy Policy</a>",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "US",
+        "options": [
+            {
+                "name": "age16",
+                "required": true,
+                "title": "I am over 16 years old"
+            }
+        ]
+    }
+}
