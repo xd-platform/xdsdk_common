@@ -1,0 +1,38 @@
+{
+    "ko_KR": {
+        "titleFirst": "동의 항목",
+        "promptFirst": "약관동의가 필요합니다",
+        "title": "동의 항목",
+        "prompt": "약관동의가 필요합니다",
+        "agreementVersion": "1.0.1",
+        "agreementRegion": "KR",
+        "agreeAll": "모두 동의하고 시작합니다",
+        "options": [
+            {
+                "name": "agreement",
+                "required": true,
+                "title": "<font color=#888888>(필수)</font> 게임 서비스 이용 약관에 대한 동의 <a href=\"https://protocol.xd.com/kr/sdk-agreement-1.0.0.html\">[내용보기]</a>"
+            },
+            {
+                "name": "privacy",
+                "required": true,
+                "title": "<font color=#888888>(필수)</font> 개인정보 수집 및 이용에 대한 동의 <a href=\"https://protocol.xd.com/kr/sdk-privacy-1.0.0.html\">[내용보기]</a>"
+            },
+            {
+                "name": "age",
+                "required": true,
+                "title": "<font color=#888888>(필수)</font> 만 14 세 이상입니다"
+            },
+            {
+                "name": "dayPush",
+                "required": false,
+                "title": "<font color=#888888>(선택)</font> 이벤트 푸시(8 시~21 시) 알림과 수신 동의"
+            },
+            {
+                "name": "nightPush",
+                "required": false,
+                "title": "<font color=#888888>(선택)</font> 야간 이벤트 푸시 (21 시~8 시) 알림과 수신 동의"
+            }
+        ]
+    }
+}

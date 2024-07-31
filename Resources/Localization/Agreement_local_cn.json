@@ -1,0 +1,12 @@
+{
+    "zh_CN": {
+        "titleFirst": "心动用户协议及隐私政策",
+        "summaryFirst": "欢迎使用心动游戏，我们将依据心动 用户协议 、 隐私政策、 第三方信息共享清单 、 儿童个人信息保护规则及监护人须知 来帮助您了解我们在收集、使用、存储和共享您个人信息的情况以及您享有的相关权利。请您点击下方链接查看并仔细阅读以了解详细信息。",
+        "promptFirst": "点击同意或注册、使用心动游戏均视为您已仔细阅读并同意心动 <a href=\"https://protocol.xd.cn/sdk-agreement-1.0.html\">用户协议</a> 、 <a href=\"https://protocol.xd.cn/sdk-privacy-1.0.html\">隐私政策</a> 、 <a href=\"https://protocol.xd.cn/sdk-share-1.0.html\">第三方信息共享清单</a> 、 <a href=\"https://protocol.xd.cn/sdk-child-protection-1.0.html\">儿童个人信息保护规则及监护人须知</a>",
+        "title": "心动用户协议及隐私政策更新",
+        "summary": "我们对用户协议 、 隐私政策 进行了更新，本次更新的内容详见协议页面首部说明，请点击协议链接查看。",
+        "prompt": "点击同意或注册、使用心动游戏均视为您已仔细阅读并同意心动<a href=\"https://protocol.xd.cn/sdk-agreement-1.0.html\">用户协议</a> 、 <a href=\"https://protocol.xd.cn/sdk-privacy-1.0.html\">隐私政策</a>.",
+        "agreementVersion": "1.0.0",
+        "agreementRegion": "DF"
+    }
+}
