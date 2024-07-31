@@ -1,0 +1,6 @@
+framework module XDGoogleWrapperSDK {
+  umbrella header "XDGoogleWrapperSDK.h"
+  export *
+
+  module * { export * }
+}

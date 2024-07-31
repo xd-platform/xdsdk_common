@@ -1,0 +1,11 @@
+framework module XDTwitterWrapperSDK {
+  umbrella header "XDTwitterWrapperSDK.h"
+  export *
+
+  module * { export * }
+}
+
+module XDTwitterWrapperSDK.Swift {
+  header "XDTwitterWrapperSDK-Swift.h"
+  requires objc
+}

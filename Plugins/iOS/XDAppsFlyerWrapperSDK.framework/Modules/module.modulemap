@@ -1,0 +1,6 @@
+framework module XDAppsFlyerWrapperSDK {
+  umbrella header "XDAppsFlyerWrapperSDK.h"
+  export *
+
+  module * { export * }
+}
